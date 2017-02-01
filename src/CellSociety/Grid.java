@@ -1,3 +1,4 @@
+package CellSociety;
 
 
 import Cells.Cell;
@@ -7,10 +8,6 @@ public class Grid {
 
 	public Cell getCell(int x,int y){
 		return cellGrid[x][y];
-	}
-	
-	public void switchCell(){
-		
 	}
 	
 	public void displayGrid(){

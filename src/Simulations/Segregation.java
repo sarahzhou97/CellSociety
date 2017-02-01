@@ -1,12 +1,12 @@
 package Simulations;
 
-import Grid;
+import CellSociety.Grid;
 
 public class Segregation extends Simulation {
 
 	public Segregation(Grid grid) {
 		super(grid);
-		// TODO Auto-generated constructor stub
+		setID("Segregation");
 	}
 
 	@Override
