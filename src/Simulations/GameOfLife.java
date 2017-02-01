@@ -1,6 +1,6 @@
 package Simulations;
 
-import CellSociety.Grid;
+import UI.Grid;
 
 public class GameOfLife extends Simulation{
 

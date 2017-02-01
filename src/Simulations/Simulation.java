@@ -1,10 +1,11 @@
 package Simulations;
 
-import CellSociety.Grid;
+import UI.Grid;
 
 public abstract class Simulation {
-	private final int screenSizeX = 400;
-	private final int screenSizeY = 400;
+	//private final int screenSizeX = 400;
+	//private final int screenSizeY = 400;
+	
 	private Grid grid;
 	private String ID;
 	
