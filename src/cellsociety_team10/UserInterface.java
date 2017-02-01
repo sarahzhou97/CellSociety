@@ -1,5 +1,5 @@
 package cellsociety_team10;
 
-public class userInterface {
+public class UserInterface {
 
 }
