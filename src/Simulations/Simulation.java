@@ -1,6 +1,6 @@
 package Simulations;
 
-import Grid;
+import default.Grid;
 
 public abstract class Simulation {
 	private final int screenSizeX = 400;

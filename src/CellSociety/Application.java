@@ -1,3 +1,4 @@
+package CellSociety;
 
 
 import Simulations.Simulation;
