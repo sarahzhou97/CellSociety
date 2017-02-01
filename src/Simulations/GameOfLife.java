@@ -1,4 +1,6 @@
-package cellsociety_team10;
+package Simulations;
+
+import cellsociety_team10.Grid;
 
 public class GameOfLife extends Simulation{
 

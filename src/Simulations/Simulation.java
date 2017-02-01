@@ -1,8 +1,10 @@
-package cellsociety_team10;
+package Simulations;
+
+import cellsociety_team10.Grid;
 
 public abstract class Simulation {
-	private int screenSizeX;
-	private int screenSizeY;
+	private final int screenSizeX;
+	private final int screenSizeY;
 	private Grid simulationGrid;
 	
 	public Simulation(int dimensionX, int dimensionY) {

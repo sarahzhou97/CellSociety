@@ -1,5 +1,7 @@
 package cellsociety_team10;
 
+import Cells.Cell;
+
 public class Grid {
 	private Cell[][] cellGrid;
 

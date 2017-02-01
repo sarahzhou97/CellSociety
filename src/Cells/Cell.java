@@ -1,4 +1,4 @@
-package cellsociety_team10;
+package Cells;
 
 import java.awt.Point;
 
