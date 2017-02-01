@@ -1,7 +1,5 @@
 package Simulations;
 
-import Grid;
-
 public abstract class Simulation {
 	private final int screenSizeX = 400;
 	private final int screenSizeY = 400;
