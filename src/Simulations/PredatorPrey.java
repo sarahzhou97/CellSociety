@@ -1,6 +1,6 @@
 package Simulations;
 
-import Grid;
+import UI.Grid;
 
 public class PredatorPrey extends Simulation {
 
