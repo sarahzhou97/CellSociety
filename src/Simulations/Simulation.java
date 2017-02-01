@@ -1,23 +1,28 @@
 package Simulations;
 
-import cellsociety_team10.Grid;
+import Grid;
 
 public abstract class Simulation {
-	private final int screenSizeX;
-	private final int screenSizeY;
-	private Grid simulationGrid;
-	
-	public Simulation(int dimensionX, int dimensionY) {
-		screenSizeX = dimensionX;
-		screenSizeY = dimensionY;
-	}
+	private final int screenSizeX = 400;
+	private final int screenSizeY = 400;
+	private Grid grid;
 	
 	public Simulation(Grid grid){
-		simulationGrid=grid;
+		this.grid = grid;
 	}
 	
-
-	public void updateGrid(){//overriden for each subclass
+	public abstract void updateGrid();
+	
+	public void play() {
 		
 	}
+	
+	public void pause() {
+		
+	}
+	
+	public void stop() {
+		
+	}
+	
 }
