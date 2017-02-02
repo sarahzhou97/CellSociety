@@ -6,7 +6,7 @@ public class GameOfLife extends Simulation{
 
 	public GameOfLife(int size) {
 		super(size);
-		setID("Game of Life");
+		setID("GameOfLife");
 	}
 	
 	@Override
