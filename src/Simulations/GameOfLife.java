@@ -1,16 +1,22 @@
 package Simulations;
 
-import Grid;
+import UI.Grid;
 
 public class GameOfLife extends Simulation{
 
-	public GameOfLife(Grid grid) {
-		super(grid);
-		// TODO Auto-generated constructor stub
+	public GameOfLife(int size) {
+		super(size);
+		setID("Game of Life");
 	}
 	
 	@Override
 	public void updateGrid(){
+		
+	}
+
+	@Override
+	public void initiateSimulation() {
+		// TODO Auto-generated method stub
 		
 	}
 

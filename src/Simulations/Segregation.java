@@ -1,16 +1,22 @@
 package Simulations;
 
-import Grid;
+import UI.Grid;
 
 public class Segregation extends Simulation {
 
-	public Segregation(Grid grid) {
-		super(grid);
-		// TODO Auto-generated constructor stub
+	public Segregation(int size) {
+		super(size);
+		setID("Segregation");
 	}
 
 	@Override
 	public void updateGrid() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void initiateSimulation() {
 		// TODO Auto-generated method stub
 		
 	}

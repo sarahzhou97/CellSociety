@@ -1,20 +1,22 @@
 package Simulations;
 
-<<<<<<< HEAD
-=======
-import default.Grid;
+import UI.Grid;
 
->>>>>>> c318d0d3f02c59c1fb02216b67539c6d2d0045d8
 public abstract class Simulation {
-	private final int screenSizeX = 400;
-	private final int screenSizeY = 400;
-	private Grid grid;
+	//private final int screenSizeX = 400;
+	//private final int screenSizeY = 400;
 	
-	public Simulation(Grid grid){
-		this.grid = grid;
+	//private Grid grid;
+	private int gridSize;
+	private String ID;
+	
+	public Simulation(int size){
+		gridSize = size;
 	}
 	
 	public abstract void updateGrid();
+	
+	public abstract void initiateSimulation();
 	
 	public void play() {
 		
@@ -26,6 +28,14 @@ public abstract class Simulation {
 	
 	public void stop() {
 		
+	}
+	
+	public String getID() {
+		return ID;
+	}
+	
+	public void setID(String ID) {
+		this.ID = ID;
 	}
 	
 }
