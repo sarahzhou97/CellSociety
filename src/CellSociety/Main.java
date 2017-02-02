@@ -2,9 +2,9 @@ package CellSociety;
 public class Main {
 
 	    public static void main (String[] args) {
-	        Application application = new Application();
+	        CellSociety application = new CellSociety();
 
-	        application.start();
+	        application.launch(args);
 	    }
 	
 

@@ -6,14 +6,17 @@ public abstract class Simulation {
 	//private final int screenSizeX = 400;
 	//private final int screenSizeY = 400;
 	
-	private Grid grid;
+	//private Grid grid;
+	private int gridSize;
 	private String ID;
 	
-	public Simulation(Grid grid){
-		this.grid = grid;
+	public Simulation(int size){
+		gridSize = size;
 	}
 	
 	public abstract void updateGrid();
+	
+	public abstract void initiateSimulation();
 	
 	public void play() {
 		
