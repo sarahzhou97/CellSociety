@@ -1,8 +1,0 @@
-<?xml version="1.0"?>
-<simulation id="Fire">
-  <probCatch>0.5</probCatch>
-  <title>Fire</title>
-</simulation>
-<simulation id="Wator">
-  <title>predator and prey</title>
-</simulation>
