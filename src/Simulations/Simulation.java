@@ -7,6 +7,7 @@ public abstract class Simulation {
 	//private final int screenSizeY = 400;
 	
 	private Grid grid;
+	private String ID;
 	
 	public Simulation(Grid grid){
 		this.grid = grid;
@@ -24,6 +25,14 @@ public abstract class Simulation {
 	
 	public void stop() {
 		
+	}
+	
+	public String getID() {
+		return ID;
+	}
+	
+	public void setID(String ID) {
+		this.ID = ID;
 	}
 	
 }

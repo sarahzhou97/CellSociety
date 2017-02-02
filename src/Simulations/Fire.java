@@ -6,7 +6,7 @@ public class Fire extends Simulation {
 
 	public Fire(Grid grid) {
 		super(grid);
-		// TODO Auto-generated constructor stub
+		setID("Fire");
 	}
 
 	@Override
