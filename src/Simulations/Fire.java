@@ -35,6 +35,7 @@ public class Fire extends Simulation {
 		}
 		if (burningTreesLeft) {
 			updateBurningTrees();
+			calculateStatus();
 			getMyGrid().displayGrid();
 		} else {
 			stop();
@@ -44,7 +45,7 @@ public class Fire extends Simulation {
 	private void applyRules(int row, int col) {
 		FireCell cell = (FireCell) getMyGrid().getCell(row, col);
 		if (cell.getState().equals(TREE)) {
-			if (existsBurningNeighbor(getMyGrid().getNeighbors(row,col))) {
+			if (existsBurningNeighbor(getMyGrid().getFourNeighbors(row,col))) {
 				calculateNewStateOfTree((FireCell) cell);
 			}
 		} if (cell.getState().equals(BURNING)) {
@@ -83,21 +84,38 @@ public class Fire extends Simulation {
 
 		for (int i=0; i<getGridSize();i++) {
 			for (int j = 0; j<getGridSize();j++) {
-				if (i==0 || i==gridEdge) {
-					getMyGrid().setCell(i, j, new FireCell(EMPTY));
+				if (isBorderCell(i,j,gridEdge)) {
+					setBorderCell(i,j);
+				} else if (isMiddleCell(i,j,mid)){
+					setMiddleCell(mid);
 				} else {
-					if (j==mid && i==mid) {
-						getMyGrid().setCell(i, j, new FireCell(BURNING));
-					} else if (j==gridEdge || j==0) {
-						getMyGrid().setCell(i, j, new FireCell(EMPTY));
-					} else {
-						getMyGrid().setCell(i, j, new FireCell(TREE));
-					}
+					setCell(i,j);
 				}
 			}
 
 		}
-
+	}
+	
+	private boolean isBorderCell(int row, int col, int gridEdge) {
+		if (row==0 || col==gridEdge || row==0 || col==gridEdge) return true;
+		else return false;
+	}
+	
+	private void setBorderCell(int row, int col) {
+		getMyGrid().setCell(row, col, new FireCell(EMPTY));
+	}
+	
+	private boolean isMiddleCell(int row, int col, int mid) {
+		if (col==mid && row==mid) return true;
+		else return false;
+	}
+	
+	private void setMiddleCell(int mid) {
+		getMyGrid().setCell(mid, mid, new FireCell(BURNING));
+	}
+	
+	private void setCell(int row, int col) {
+		getMyGrid().setCell(row, col, new FireCell(TREE));
 	}
 
 	@Override

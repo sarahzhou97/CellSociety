@@ -20,4 +20,10 @@ public class PredatorPrey extends Simulation {
 		
 	}
 
+	@Override
+	public void calculateStatus() {
+		// TODO Auto-generated method stub
+		
+	}
+
 }
