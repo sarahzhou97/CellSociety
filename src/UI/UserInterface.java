@@ -1,4 +1,5 @@
-package cellsociety_team10;
+package UI;
+
 
 public class UserInterface {
 
