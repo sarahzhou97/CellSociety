@@ -12,6 +12,7 @@ public abstract class Simulation {
 	
 	public Simulation(int size){
 		setMyGrid(new Grid(size));
+		myGridSize = size;
 	}
 	
 	public abstract void update();
