@@ -10,7 +10,7 @@ public class Segregation extends Simulation {
 	}
 
 	@Override
-	public void updateGrid() {
+	public void update() {
 		// TODO Auto-generated method stub
 		
 	}

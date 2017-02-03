@@ -1,15 +1,14 @@
 package Cells;
 
+import java.awt.Color;
 import java.awt.Point;
 
 public abstract class Cell {
-	private String state;
+	private String myState;
+	private Color myColor; 
+	
 	private int row;
 	private int col;
-	
-	public String getState(){
-		return state;
-	}
 	
 	public int getRow() {
 		return row;
@@ -27,13 +26,22 @@ public abstract class Cell {
 		this.col = col;
 	}
 	
+	public abstract void updateState(String newState);
 	
-	public void respondToNeighbours(){//used only for conway and fire
-		
+	public Color getColor() {
+		return myColor;
 	}
 	
-	public void updateState(String newState) {
-		state = newState;
+	public String getState(){
+		return myState;
+	}
+	
+	public void setColor(Color color) {
+		myColor = color;
+	}
+	
+	public void setState(String state) {
+		myState = state;
 	}
 	
 	

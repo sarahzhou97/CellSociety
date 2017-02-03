@@ -10,7 +10,7 @@ public class GameOfLife extends Simulation{
 	}
 	
 	@Override
-	public void updateGrid(){
+	public void update(){
 		
 	}
 
