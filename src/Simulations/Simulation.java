@@ -6,17 +6,21 @@ public abstract class Simulation {
 	//private final int screenSizeX = 400;
 	//private final int screenSizeY = 400;
 	
-	//private Grid grid;
-	private int gridSize;
-	private String ID;
+	private Grid myGrid;
+	private int myGridSize;
+	private String myTitle;
 	
-	public Simulation(int size){
-		gridSize = size;
+	public Simulation(int size,String title){
+		setMyGrid(new Grid(size));
+		myGridSize = size;
+		myTitle = title;
 	}
 	
-	public abstract void updateGrid();
+	public abstract void update();
 	
 	public abstract void initiateSimulation();
+	
+	public abstract void calculateStatus();
 	
 	public void play() {
 		
@@ -29,13 +33,21 @@ public abstract class Simulation {
 	public void stop() {
 		
 	}
-	
-	public String getID() {
-		return ID;
+
+	public Grid getMyGrid() {
+		return myGrid;
+	}
+
+	public void setMyGrid(Grid myGrid) {
+		this.myGrid = myGrid;
 	}
 	
-	public void setID(String ID) {
-		this.ID = ID;
+	public int getGridSize() {
+		return myGridSize;
+	}
+	
+	public String getTitle() {
+		return myTitle;
 	}
 	
 }
