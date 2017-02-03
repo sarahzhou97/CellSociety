@@ -7,17 +7,20 @@ public abstract class Simulation {
 	//private final int screenSizeY = 400;
 	
 	private Grid myGrid;
-	private String ID;
 	private int myGridSize;
+	private String myTitle;
 	
-	public Simulation(int size){
+	public Simulation(int size,String title){
 		setMyGrid(new Grid(size));
 		myGridSize = size;
+		myTitle = title;
 	}
 	
 	public abstract void update();
 	
 	public abstract void initiateSimulation();
+	
+	public abstract void calculateStatus();
 	
 	public void play() {
 		
@@ -30,14 +33,6 @@ public abstract class Simulation {
 	public void stop() {
 		
 	}
-	
-	public String getID() {
-		return ID;
-	}
-	
-	public void setID(String ID) {
-		this.ID = ID;
-	}
 
 	public Grid getMyGrid() {
 		return myGrid;
@@ -49,6 +44,10 @@ public abstract class Simulation {
 	
 	public int getGridSize() {
 		return myGridSize;
+	}
+	
+	public String getTitle() {
+		return myTitle;
 	}
 	
 }

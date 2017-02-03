@@ -33,7 +33,7 @@ public class MainScreen {
 	private void getButtons() {
 		myButtons = new ArrayList<>();
 		for (Simulation currentSimulation : mySimulations) {
-			Button currentButton = new Button(currentSimulation.getID());
+			Button currentButton = new Button(currentSimulation.getTitle());
 			currentButton.setOnAction(e -> currentSimulation.initiateSimulation());
 			myButtons.add(currentButton);
 		}

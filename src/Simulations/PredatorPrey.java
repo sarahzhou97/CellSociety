@@ -4,9 +4,8 @@ import UI.Grid;
 
 public class PredatorPrey extends Simulation {
 
-	public PredatorPrey(int size) {
-		super(size);
-		setID("Predator Prey");
+	public PredatorPrey(int size, String title) {
+		super(size,title);
 	}
 
 	@Override

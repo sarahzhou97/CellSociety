@@ -4,9 +4,8 @@ import UI.Grid;
 
 public class Segregation extends Simulation {
 
-	public Segregation(int size) {
-		super(size);
-		setID("Segregation");
+	public Segregation(int size,String title) {
+		super(size,title);
 	}
 
 	@Override

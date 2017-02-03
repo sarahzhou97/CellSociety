@@ -4,9 +4,8 @@ import UI.Grid;
 
 public class GameOfLife extends Simulation{
 
-	public GameOfLife(int size) {
-		super(size);
-		setID("GameOfLife");
+	public GameOfLife(int size,String title) {
+		super(size,title);
 	}
 	
 	@Override
