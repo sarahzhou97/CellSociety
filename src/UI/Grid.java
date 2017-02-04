@@ -6,15 +6,34 @@ import java.util.List;
 
 import Cells.Cell;
 import Utils.FileReader;
+import javafx.scene.Group;
+import javafx.scene.Scene;
+import javafx.scene.canvas.Canvas;
+import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.paint.Color;
 
 public class Grid {
-
+	private double canvasWidth=200;
+	private double canvasHeight=200;
+	private int sceneWidth=300;
+	private int sceneHeight=300;
 	private Cell[][] myCellGrid;
+	private int columns;
+	private int rows;
 	private FileReader myFileReader;
+	private Canvas gridPicture;
+	private Scene gridScene;
 
 	public Grid(int size) {
 		myCellGrid = new Cell[size][size];
 		myFileReader = new FileReader();
+		this.columns=size;
+		this.rows=size;
+		Group root=new Group();
+		root.getChildren().add(gridPicture);
+		gridPicture=new Canvas(canvasWidth,canvasHeight);
+		displayGrid();
+		gridScene=new Scene(root,sceneWidth,sceneHeight,Color.WHITE);
 	}
 
 	public Cell getCell(int x,int y){
@@ -26,7 +45,20 @@ public class Grid {
 	}
 
 	public void displayGrid(){
-
+		GraphicsContext gc=gridPicture.getGraphicsContext2D();
+		gc.setFill(Color.BLUE);//Fill in unoccupied grid spaces with a default color
+		gc.fillRect(0, 0, canvasWidth, canvasHeight);
+		double cellWidth=canvasWidth/columns;
+		double cellHeight=canvasHeight/rows;
+		for(int i=0;i<columns;i++){
+			for(int j=0;j<rows;j++){
+				gc.fillRect(i*cellWidth, j*cellHeight, (i+1)*cellWidth, (j+1)*cellHeight);
+			}
+		}
+	}
+	
+	public Scene getScene(){
+		return gridScene;
 	}
 
 	public void setCell(int row, int col, Cell cell) {

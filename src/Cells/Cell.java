@@ -3,10 +3,12 @@ package Cells;
 import java.awt.Color;
 import java.awt.Point;
 
+import UI.Grid;
+
 public abstract class Cell {
 	private String myState;
 	private Color myColor; 
-	
+	private Grid myGrid;
 	private int row;
 	private int col;
 	

@@ -26,6 +26,7 @@ public class CellSociety extends Application {
 		myStage.setTitle("Cell Society");
 		myMainScreen = new MainScreen(myStage, possibleSimulations);
 		myMainScreen.setUpMainScreen();
+		//myStage.show();
 	}
 	
 	public static void main(String[] args) {
