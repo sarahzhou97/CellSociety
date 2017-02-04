@@ -2,6 +2,7 @@ package UI;
 
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 import Cells.Cell;
@@ -38,10 +39,6 @@ public class Grid {
 
 	public Cell getCell(int x,int y){
 		return myCellGrid[x][y];
-	}
-
-	public void switchCell(){
-
 	}
 
 	public void displayGrid(){
@@ -90,6 +87,7 @@ public class Grid {
 		
 		return neighborList;
 	}
+	
 	
 	public List<Cell> getEightNeighbors(int row, int col) {
 		List<Cell> neighborList = new ArrayList<Cell>();
