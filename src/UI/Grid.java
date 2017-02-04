@@ -32,6 +32,7 @@ public class Grid {
 		Group root=new Group();
 		root.getChildren().add(gridPicture);
 		gridPicture=new Canvas(canvasWidth,canvasHeight);
+		displayGrid();
 		gridScene=new Scene(root,sceneWidth,sceneHeight,Color.WHITE);
 	}
 
