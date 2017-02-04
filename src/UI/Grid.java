@@ -52,6 +52,17 @@ public class Grid {
 		double cellHeight=canvasHeight/rows;
 		for(int i=0;i<columns;i++){
 			for(int j=0;j<rows;j++){
+				java.awt.Color javaColor=getCell(i,j).getColor();
+				//The code between the braces is just used to convert between java.awt.color and javafx color.
+				//source:http://stackoverflow.com/questions/30466405/java-convert-java-awt-color-to-javafx-scene-paint-color
+				int r = javaColor.getRed();
+				int g = javaColor.getGreen();
+				int b = javaColor.getBlue();
+				int a = javaColor.getAlpha();
+				double opacity = a / 255.0 ;
+				//
+				javafx.scene.paint.Color fxColor = javafx.scene.paint.Color.rgb(r, g, b, opacity);
+				gc.setFill(fxColor);
 				gc.fillRect(i*cellWidth, j*cellHeight, (i+1)*cellWidth, (j+1)*cellHeight);
 			}
 		}
