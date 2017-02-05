@@ -106,7 +106,7 @@ To see the steps needed to complete the Use Cases of the program, read below at 
 
 We want to plan all the methods and classes together (write comments for purpose, and functionality) and assign actual implementation to individuals based on projected number of lines of code. The general format is: we will write all abstract classes together alongside Main and Application, and then write our assigned subclasses, and regroup to see if we need to make any changes to abstract classes. 
 
-Sarah: Fire, Game of Life
+Sarah: Fire, Game of Life, XML Parser
 Daniel: Wator Predator-Prey
 Moses: userInterface, segregation
 
