@@ -7,5 +7,10 @@ public class WatorPrey extends WatorCreature{
 		super();
 		setGestationPeriod(PREY_GESTATION_PERIOD);
 	}
+	
+	@Override
+	public WatorPrey makeChild(){
+		return new WatorPrey();
+	}
 
 }

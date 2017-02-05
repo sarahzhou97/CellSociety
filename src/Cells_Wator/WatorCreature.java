@@ -36,5 +36,6 @@ public abstract class WatorCreature extends Cell{
 		setRow(y);
 		setCol(x);
 	}
-
+	
+	public abstract WatorCreature makeChild();
 }
