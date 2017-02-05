@@ -13,7 +13,7 @@ public class MainScreen {
 	private Stage myStage;
 	private Simulation[] mySimulations;
 	private ArrayList<Button> myButtons;
-	private VBox myVBox;
+	private BorderPane myScreen;
 
 	public MainScreen(Stage initStage, Simulation[] possibleSimulations) {
 		myStage = initStage;
