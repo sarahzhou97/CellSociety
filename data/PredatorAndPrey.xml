@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<simulation id="Wator">
+		<title>Predator and Prey</title>
+		<fishBreedRate>0.75</fishBreedRate>
+		<sharkBreedRate>0.5</sharkBreedRate>
+		<sharkStarveRate>0.25</sharkStarveRate>
+		<percentFish>0.5</percentFish>
+		<percentShark>0.25</percentShark>
+	</simulation>

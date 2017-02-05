@@ -1,0 +1,5 @@
+<?xml version="1.0"?>
+<simulation id="Fire">
+	<title>Fire</title>
+	<probCatch>0.5</probCatch>
+</simulation>
