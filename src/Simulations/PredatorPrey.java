@@ -20,10 +20,15 @@ public class PredatorPrey extends Simulation {
 	}
 
 	public void switchCell(Cell cell1, Cell cell2){
-		int cell2X=cell2.getRow();
-		int cell2Y=cell2.getCol();
-		moveToAndReplace(cell1.getRow(),cell1.getCol(),cell2);
-		moveToAndReplace(cell2X,cell2Y,cell1);	
+		int cell2Row=cell2.getRow();
+		int cell2Col=cell2.getCol();
+		
+		getMyGrid().setCell(cell1.getRow(), cell1.getCol(), cell2);
+		cell2.setRow(cell1.getRow());
+		cell2.setCol(cell1.getCol());
+		getMyGrid().setCell(cell2Row, cell2Col, cell1);
+		cell1.setRow(cell2Row);
+		cell1.setCol(cell2Col);
 	}
 	
 	public void handleReproduction(WatorCreature creature){
@@ -37,12 +42,10 @@ public class PredatorPrey extends Simulation {
 	}
 	
 	public void birthIfAble(WatorCreature creature){
-		/*
 		List<Cell> cellList=getMyGrid().getEightNeighbors(creature.getRow(), creature.getCol());
 		for(Cell cell:cellList){
 			
-		}*/
-		
+		}
 	}
 	
 	public void moveIfAble(){
