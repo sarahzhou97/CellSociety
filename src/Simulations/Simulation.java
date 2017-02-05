@@ -33,6 +33,14 @@ public abstract class Simulation {
 	public void stop() {
 		
 	}
+	
+	public void switchCell(){
+		
+	}
+	
+	public void moveToAndReplaceCell(){
+		
+	}
 
 	public Grid getMyGrid() {
 		return myGrid;
