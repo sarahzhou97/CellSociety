@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<simulation id="Segregation">
+	<title>Segregation</title>
+	<redBlueRatio>0.5</redBlueRatio>
+	<percentEmpty>0.25</percentEmpty>
+	<percentSatisfied>0.1</percentSatisfied>
+</simulation>

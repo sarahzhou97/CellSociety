@@ -78,43 +78,42 @@ public class Fire extends Simulation {
 
 	@Override
 	public void initiateSimulation() {
-
-		int gridEdge = getGridSize()-1;
-		int mid = getGridSize()/2;
-
-		for (int i=0; i<getGridSize();i++) {
-			for (int j = 0; j<getGridSize();j++) {
-				if (isBorderCell(i,j,gridEdge)) {
-					setBorderCell(i,j);
-				} else if (isMiddleCell(i,j,mid)){
-					setMiddleCell(mid);
+		int gridSize = getGridSize();
+		for (int i=0; i<gridSize;i++) {
+			for (int j = 0; j<gridSize;j++) {
+				if (isBorderCell(i,j,gridSize)) {
+					setEmptyCell(i,j);
+				} else if (isMiddleCell(i,j,gridSize)){
+					setBurningCell(i,j);
 				} else {
-					setCell(i,j);
+					setTreeCell(i,j);
 				}
 			}
 
 		}
 	}
 	
-	private boolean isBorderCell(int row, int col, int gridEdge) {
+	private boolean isBorderCell(int row, int col, int gridSize) {
+		int gridEdge = gridSize -1;
 		if (row==0 || col==gridEdge || row==0 || col==gridEdge) return true;
 		else return false;
 	}
 	
-	private void setBorderCell(int row, int col) {
+	private void setEmptyCell(int row, int col) {
 		getMyGrid().setCell(row, col, new FireCell(EMPTY));
 	}
 	
-	private boolean isMiddleCell(int row, int col, int mid) {
+	private boolean isMiddleCell(int row, int col, int gridSize) {
+		int mid = gridSize/2;
 		if (col==mid && row==mid) return true;
 		else return false;
 	}
 	
-	private void setMiddleCell(int mid) {
-		getMyGrid().setCell(mid, mid, new FireCell(BURNING));
+	private void setBurningCell(int i, int j) {
+		getMyGrid().setCell(i, j, new FireCell(BURNING));
 	}
 	
-	private void setCell(int row, int col) {
+	private void setTreeCell(int row, int col) {
 		getMyGrid().setCell(row, col, new FireCell(TREE));
 	}
 
