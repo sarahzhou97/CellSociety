@@ -11,8 +11,8 @@ public abstract class Simulation {
 	private String myTitle;
 	
 	public Simulation(int size,String title){
-		setMyGrid(new Grid(size));
 		myGridSize = size;
+		setMyGrid(new Grid(size));
 		myTitle = title;
 	}
 	
