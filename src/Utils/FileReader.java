@@ -25,7 +25,7 @@ public class FileReader {
 	
 	private final String SEGREGATION_ID = "Segregation";
 	private String segregationTitle;
-	private double percentSatisfied;
+	private double percentSimilar;
 	private double redBlueRatio;
 	private double percentEmpty;
 	
@@ -40,9 +40,9 @@ public class FileReader {
 	private double percentFish;
 	private double percentShark;
 	
-	public FileReader() {
+	public FileReader(File file) {
 		try{
-			File file = new File(FILE);
+			//File file = new File(FILE);
 			DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
 			DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
 			Document doc =dBuilder.parse(file);
@@ -80,7 +80,7 @@ public class FileReader {
 	private void setSegregationParameters(Element el) {
 		segregationTitle=el.getElementsByTagName("title").item(0).getTextContent();
 		redBlueRatio = Double.parseDouble(el.getElementsByTagName("redBlueRatio").item(0).getTextContent());
-		percentSatisfied = Double.parseDouble(el.getElementsByTagName("percentSatisfied").item(0).getTextContent());
+		percentSimilar = Double.parseDouble(el.getElementsByTagName("percentSimilar").item(0).getTextContent());
 		percentEmpty = Double.parseDouble(el.getElementsByTagName("percentEmpty").item(0).getTextContent());
 	}
 	
