@@ -14,15 +14,13 @@ public class Main extends Application{
 	@Override
 	public void start(Stage primaryStage) throws Exception {
 		primaryStage.setTitle("Cell Society");
-		myUI = new UserInterface(primaryStage, "Hello");
+		myUI = new UserInterface(primaryStage, "English.properties");
 		myUI.setUIScreen(1000, 500);
 		primaryStage.show();
-		
 	}
 	
 	public static void main (String[] args) {
-        CellSociety application = new CellSociety();
-        application.launch(args);
+        launch(args);
     }
 
 }

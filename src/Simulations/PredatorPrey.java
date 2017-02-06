@@ -10,10 +10,11 @@ import Cells_Wator.WatorCreature;
 import Cells_Wator.WatorEmpty;
 import Cells_Wator.WatorPredator;
 import Cells_Wator.WatorPrey;
+import Utils.PredatorPreyParameterParser;
 
 public class PredatorPrey extends Simulation {
-	public PredatorPrey(int size, String title) {
-		super(size,title);
+	public PredatorPrey(PredatorPreyParameterParser parameters) {
+		super(parameters);
 	}
 	
 	public void moveToAndReplace(int x, int y,Cell creature){//Replaces target cell and leaves blank cell behind

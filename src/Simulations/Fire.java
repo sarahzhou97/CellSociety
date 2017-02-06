@@ -5,6 +5,7 @@ import java.util.List;
 
 import Cells.Cell;
 import Cells.FireCell;
+import Utils.FireParameterParser;
 
 public class Fire extends Simulation {
 
@@ -18,9 +19,9 @@ public class Fire extends Simulation {
 	
 	private List<FireCell> burningList;
 
-	public Fire(int size, double probCatch,String title) {
-		super(size,title);
-		this.probCatch = probCatch;
+	public Fire(FireParameterParser parameters) {
+		super(parameters);
+		probCatch = parameters.getProbCatch();
 		burningList = new ArrayList<FireCell>();
 	}
 
@@ -35,7 +36,7 @@ public class Fire extends Simulation {
 		if (burningTreesLeft) {
 			updateBurningTrees();
 			calculateStatus();
-			getMyGrid().displayGrid();
+			//getMyGrid().displayGrid();
 		} else {
 			stop();
 		}

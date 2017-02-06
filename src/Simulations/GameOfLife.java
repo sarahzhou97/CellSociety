@@ -1,6 +1,7 @@
 package Simulations;
 
 import Cells.GameOfLifeCell;
+import Utils.GameOfLifeParameterParser;
 
 public class GameOfLife extends Simulation{
 	
@@ -9,8 +10,8 @@ public class GameOfLife extends Simulation{
 	private static final String ALIVE = "alive";
 	private static final String DEAD = "dead";
 
-	public GameOfLife(int size,String title) {
-		super(size,title);
+	public GameOfLife(GameOfLifeParameterParser parameters) {
+		super(parameters);
 	}
 	
 	@Override
