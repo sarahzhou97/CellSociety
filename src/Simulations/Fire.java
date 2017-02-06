@@ -37,9 +37,17 @@ public class Fire extends Simulation {
 		}
 		updateTrees();
 		if (!burningTreesLeft()) {
-			stop=true;
+			stop();
 			//getMyGrid().displayGrid();
 		}
+	}
+	
+	private void stop() {
+		stop= true;
+	}
+	
+	public boolean getStop() {
+		return stop;
 	}
 	
 	private boolean burningTreesLeft() {
