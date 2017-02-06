@@ -3,6 +3,7 @@ package Simulations;
 import java.util.List;
 
 import BackEndGrid.BackEndGrid;
+import Utils.ParameterParser;
 
 public abstract class Simulation {
 	//private final int screenSizeX = 400;
@@ -11,11 +12,13 @@ public abstract class Simulation {
 	private BackEndGrid myGrid;
 	private int myGridSize;
 	private String myTitle;
+	private ParameterParser myParameters;
 	
-	public Simulation(int size,String title){
-		myGridSize = size;
-		setMyGrid(new BackEndGrid(size));
-		myTitle = title;
+	public Simulation(ParameterParser parameters){
+		myParameters = parameters;
+		myGridSize = myParameters.getGridSize();
+		setMyGrid(new BackEndGrid(myGridSize));
+		myTitle = parameters.getTitle();
 	}
 	
 	public abstract void update();

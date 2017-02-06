@@ -2,7 +2,10 @@ package UI;
 
 import java.util.ResourceBundle;
 
+import CellSociety.CellSocietyView;
 import Simulations.Simulation;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.scene.control.Button;
 import javafx.scene.layout.VBox;
 
@@ -14,19 +17,61 @@ public class ControlPanel extends VBox{
 	private Button resetButton;
 	private ResourceBundle myResources;
 	private Simulation mySimulation;
+	private CellSocietyView myCellSociety;
 	private boolean runSimulation;
 	
 	public ControlPanel(String resources) {
-		myResources = ResourceBundle.getBundle(resources);
+		//myResources = ResourceBundle.getBundle(resources);
 		runSimulation = false;
-		runSimulationLoop();
+		initiateControlButtons();
+		this.getChildren().addAll(startButton, stepButton, stopButton, resetButton);
 	}
 	
-	private void initiateStartButton() {
-		startButton = new Button(myResources.getString("StartButton"));
-		startButton.setOnAction(e -> startOp());
+	private void initiateControlButtons() {
+		startButton = initiateButton("StartButton", new EventHandler<ActionEvent>() {
+            @Override
+            public void handle (ActionEvent event) {
+            	runSimulation = true;
+            	enableButtons();
+                myCellSociety.startOp();
+            }
+        });
+		stopButton = initiateButton("StopButton", new EventHandler<ActionEvent>() {
+            @Override
+            public void handle (ActionEvent event) {
+            	runSimulation = false;
+            	enableButtons();
+                myCellSociety.stopOp();
+            }
+        });
+		stepButton = initiateButton("StepButton", new EventHandler<ActionEvent>() {
+            @Override
+            public void handle (ActionEvent event) {
+                myCellSociety.getNextFrame();
+            }
+        });
+		resetButton = initiateButton("ResetButton", new EventHandler<ActionEvent>() {
+            @Override
+            public void handle (ActionEvent event) {
+            	runSimulation = false;
+            	enableButtons();
+                myCellSociety.resetSimulation();
+            }
+        });
 	}
 	
+	private Button initiateButton(String resourceString, EventHandler<ActionEvent> handler) {
+		//Button controlButton = new Button(myResources.getString(resourceString));
+		Button controlButton = new Button(resourceString);
+		controlButton.setOnAction(handler);
+		return controlButton;
+	}
+	
+	public void setCellSociety(CellSocietyView newCS) {
+		myCellSociety = newCS;
+	}
+	
+	/*
 	private void startOp() {
 		runSimulation = true;
 		runSimulationLoop();
@@ -36,25 +81,12 @@ public class ControlPanel extends VBox{
 	private void stopOp() {
 		runSimulation = false;
 		enableButtons();
-	}
+	}*/
 	
 	private void enableButtons() {
-		startButton.setDisable(mySimulation==null && runSimulation);
-		stepButton.setDisable(mySimulation==null);
-		stopButton.setDisable(mySimulation==null && !runSimulation);
-		resetButton.setDisable(mySimulation==null);
-	}
-	
-	public void setSimulation(Simulation newSimulation) {
-		mySimulation = newSimulation;
-		enableButtons();
-	}
-	
-	private void runSimulationLoop() {
-		if(mySimulation!=null) {
-			while(runSimulation) {
-				mySimulation.update();
-			}
-		}
+		startButton.setDisable(myCellSociety==null && runSimulation);
+		stepButton.setDisable(myCellSociety==null);
+		stopButton.setDisable(myCellSociety==null && !runSimulation);
+		resetButton.setDisable(myCellSociety==null);
 	}
 }

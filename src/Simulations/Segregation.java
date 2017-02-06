@@ -1,10 +1,11 @@
 package Simulations;
 
+import Utils.SegregationParameterParser;
 
 public class Segregation extends Simulation {
 
-	public Segregation(int size,String title) {
-		super(size,title);
+	public Segregation(SegregationParameterParser parameters) {
+		super(parameters);
 	}
 
 	@Override
