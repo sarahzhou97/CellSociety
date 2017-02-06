@@ -16,10 +16,10 @@ public class ControlPanel extends VBox{
 	private Simulation mySimulation;
 	private boolean runSimulation;
 	
-	public ControlPanel(String resources, Simulation currSimulation) {
+	public ControlPanel(String resources) {
 		myResources = ResourceBundle.getBundle(resources);
-		mySimulation = currSimulation;
 		runSimulation = false;
+		runSimulationLoop();
 	}
 	
 	private void initiateStartButton() {
@@ -29,7 +29,13 @@ public class ControlPanel extends VBox{
 	
 	private void startOp() {
 		runSimulation = true;
-		
+		runSimulationLoop();
+		enableButtons();
+	}
+	
+	private void stopOp() {
+		runSimulation = false;
+		enableButtons();
 	}
 	
 	private void enableButtons() {
@@ -41,5 +47,14 @@ public class ControlPanel extends VBox{
 	
 	public void setSimulation(Simulation newSimulation) {
 		mySimulation = newSimulation;
+		enableButtons();
+	}
+	
+	private void runSimulationLoop() {
+		if(mySimulation!=null) {
+			while(runSimulation) {
+				mySimulation.update();
+			}
+		}
 	}
 }
