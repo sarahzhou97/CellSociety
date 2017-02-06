@@ -1,8 +1,10 @@
 package Simulations;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import BackEndGrid.BackEndGrid;
+import Cells.Cell;
 
 public abstract class Simulation {
 	//private final int screenSizeX = 400;
@@ -23,6 +25,16 @@ public abstract class Simulation {
 	public abstract void initiateSimulation();
 	
 	public abstract void calculateStatus();
+	
+	public List<Cell> getStateSpecificSubset(List<Cell> cells, String state){
+		List<Cell> sublist=new ArrayList<Cell>();
+		for(Cell cell:cells){
+			if(cell.getState().equals(state)){
+				sublist.add(cell);
+			}
+		}
+		return sublist;
+	}
 	
 	public void play() {
 		
