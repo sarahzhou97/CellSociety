@@ -2,4 +2,43 @@
 <simulation id="Fire">
 	<title>Fire</title>
 	<probCatch>0.5</probCatch>
+	<Cells>
+		<Cell>0,0,Empty</Cell>
+		<Cell>0,1,Empty</Cell>
+		<Cell>0,2,Empty</Cell>
+		<Cell>0,3,Empty</Cell>
+		<Cell>0,4,Empty</Cell>
+		<Cell>0,5,Empty</Cell>
+		<Cell>1,0,Empty</Cell>
+		<Cell>1,1,Empty</Cell>
+		<Cell>1,2,Tree</Cell>
+		<Cell>1,3,Tree</Cell>
+		<Cell>1,4,Tree</Cell>
+		<Cell>1,5,Empty</Cell>
+		<Cell>2,0,Empty</Cell>
+		<Cell>2,1,Empty</Cell>
+		<Cell>2,2,Tree</Cell>
+		<Cell>2,3,Tree</Cell>
+		<Cell>2,4,Tree</Cell>
+		<Cell>2,5,Empty</Cell>
+		<Cell>3,0,Empty</Cell>
+		<Cell>3,1,Empty</Cell>
+		<Cell>3,2,Tree</Cell>
+		<Cell>3,3,Burning</Cell>
+		<Cell>3,4,Tree</Cell>
+		<Cell>3,5,Empty</Cell>
+		<Cell>4,0,Empty</Cell>
+		<Cell>4,1,Empty</Cell>
+		<Cell>4,2,Tree</Cell>
+		<Cell>4,3,Tree</Cell>
+		<Cell>4,4,Tree</Cell>
+		<Cell>4,5,Empty</Cell>
+		<Cell>5,0,Empty</Cell>
+		<Cell>5,1,Empty</Cell>
+		<Cell>5,2,Empty</Cell>
+		<Cell>5,3,Empty</Cell>
+		<Cell>5,4,Empty</Cell>
+		<Cell>5,5,Empty</Cell>
+	</Cells>
+	
 </simulation>
