@@ -18,6 +18,7 @@ public class Fire extends Simulation {
 	private static final String BURNING = "burning";
 	
 	private List<FireCell> burningList;
+	private List<FireCell> emptyList;
 
 	public Fire(FireParameterParser parameters) {
 		super(parameters);
@@ -34,7 +35,7 @@ public class Fire extends Simulation {
 			}
 		}
 		if (burningTreesLeft) {
-			updateBurningTrees();
+			updateTrees();
 			calculateStatus();
 			//getMyGrid().displayGrid();
 		} else {
@@ -49,7 +50,7 @@ public class Fire extends Simulation {
 				calculateNewStateOfTree((FireCell) cell);
 			}
 		} if (cell.getState().equals(BURNING)) {
-			burningList.add(cell);
+			emptyList.add(cell);
 		}
 	}
 
@@ -65,16 +66,20 @@ public class Fire extends Simulation {
 	private void calculateNewStateOfTree(FireCell cell) {
 		double random = Math.random();
 		if (random<probCatch) {
-			cell.updateState(BURNING);
+			burningList.add(cell);
 			burningTreesLeft=true;
 		}
 	}
 	
-	private void updateBurningTrees() {
+	private void updateTrees() {
 		for (FireCell cell : burningList) {
+			cell.updateState(BURNING);
+		}
+		for (FireCell cell : emptyList) {
 			cell.updateState(EMPTY);
 		}
 		burningList.clear();
+		emptyList.clear();
 	}
 
 	@Override
