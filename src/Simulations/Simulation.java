@@ -1,5 +1,7 @@
 package Simulations;
 
+import java.util.List;
+
 import BackEndGrid.BackEndGrid;
 
 public abstract class Simulation {
