@@ -11,7 +11,7 @@ public class Fire extends Simulation {
 
 	private double probCatch;
 
-	private boolean burningTreesLeft;
+	private boolean stop;
 
 	private static final String EMPTY = "empty";
 	private static final String TREE = "tree";
@@ -22,6 +22,7 @@ public class Fire extends Simulation {
 
 	public Fire(FireParameterParser parameters) {
 		super(parameters);
+		stop = false;
 		probCatch = parameters.getProbCatch();
 		burningList = new ArrayList<FireCell>();
 		emptyList = new ArrayList<FireCell>();
@@ -36,7 +37,7 @@ public class Fire extends Simulation {
 		}
 		updateTrees();
 		if (!burningTreesLeft()) {
-			stop();
+			stop=true;
 			//getMyGrid().displayGrid();
 		}
 	}
