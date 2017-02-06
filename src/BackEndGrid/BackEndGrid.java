@@ -58,11 +58,11 @@ public class BackEndGrid {
 		List<Cell> neighborList = new ArrayList<Cell>();
 		if (row>0) {
 			neighborList.add(getCell(row-1,col));
-		} if (row<myCellGrid.length) {
+		} if (row<myCellGrid.length-1) {
 			neighborList.add(getCell(row+1,col));
 		} if (col>0) {
 			neighborList.add(getCell(row,col-1));
-		} if (col<myCellGrid.length) {
+		} if (col<myCellGrid.length-1) {
 			neighborList.add(getCell(row,col+1));
 		}
 		
@@ -75,11 +75,11 @@ public class BackEndGrid {
 		neighborList.addAll(getFourNeighbors(row, col));
 		if (row>0&&col>0) {
 			neighborList.add(getCell(row-1,col-1));
-		} if (row>0&&col<myCellGrid.length) {
+		} if (row>0&&col<myCellGrid.length-1) {
 			neighborList.add(getCell(row-1,col+1));
-		} if (row<myCellGrid.length&&col>0) {
+		} if (row<myCellGrid.length-1&&col>0) {
 			neighborList.add(getCell(row+1,col-1));
-		} if (row<myCellGrid.length&&col<myCellGrid.length) {
+		} if (row<myCellGrid.length-1&&col<myCellGrid.length-1) {
 			neighborList.add(getCell(row+1,col+1));
 		}
 		return neighborList;

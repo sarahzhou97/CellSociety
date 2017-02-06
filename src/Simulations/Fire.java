@@ -66,6 +66,7 @@ public class Fire extends Simulation {
 		double random = Math.random();
 		if (random<probCatch) {
 			cell.updateState(BURNING);
+			burningTreesLeft=true;
 		}
 	}
 	
