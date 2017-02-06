@@ -1,5 +1,9 @@
 package Simulations;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import Cells.Cell;
 import Cells.GameOfLifeCell;
 import Utils.GameOfLifeParameterParser;
 
@@ -25,14 +29,20 @@ public class GameOfLife extends Simulation{
 	
 	private void applyRulesToCell(int row, int col) {
 		GameOfLifeCell cell = (GameOfLifeCell) getMyGrid().getCell(row, col);
-		int numNeighbors = getMyGrid().getEightNeighbors(row, col).size();
+		List<Cell> neighbors = getMyGrid().getEightNeighbors(row, col);
+		int numAliveNeighbors=0;
+		for (Cell gameCell : neighbors) {
+			if (gameCell.getState().equals(ALIVE)) {
+				numAliveNeighbors++;
+			}
+		}
 		if (cell.getState().equals(ALIVE)) {
-			if (numNeighbors<2||numNeighbors>3) {
+			if (numAliveNeighbors<2||numAliveNeighbors>3) {
 				cell.updateState(DEAD);
 				return;
 			}
 		} else if (cell.getState().equals(DEAD)) {
-			if (numNeighbors==3) {
+			if (numAliveNeighbors==3) {
 				cell.updateState(ALIVE);
 				return;
 			}
