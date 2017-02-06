@@ -67,6 +67,7 @@ public class UserInterface {
 	
 	private void setUpGridDisplay() {
 		myDisplay = new FrontEndGrid(mySimulation.getMyGrid(), .5*myWidth, .5*myHeight, DEFAULT_COLOR);
+		myDisplay.updateGrid();
 	}
 	
 	public void setUIScreen(double screenWidth, double screenHeight) {
@@ -98,11 +99,16 @@ public class UserInterface {
 			mySimulation.initiateSimulation();
 			setUpGridDisplay();
 			myScreen.setCenter(myDisplay.returnDisplay());
-			myCellSociety = new CellSocietyView(mySimulation, myDisplay);
+			myCellSociety = new CellSocietyView(mySimulation, myDisplay, this);
 			myControlPanel.setCellSociety(myCellSociety);
 		} else {
 			return;
 		}
+	}
+	
+	public void updateScreen() {
+		mySimulation.update();
+		myDisplay.updateGrid();
 	}
 	/*
 	private void playSimulation() {
