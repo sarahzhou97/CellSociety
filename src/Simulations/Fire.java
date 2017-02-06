@@ -24,6 +24,7 @@ public class Fire extends Simulation {
 		super(parameters);
 		probCatch = parameters.getProbCatch();
 		burningList = new ArrayList<FireCell>();
+		emptyList = new ArrayList<FireCell>();
 	}
 
 	@Override
