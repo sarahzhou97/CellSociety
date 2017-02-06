@@ -29,19 +29,28 @@ public class Fire extends Simulation {
 
 	@Override
 	public void update() {
-		burningTreesLeft = false;
 		for (int i = 0; i<getGridSize();i++) {
 			for (int j = 0; j<getGridSize();j++) {
 				applyRules(i,j);
 			}
 		}
-		if (burningTreesLeft) {
-			updateTrees();
-			calculateStatus();
-			//getMyGrid().displayGrid();
-		} else {
+		updateTrees();
+		if (!burningTreesLeft()) {
 			stop();
+			//getMyGrid().displayGrid();
 		}
+	}
+	
+	private boolean burningTreesLeft() {
+		int gridSize = getGridSize();
+		for (int i=0; i<gridSize;i++) {
+			for (int j = 0; j<gridSize;j++) {
+				if (getMyGrid().getCell(i, j).getState().equals(BURNING)) {
+					return true;
+				}
+			}
+	}
+		return false;
 	}
 
 	private void applyRules(int row, int col) {
@@ -68,7 +77,6 @@ public class Fire extends Simulation {
 		double random = Math.random();
 		if (random<probCatch) {
 			burningList.add(cell);
-			burningTreesLeft=true;
 		}
 	}
 	
