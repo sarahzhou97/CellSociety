@@ -3,6 +3,7 @@ package CellSociety;
 import Simulations.Simulation;	
 import UI.MainScreen;
 import UI.UserInterface;
+import javafx.animation.Timeline;
 //import Utils.FileReader;
 import javafx.application.Application;
 import javafx.stage.Stage;
@@ -14,23 +15,29 @@ import Simulations.GameOfLife;
 import Simulations.PredatorPrey;
 import Simulations.Segregation;
 
-public class CellSociety extends Application {
+public class CellSociety {
 	public static final int DEFAULT_GRID_SIZE = 30;
 	
 	//private FileReader myFileReader = new FileReader();
 
-	private UserInterface myMainScreen;
-	/*private Simulation[] possibleSimulations = { 
-			new Fire(DEFAULT_GRID_SIZE,myFileReader.getProbCatch(),myFileReader.getFireTitle()), 
-			new GameOfLife(DEFAULT_GRID_SIZE,myFileReader.getGameOfLifeTitle()),
-			new PredatorPrey(DEFAULT_GRID_SIZE,myFileReader.getPredatorPreyTitle()), 
-			new Segregation(DEFAULT_GRID_SIZE,myFileReader.getSegregationTitle()) };*/
-
-	public void start(Stage myStage) throws Exception {
-		myStage.setTitle("Cell Society");
-		myMainScreen = new UserInterface(myStage, new HashMap<String, Simulation>(), "Hello");
-		myMainScreen.setUIScreen(myStage, 1000, 500);
-		myStage.show();
+	private Simulation mySimulation;
+	private Timeline cellAnimation;
+	
+	public CellSociety(Simulation newSimulation){
+		mySimulation = newSimulation;
+		initializeAnimation();
+	}
+	
+	private void initializeAnimation() {
+		cellAnimation = new Timeline();
+	}
+	
+	private void startOp() {
+		
+	}
+	
+	private void setSimulation(Simulation selectedSim) {
+		
 	}
 	
 	public static void main(String[] args) {

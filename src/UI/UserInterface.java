@@ -20,7 +20,6 @@ import javafx.stage.Stage;
 public class UserInterface {
 	public static int BUTTON_SPACING = 10;
 
-	private Map<String, Simulation> allSimulations;
 	private Simulation mySimulation;
 	private ArrayList<Button> myButtons;
 	private Stage myStage;
@@ -31,14 +30,13 @@ public class UserInterface {
 	private ResourceBundle myResources;
 	private boolean runSimulation;
 
-	public UserInterface(Stage mainStage, Map<String, Simulation> possibleSimulations, String resources) {
+	public UserInterface(Stage mainStage, String resources) {
 		fileBrowse = new FileChooser();
-		allSimulations = possibleSimulations;
 		myResources = ResourceBundle.getBundle(resources);
 		myStage = mainStage;
 		myScreen = new BorderPane();
 		myScreen.setTop(setUpToolBar());
-		myScreen.setLeft(new ControlPanel(resources, ));
+		myScreen.setLeft(new ControlPanel(resources));
 	}
 	
 	private Node setUpToolBar() {
@@ -56,9 +54,9 @@ public class UserInterface {
 		return controlStrip;
 	}
 	
-	public void setUIScreen(Stage mainStage, double screenWidth, double screenHeight) {
+	public void setUIScreen(double screenWidth, double screenHeight) {
 		myScene = new Scene(myScreen, screenWidth, screenHeight);
-		mainStage.setScene(myScene);
+		myStage.setScene(myScene);
 	}
 	
 	private void openFileBrowser() {
