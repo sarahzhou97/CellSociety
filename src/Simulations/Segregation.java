@@ -8,12 +8,14 @@ import Cells.Cell;
 import Cells.SegregationCell;
 import Utils.SegregationParameterParser;
 
+
 public class Segregation extends Simulation {
 	private final String EMPTY="empty";  //duplicated code
-	
+
 	public Segregation(SegregationParameterParser parameters) {
 		super(parameters);
 	}
+
 
 	@Override
 	public void update() {

@@ -32,10 +32,5 @@ public abstract class WatorCreature extends Cell{
 		timeSinceBirth++;
 	}
 	
-	public void moveTo(int x, int y){
-		setRow(y);
-		setCol(x);
-	}
-	
 	public abstract WatorCreature makeChild();
 }
