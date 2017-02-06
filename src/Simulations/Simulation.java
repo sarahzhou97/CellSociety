@@ -1,8 +1,10 @@
 package Simulations;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import BackEndGrid.BackEndGrid;
+import Cells.Cell;
 import Utils.ParameterParser;
 
 public abstract class Simulation {
@@ -27,24 +29,14 @@ public abstract class Simulation {
 	
 	public abstract void calculateStatus();
 	
-	public void play() {
-		
-	}
-	
-	public void pause() {
-		
-	}
-	
-	public void stop() {
-		
-	}
-	
-	public void switchCell(){
-		
-	}
-	
-	public void moveToAndReplaceCell(){
-		
+	public List<Cell> getStateSpecificSubset(List<Cell> cells, String state){
+		List<Cell> sublist=new ArrayList<Cell>();
+		for(Cell cell:cells){
+			if(cell.getState().equals(state)){
+				sublist.add(cell);
+			}
+		}
+		return sublist;
 	}
 
 	public BackEndGrid getMyGrid() {
