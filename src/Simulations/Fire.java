@@ -55,7 +55,7 @@ public class Fire extends Simulation {
 
 	private boolean existsBurningNeighbor(List<Cell> neighbors) {
 		for (Cell neighborCell : neighbors) {
-			if (neighborCell.getState().equals(TREE)) {
+			if (neighborCell.getState().equals(BURNING)) {
 				return true;
 			} 
 		}
