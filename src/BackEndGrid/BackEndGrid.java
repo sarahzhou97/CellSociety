@@ -52,6 +52,8 @@ public class BackEndGrid {
 
 	public void setCell(int row, int col, Cell cell) {
 		myCellGrid[row][col] = cell;
+		cell.setCol(col);
+		cell.setRow(row);
 	}
 	/*
 	public List<Cell> getFourNeighbors(int row, int col) {
