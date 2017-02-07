@@ -15,7 +15,7 @@ public class Main extends Application{
 	public void start(Stage primaryStage) throws Exception {
 		primaryStage.setTitle("Cell Society");
 		myUI = new UserInterface(primaryStage, "English.properties");
-		myUI.setUIScreen(1000, 500);
+		myUI.setUIScreen(800, 800);
 		primaryStage.show();
 	}
 	
