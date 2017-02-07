@@ -53,7 +53,7 @@ public class BackEndGrid {
 	public void setCell(int row, int col, Cell cell) {
 		myCellGrid[row][col] = cell;
 	}
-	
+	/*
 	public List<Cell> getFourNeighbors(int row, int col) {
 		List<Cell> neighborList = new ArrayList<Cell>();
 		if (row>0) {
@@ -64,6 +64,25 @@ public class BackEndGrid {
 			neighborList.add(getCell(row,col-1));
 		} if (col<myCellGrid.length-1) {
 			neighborList.add(getCell(row,col+1));
+		}
+		
+		return neighborList;
+	}*/
+	
+	public List<Cell> getFourNeighbors(int row, int col) {
+		List<Cell> neighborList = new ArrayList<Cell>();
+		if (row>0) {
+			neighborList.add(getCell(row-1,col));
+			System.out.print("1");
+		} if (row<rows-1) {
+			neighborList.add(getCell(row+1,col));
+			System.out.print("2");
+		} if (col>0) {
+			neighborList.add(getCell(row,col-1));
+			System.out.print("3");
+		} if (col<columns-1) {
+			neighborList.add(getCell(row,col+1));
+			System.out.print("4");
 		}
 		
 		return neighborList;

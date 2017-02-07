@@ -42,6 +42,26 @@ public abstract class Simulation {
 		}
 		return sublist;
 	}
+	
+	public void play() {
+		
+	}
+	
+	public void pause() {
+		
+	}
+	
+	public void stop() {
+		
+	}
+	
+	public void switchCell(){
+		
+	}
+	
+	public void moveToAndReplaceCell(){
+		
+	}
 
 	public BackEndGrid getMyGrid() {
 		return myGrid;
