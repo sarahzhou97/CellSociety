@@ -1,42 +1,27 @@
 package CellSociety;
 
-import Simulations.Simulation;
+import Simulations.Simulation; 
 import UI.FrontEndGrid;
-//import UI.MainScreen;
-import UI.UserInterface;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
-//import Utils.FileReader;
-import javafx.application.Application;
-import javafx.stage.Stage;
 import javafx.util.Duration;
-
-import java.util.HashMap;
-
-import Simulations.Fire;
-import Simulations.GameOfLife;
-import Simulations.PredatorPrey;
-import Simulations.Segregation;
 
 public class CellSocietyView {
 	public static final int DEFAULT_GRID_SIZE = 30;
-
-	// private FileReader myFileReader = new FileReader();
+	public static final double DEFAULT_SPEED = 150;
 
 	private Simulation mySimulation;
 	private FrontEndGrid myDisplay;
 	private Timeline cellAnimation;
-	private double selectedSpeed;
 
 	public CellSocietyView(Simulation newSimulation, FrontEndGrid mainDisplay) {
 		mySimulation = newSimulation;
-		selectedSpeed = 150;
 		myDisplay = mainDisplay;
 		initializeAnimation();
 	}
 
 	private void initializeAnimation() {
-		KeyFrame gridFrame = new KeyFrame(Duration.millis(selectedSpeed), e -> getNextFrame());
+		KeyFrame gridFrame = new KeyFrame(Duration.millis(DEFAULT_SPEED), e -> getNextFrame());
 		cellAnimation = new Timeline();
 		cellAnimation.setCycleCount(Timeline.INDEFINITE);
 		cellAnimation.getKeyFrames().add(gridFrame);
@@ -52,7 +37,10 @@ public class CellSocietyView {
 
 	public void getNextFrame() {
 		mySimulation.update();
-		//myUI.updateScreen();
 		myDisplay.updateGrid();
+	}
+	
+	public void setRate(double newRate) {
+		cellAnimation.setRate(newRate);
 	}
 }

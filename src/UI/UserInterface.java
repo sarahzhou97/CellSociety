@@ -4,14 +4,18 @@ import java.io.File;
 import java.util.ResourceBundle;
 
 import CellSociety.CellSocietyView;
-import Simulations.Simulation;
 import Utils.FileReader;
 import Utils.ParameterParser;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.Slider;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -22,19 +26,18 @@ import javafx.stage.Stage;
 public class UserInterface {
 	public static final int BUTTON_SPACING = 10;
 	public static final Color DEFAULT_COLOR = Color.WHITE;
-	public static final double GRID_SIZE_RATIO = .75;
+	public static final double GRID_SIZE_RATIO = .80;
 
 	private CellSocietyView myCellSociety;
 	private InitiateCS myInitializer;
 	private Stage myStage;
 	private BorderPane myScreen;
-	//private ControlPanel myControlPanel;
 	private Button startButton;
 	private Button stepButton;
 	private Button stopButton;
 	private Button resetButton;
+	private Slider mySpeedSlider;
 	private boolean runSimulation;
-	private Node screenNode;
 	private Scene myScene;
 	private FileChooser fileBrowse;
 	private ParameterParser myDataFile;
@@ -44,11 +47,9 @@ public class UserInterface {
 
 	public UserInterface(Stage mainStage, String resources) {
 		fileBrowse = new FileChooser();
-		// myResources = ResourceBundle.getBundle(resources);
+		myResources = ResourceBundle.getBundle(resources);
 		myStage = mainStage;
 		myScreen = new BorderPane();
-		//myControlPanel = new ControlPanel(resources);
-		//myControlPanel.enableButtons();
 		myScreen.setTop(setUpToolBar());
 		myScreen.setLeft(setControlPanel());
 		enableButtons();
@@ -56,69 +57,71 @@ public class UserInterface {
 
 	private Node setUpToolBar() {
 		HBox toolBar = new HBox();
-		// Button openFileButton = new
-		// Button(myResources.getString("OpenFile"));
-		Button openFileButton = new Button(("OpenFile"));
+		toolBar.setAlignment(Pos.TOP_RIGHT);
+		Button openFileButton = new Button(myResources.getString("OpenFile"));
 		openFileButton.setOnAction(e -> openFileBrowser());
-		toolBar.getChildren().add(openFileButton);
+		toolBar.getChildren().addAll(openFileButton);
 		return toolBar;
 	}
-	
+
 	private Node setControlPanel() {
 		VBox controlPanel = new VBox();
+		controlPanel.setAlignment(Pos.CENTER_LEFT);
+		controlPanel.setSpacing(BUTTON_SPACING);
 		initiateControlButtons();
-		controlPanel.getChildren().addAll(startButton, stepButton, stopButton, resetButton);
+		Label sliderLabel = new Label(myResources.getString("SliderLabel"));
+		controlPanel.getChildren().addAll(startButton, stepButton, stopButton, resetButton, sliderLabel, mySpeedSlider);
 		return controlPanel;
 	}
-	
+
 	private void initiateControlButtons() {
-		startButton = initiateButton("StartButton", new EventHandler<ActionEvent>() {
-            @Override
-            public void handle (ActionEvent event) {
-            	runSimulation = true;
-            	enableButtons();
-                myCellSociety.startOp();
-            }
-        });
-		stopButton = initiateButton("StopButton", new EventHandler<ActionEvent>() {
-            @Override
-            public void handle (ActionEvent event) {
-            	runSimulation = false;
-            	enableButtons();
-                myCellSociety.stopOp();
-            }
-        });
-		stepButton = initiateButton("StepButton", new EventHandler<ActionEvent>() {
-            @Override
-            public void handle (ActionEvent event) {
-                myCellSociety.getNextFrame();
-            }
-        });
-		resetButton = initiateButton("ResetButton", new EventHandler<ActionEvent>() {
-            @Override
-            public void handle (ActionEvent event) {
-            	runSimulation = false;
-            	myCellSociety.stopOp();
-            	/*enableButtons();
-                myInitializer.instantiateSimulation();
-                myScreen.getChildren().remove(screenNode);
-                refreshDisplay();*/
-            	getNewSimulation();
-            }
-        });
+		startButton = initiateButton(myResources.getString("StartButton"), new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent event) {
+				runSimulation = true;
+				enableButtons();
+				myCellSociety.startOp();
+			}
+		});
+		stopButton = initiateButton(myResources.getString("StopButton"), new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent event) {
+				runSimulation = false;
+				enableButtons();
+				myCellSociety.stopOp();
+			}
+		});
+		stepButton = initiateButton(myResources.getString("StepButton"), new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent event) {
+				myCellSociety.getNextFrame();
+			}
+		});
+		resetButton = initiateButton(myResources.getString("ResetButton"), new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent event) {
+				runSimulation = false;
+				myCellSociety.stopOp();
+				getNewSimulation();
+				enableButtons();
+			}
+		});
+		mySpeedSlider = new Slider(0, 5, 1);
+		mySpeedSlider.valueProperty().addListener(new ChangeListener<Number>() {
+			@Override
+			public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
+				myCellSociety.setRate(newValue.doubleValue());
+			}
+
+		});
 	}
-	
+
 	private Button initiateButton(String resourceString, EventHandler<ActionEvent> handler) {
-		//Button controlButton = new Button(myResources.getString(resourceString));
 		Button controlButton = new Button(resourceString);
 		controlButton.setOnAction(handler);
+		controlButton.setMaxWidth(Double.MAX_VALUE);
 		return controlButton;
 	}
-	/*
-	 * private void setUpGridDisplay() { myDisplay = new
-	 * FrontEndGrid(mySimulation.getMyGrid(), .5 * myWidth, .5 * myHeight,
-	 * DEFAULT_COLOR); myDisplay.updateGrid(); }
-	 */
 
 	public void setUIScreen(double screenWidth, double screenHeight) {
 		myWidth = screenWidth;
@@ -133,16 +136,11 @@ public class UserInterface {
 			FileReader myFileReader = new FileReader(readFile);
 			myDataFile = myFileReader.getParser();
 			getNewSimulation();
-			/*myInitializer = new InitiateCS(myDataFile, GRID_SIZE_RATIO * myWidth, GRID_SIZE_RATIO * myHeight,
-					DEFAULT_COLOR);
-			myCellSociety = myInitializer.getCellSociety();
-			myScreen.setCenter(myInitializer.getGridNode());
-			enableButtons();*/
 		} else {
 			return;
 		}
 	}
-	
+
 	private void getNewSimulation() {
 		myInitializer = new InitiateCS(myDataFile, GRID_SIZE_RATIO * myWidth, GRID_SIZE_RATIO * myHeight,
 				DEFAULT_COLOR);
@@ -150,36 +148,11 @@ public class UserInterface {
 		myScreen.setCenter(myInitializer.getGridNode());
 		enableButtons();
 	}
-	
-	private void refreshDisplay() {
-		screenNode = myInitializer.getGridNode();
-		myScreen.setCenter(screenNode);
-	}
 
 	private void enableButtons() {
-		startButton.setDisable(myCellSociety==null || runSimulation);
-		stepButton.setDisable(myCellSociety==null);
-		stopButton.setDisable(myCellSociety==null || !runSimulation);
-		resetButton.setDisable(myInitializer==null);
+		startButton.setDisable(myCellSociety == null || runSimulation);
+		stepButton.setDisable(myCellSociety == null);
+		stopButton.setDisable(myCellSociety == null || !runSimulation);
+		resetButton.setDisable(myInitializer == null);
 	}
-	/*
-	 * public void instantiateSimulation() { String simType =
-	 * myDataFile.getSimType(); if (simType.equals("Fire")) { mySimulation = new
-	 * Fire((FireParameterParser) myDataFile); } else if
-	 * (simType.equals("GameOfLife")) { mySimulation = new
-	 * GameOfLife((GameOfLifeParameterParser) myDataFile); } else if
-	 * (simType.equals("PredatorPrey")) { mySimulation = new
-	 * PredatorPrey((PredatorPreyParameterParser) myDataFile); } else if
-	 * (simType.equals("Segregation")) { mySimulation = new
-	 * Segregation((SegregationParameterParser) myDataFile); } else {
-	 * System.exit(1); } mySimulation.initiateSimulation(); setUpGridDisplay();
-	 * myScreen.setCenter(myDisplay.returnDisplay()); myCellSociety = new
-	 * CellSocietyView(mySimulation, myDisplay);
-	 * myControlPanel.setCellSociety(myCellSociety); }
-	 */
-
-	/*
-	 * public void updateScreen() { mySimulation.update();
-	 * myDisplay.updateGrid(); }
-	 */
 }

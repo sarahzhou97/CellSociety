@@ -18,7 +18,7 @@ public class FileReader {
 	public static final String TAG_NAME = "simulation";
 	public static final String TAG_ID = "id";
 	private static final String FIRE_FILE_NAME = "Fire";
-	private static final String PREDATOR_PREY_NAME = "PredatorAndPrey";
+	private static final String PREDATOR_PREY_NAME = "PredatorPrey";
 	private static final String GAME_OF_LIFE_FILE_NAME = "GameOfLife";
 	private static final String SEGREGATION_FILE_NAME = "Segregation";
 	
