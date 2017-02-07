@@ -4,8 +4,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-import com.sun.javafx.collections.MappingChange.Map;
-
 import Cells.Cell;
 import Cells.FireCell;
 import Utils.FireParameterParser;
@@ -13,8 +11,6 @@ import Utils.FireParameterParser;
 public class Fire extends Simulation {
 
 	private double probCatch;
-	
-	private HashMap<int[],String> initialCells;
 
 	private boolean stop;
 
@@ -29,7 +25,6 @@ public class Fire extends Simulation {
 		super(parameters);
 		stop = false;
 		probCatch = parameters.getProbCatch();
-		initialCells = parameters.getInitialCells();
 		burningList = new ArrayList<FireCell>();
 		emptyList = new ArrayList<FireCell>();
 	}
