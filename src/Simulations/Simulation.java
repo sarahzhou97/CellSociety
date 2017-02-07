@@ -1,6 +1,7 @@
 package Simulations;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import BackEndGrid.BackEndGrid;
@@ -16,11 +17,14 @@ public abstract class Simulation {
 	private String myTitle;
 	private ParameterParser myParameters;
 	
+	HashMap<int[],String> initialCells;
+	
 	public Simulation(ParameterParser parameters){
 		myParameters = parameters;
 		myGridSize = myParameters.getGridSize();
 		setMyGrid(new BackEndGrid(myGridSize));
 		myTitle = parameters.getTitle();
+		initialCells = parameters.getInitialCells();
 	}
 	
 	public abstract void update();
@@ -74,5 +78,6 @@ public abstract class Simulation {
 	public String getTitle() {
 		return myTitle;
 	}
+
 	
 }
