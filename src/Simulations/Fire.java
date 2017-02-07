@@ -1,7 +1,10 @@
 package Simulations;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+
+import com.sun.javafx.collections.MappingChange.Map;
 
 import Cells.Cell;
 import Cells.FireCell;
@@ -10,6 +13,8 @@ import Utils.FireParameterParser;
 public class Fire extends Simulation {
 
 	private double probCatch;
+	
+	private HashMap<int[],String> initialCells;
 
 	private boolean stop;
 
@@ -24,22 +29,23 @@ public class Fire extends Simulation {
 		super(parameters);
 		stop = false;
 		probCatch = parameters.getProbCatch();
+		initialCells = parameters.getInitialCells();
 		burningList = new ArrayList<FireCell>();
 		emptyList = new ArrayList<FireCell>();
 	}
 
 	@Override
 	public void update() {
+		if (!burningTreesLeft()) {
+			stop();
+			return;
+		}
 		for (int i = 0; i<getGridSize();i++) {
 			for (int j = 0; j<getGridSize();j++) {
 				applyRules(i,j);
 			}
 		}
 		updateTrees();
-		if (!burningTreesLeft()) {
-			stop();
-			//getMyGrid().displayGrid();
-		}
 	}
 	
 	private void stop() {
@@ -99,46 +105,20 @@ public class Fire extends Simulation {
 		burningList.clear();
 		emptyList.clear();
 	}
-
-	@Override
+	
 	public void initiateSimulation() {
-		int gridSize = getGridSize();
-		for (int i=0; i<gridSize;i++) {
-			for (int j = 0; j<gridSize;j++) {
-				if (isBorderCell(i,j,gridSize)) {
-					setEmptyCell(i,j);
-				} else if (isMiddleCell(i,j,gridSize)){
-					setBurningCell(i,j);
-				} else {
-					setTreeCell(i,j);
-				}
+		for (int[] coordinates : initialCells.keySet()) {
+			String cellType = initialCells.get(coordinates);
+			FireCell cell = null;
+			if (cellType.equals(BURNING)) {
+				cell = new FireCell(BURNING);
+			} else if (cellType.equals(EMPTY)) {
+				cell = new FireCell(EMPTY);
+			} else if (cellType.equals(TREE)) {
+				cell = new FireCell(TREE);
 			}
-
+			getMyGrid().setCell(coordinates[0],coordinates[1],cell);
 		}
-	}
-	
-	private boolean isBorderCell(int row, int col, int gridSize) {
-		int gridEdge = gridSize -1;
-		if (row==0 || col==gridEdge || row==0 || col==gridEdge) return true;
-		else return false;
-	}
-	
-	private void setEmptyCell(int row, int col) {
-		getMyGrid().setCell(row, col, new FireCell(EMPTY));
-	}
-	
-	private boolean isMiddleCell(int row, int col, int gridSize) {
-		int mid = gridSize/2;
-		if (col==mid && row==mid) return true;
-		else return false;
-	}
-	
-	private void setBurningCell(int i, int j) {
-		getMyGrid().setCell(i, j, new FireCell(BURNING));
-	}
-	
-	private void setTreeCell(int row, int col) {
-		getMyGrid().setCell(row, col, new FireCell(TREE));
 	}
 
 	@Override
