@@ -6,7 +6,6 @@ import java.util.Random;
 
 import BackEndGrid.BackEndGrid;
 import Cells.Cell;
-import Cells.SegregationCell;
 import Cells_Wator.WatorCreature;
 import Cells_Wator.WatorEmpty;
 import Cells_Wator.WatorPredator;
@@ -20,21 +19,7 @@ public class PredatorPrey extends Simulation {
 	
 	public void moveToAndReplace(int x, int y,Cell creature){//Replaces target cell and leaves blank cell behind
 		getMyGrid().setCell(creature.getRow(), creature.getCol(), new WatorEmpty());
-		creature.setRow(x);
-		creature.setCol(y);
 		getMyGrid().setCell(x,y,creature);
-	}
-
-	public void switchCell(Cell cell1, Cell cell2){
-		int cell2Row=cell2.getRow();
-		int cell2Col=cell2.getCol();
-		
-		getMyGrid().setCell(cell1.getRow(), cell1.getCol(), cell2);
-		cell2.setRow(cell1.getRow());
-		cell2.setCol(cell1.getCol());
-		getMyGrid().setCell(cell2Row, cell2Col, cell1);
-		cell1.setRow(cell2Row);
-		cell1.setCol(cell2Col);
 	}
 	
 	public void handleReproduction(WatorCreature creature){
@@ -49,7 +34,7 @@ public class PredatorPrey extends Simulation {
 	
 	public void birthIfAble(WatorCreature creature){
 		List<Cell> cellList=getMyGrid().getEightNeighbors(creature.getRow(), creature.getCol());
-		List<Cell> emptyCells=getClassSpecificSubcells(cellList,"WatorEmpty");
+		List<Cell> emptyCells=getClassSpecificSubcells(cellList,"Cells_Wator.WatorEmpty");
 		
 		
 		if(emptyCells.size()>0){
@@ -62,7 +47,7 @@ public class PredatorPrey extends Simulation {
 	
 	public void moveIfAble(WatorCreature creature){
 		List<Cell> cellList=getMyGrid().getEightNeighbors(creature.getRow(), creature.getCol());
-		List<Cell> emptyCells=getClassSpecificSubcells(cellList,"WatorEmpty");
+		List<Cell> emptyCells=getClassSpecificSubcells(cellList,"Cells_Wator.WatorEmpty");
 		
 		if(emptyCells.size()>0){
 			Random rn = new Random();
@@ -73,20 +58,21 @@ public class PredatorPrey extends Simulation {
 	
 	public void eatIfAble(WatorPredator creature){
 		List<Cell> cellList=getMyGrid().getEightNeighbors(creature.getRow(), creature.getCol());
-		List<Cell> preyCells=getClassSpecificSubcells(cellList,"WatorPrey");
+		List<Cell> preyCells=getClassSpecificSubcells(cellList,"Cells_Wator.WatorPrey");
 		
 		if(preyCells.size()>0){
 			Random rn = new Random();
-			WatorEmpty targetCell=(WatorEmpty)preyCells.get(rn.nextInt(preyCells.size()));
+			WatorPrey targetCell=(WatorPrey)preyCells.get(rn.nextInt(preyCells.size()));
 			moveToAndReplace(targetCell.getRow(),targetCell.getCol(), creature);
 			creature.resetTimeSinceAte();
+			System.out.println("ate");
 		}
 	}
 	
 	public void handleHunger(WatorPredator creature){
 		creature.incrementTimeSinceAte();
 		if(creature.getTimeSinceAte()==creature.getMaxHungerPeriod()){
-			moveToAndReplace(creature.getRow(),creature.getCol(),new WatorEmpty());
+			getMyGrid().setCell(creature.getRow(),creature.getCol(),new WatorEmpty());
 		}
 	}
 	
@@ -119,15 +105,17 @@ public class PredatorPrey extends Simulation {
 			}
 		}
 		
-		List<Cell> predators=getClassSpecificSubcells(allCells,"WatorPredator");
+		List<Cell> predators=getClassSpecificSubcells(allCells,"Cells_Wator.WatorPredator");
 		for(Cell predator: predators){
 			eatIfAble((WatorPredator)predator);
-			handleHunger((WatorPredator)predator);
-			moveIfAble((WatorPredator)predator);
+			if(((WatorPredator)predator).getTimeSinceAte()>0){
+					moveIfAble((WatorPredator)predator);
+			}
 			handleReproduction((WatorPredator)predator);
+			handleHunger((WatorPredator)predator);
 		}
 		
-		List<Cell> preyCells=getClassSpecificSubcells(allCells,"WatorPrey");
+		List<Cell> preyCells=getClassSpecificSubcells(allCells,"Cells_Wator.WatorPrey");
 		for(Cell prey: preyCells){
 			moveIfAble((WatorPrey)prey);
 			handleReproduction((WatorPrey)prey);
@@ -140,17 +128,16 @@ public class PredatorPrey extends Simulation {
 			String cellType = initialCells.get(coordinates);	
 			Class<?> cls;
 			try {
-				cls = Class.forName(cellType);
+				cls = Class.forName("Cells_Wator."+cellType);
 				Cell cell=(Cell) cls.newInstance();
 				getMyGrid().setCell(coordinates[0],coordinates[1],cell);
 			} catch (ClassNotFoundException | InstantiationException | IllegalAccessException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+			
 		}
-		
-		// TODO Auto-generated method stub
-		
+		// TODO Auto-generated method stub		
 	}
 	
 
