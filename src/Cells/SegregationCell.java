@@ -37,9 +37,9 @@ public class SegregationCell extends Cell{
 		} else if (newState.equals(EMPTY)) {
 			setState(EMPTY);
 			setColor(EMPTY_COLOR);
-		} else{
+		} /*else{
 			System.out.print("State Not Found!");//throw exception ideally
-		}
+		}*/
 	}
 	
 	public double getSatisfactionRequirement(){

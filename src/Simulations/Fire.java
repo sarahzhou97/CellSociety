@@ -1,7 +1,6 @@
 package Simulations;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 import Cells.Cell;
@@ -41,10 +40,6 @@ public class Fire extends Simulation {
 			}
 		}
 		updateTrees();
-	}
-	
-	private void stop() {
-		stop= true;
 	}
 	
 	public boolean getStop() {

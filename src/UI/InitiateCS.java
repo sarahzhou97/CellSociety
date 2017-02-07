@@ -61,4 +61,8 @@ public class InitiateCS {
 	public CellSocietyView getCellSociety() {
 		return new CellSocietyView(mySimulation, myDisplay);
 	}
+	
+	public String getSimTitle() {
+		return myDataFile.getTitle();
+	}
 }
