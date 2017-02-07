@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <simulation id = "GameOfLife">
 	<title>Game of Life</title>
-	<size>4</size>
+	<size>10</size>
 	<cells>
 		<cell>0,0,dead</cell>
 		<cell>0,1,dead</cell>
@@ -104,5 +104,4 @@
 		<cell>9,8,alive</cell>
 		<cell>9,9,dead</cell>
 	</cells>
-	
 </simulation>
