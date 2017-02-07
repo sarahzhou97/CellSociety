@@ -25,14 +25,13 @@ public class CellSocietyView {
 
 	private Simulation mySimulation;
 	private FrontEndGrid myDisplay;
-	private UserInterface myUI;
 	private Timeline cellAnimation;
 	private double selectedSpeed;
 
-	public CellSocietyView(Simulation newSimulation, FrontEndGrid mainDisplay, UserInterface test) {
+	public CellSocietyView(Simulation newSimulation, FrontEndGrid mainDisplay) {
 		mySimulation = newSimulation;
+		selectedSpeed = 150;
 		myDisplay = mainDisplay;
-		myUI = test;
 		initializeAnimation();
 	}
 
@@ -50,15 +49,10 @@ public class CellSocietyView {
 	public void stopOp() {
 		cellAnimation.pause();
 	}
-	
-	public void resetSimulation() {
-		cellAnimation.playFromStart();
-		cellAnimation.pause();
-	}
 
 	public void getNextFrame() {
 		mySimulation.update();
-		myUI.updateScreen();
-		//myDisplay.updateGrid();
+		//myUI.updateScreen();
+		myDisplay.updateGrid();
 	}
 }
