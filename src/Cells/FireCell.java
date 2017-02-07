@@ -9,8 +9,7 @@ public class FireCell extends Cell {
 	private static final String BURNING = "burning";
 	
 	public FireCell(String state) {
-		super();
-		updateState(state);
+		super(state);
 	}
 	
 	@Override

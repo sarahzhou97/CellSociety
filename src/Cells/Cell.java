@@ -11,6 +11,13 @@ public abstract class Cell {
 	private int row;
 	private int col;
 	
+	public Cell() {
+	}
+	
+	public Cell(String state) {
+		updateState(state);
+	}
+	
 	public int getRow() {
 		return row;
 	}

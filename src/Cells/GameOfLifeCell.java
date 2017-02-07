@@ -7,8 +7,7 @@ public class GameOfLifeCell extends Cell {
 	private static final String DEAD = "dead";
 	
 	public GameOfLifeCell(String state) {
-		super();
-		updateState(state);
+		super(state);
 	}
 	
 	@Override
