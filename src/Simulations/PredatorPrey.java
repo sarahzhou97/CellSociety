@@ -65,7 +65,7 @@ public class PredatorPrey extends Simulation {
 			WatorPrey targetCell=(WatorPrey)preyCells.get(rn.nextInt(preyCells.size()));
 			moveToAndReplace(targetCell.getRow(),targetCell.getCol(), creature);
 			creature.resetTimeSinceAte();
-			System.out.println("ate");
+			System.out.println(creature.getRow());
 		}
 	}
 	
