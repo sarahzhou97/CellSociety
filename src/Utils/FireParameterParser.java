@@ -12,6 +12,7 @@ public class FireParameterParser extends ParameterParser{
 	@Override
 	protected void setParameters(Element el) {
 		probCatch=Double.parseDouble(el.getElementsByTagName("probCatch").item(0).getTextContent());
+		
 	}
 
 	public double getProbCatch() {
