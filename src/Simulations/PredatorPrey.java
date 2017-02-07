@@ -25,7 +25,6 @@ public class PredatorPrey extends Simulation {
 	public void handleReproduction(WatorCreature creature){
 		if(creature.getGestationPeriod()==creature.getTimeSinceBirth()){
 			birthIfAble(creature);
-			creature.resetTimeSinceBirth();
 		}
 		else{
 			creature.incrementTimeSinceBirth();
@@ -34,15 +33,14 @@ public class PredatorPrey extends Simulation {
 	
 	public void birthIfAble(WatorCreature creature){
 		List<Cell> cellList=getMyGrid().getEightNeighbors(creature.getRow(), creature.getCol());
-		List<Cell> emptyCells=getClassSpecificSubcells(cellList,"Cells_Wator.WatorEmpty");
-		
+		List<Cell> emptyCells=getClassSpecificSubcells(cellList,"Cells_Wator.WatorEmpty");		
 		
 		if(emptyCells.size()>0){
 			Random rn = new Random();
 			WatorEmpty targetCell=(WatorEmpty)emptyCells.get(rn.nextInt(emptyCells.size()));
 			getMyGrid().setCell(targetCell.getRow(), targetCell.getCol(), creature.makeChild());
+			creature.resetTimeSinceBirth();
 		}
-		creature.resetTimeSinceBirth();
 	}
 	
 	public void moveIfAble(WatorCreature creature){
@@ -71,7 +69,7 @@ public class PredatorPrey extends Simulation {
 	
 	public void handleHunger(WatorPredator creature){
 		creature.incrementTimeSinceAte();
-		if(creature.getTimeSinceAte()==creature.getMaxHungerPeriod()){
+		if(creature.getTimeSinceAte()>=creature.getMaxHungerPeriod()){
 			getMyGrid().setCell(creature.getRow(),creature.getCol(),new WatorEmpty());
 		}
 	}
@@ -97,6 +95,35 @@ public class PredatorPrey extends Simulation {
 
 	@Override
 	public void update() {
+		List<Cell> allCells = getAllCells();
+		List<Cell> predators=getClassSpecificSubcells(allCells,"Cells_Wator.WatorPredator");
+		for(Cell predator: predators){
+			
+			eatIfAble((WatorPredator)predator);
+			
+			if(((WatorPredator)predator).getTimeSinceAte()>0){
+				moveIfAble((WatorPredator)predator);			
+			}
+			handleReproduction((WatorPredator)predator);
+			handleHunger((WatorPredator)predator);
+		}
+
+		
+		List<Cell> allCellsAfterPredatorAction=getAllCells();
+		List<Cell> preyCells=getClassSpecificSubcells(allCellsAfterPredatorAction,"Cells_Wator.WatorPrey");
+		for(Cell prey: preyCells){
+			System.out.println("Before prey moved: "+getWatorClassCount("WatorPredator"));
+			moveIfAble((WatorPrey)prey);
+			System.out.println("After prey moved: "+getWatorClassCount("WatorPredator"));
+			handleReproduction((WatorPrey)prey);
+			System.out.println("After prey sex: "+getWatorClassCount("WatorPredator"));
+		}
+
+		
+		
+	}
+
+	private List<Cell> getAllCells() {
 		List<Cell> allCells=new ArrayList<>();
 		BackEndGrid grid=getMyGrid();
 		for(int i=0; i<grid.getRows();i++){
@@ -104,22 +131,13 @@ public class PredatorPrey extends Simulation {
 				allCells.add(grid.getCell(i, j));
 			}
 		}
-		
-		List<Cell> predators=getClassSpecificSubcells(allCells,"Cells_Wator.WatorPredator");
-		for(Cell predator: predators){
-			eatIfAble((WatorPredator)predator);
-			if(((WatorPredator)predator).getTimeSinceAte()>0){
-					moveIfAble((WatorPredator)predator);
-			}
-			handleReproduction((WatorPredator)predator);
-			handleHunger((WatorPredator)predator);
-		}
-		
-		List<Cell> preyCells=getClassSpecificSubcells(allCells,"Cells_Wator.WatorPrey");
-		for(Cell prey: preyCells){
-			moveIfAble((WatorPrey)prey);
-			handleReproduction((WatorPrey)prey);
-		}
+		return allCells;
+	}
+	
+	private int getWatorClassCount(String className){
+		List<Cell> allCells=getAllCells();
+		List<Cell> wantedCells=getClassSpecificSubcells(allCells,"Cells_Wator."+className);
+		return wantedCells.size();
 	}
 
 	@Override
