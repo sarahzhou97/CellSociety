@@ -5,12 +5,15 @@ import java.util.List;
 import java.util.Random;
 
 import Cells.Cell;
+import Cells.GameOfLifeCell;
 import Cells.SegregationCell;
 import Utils.SegregationParameterParser;
 
 
 public class Segregation extends Simulation {
 	private final String EMPTY="empty";  //duplicated code
+	private final String TYPE1="type1";
+	private final String TYPE2="type2";
 
 	public Segregation(SegregationParameterParser parameters) {
 		super(parameters);
@@ -19,6 +22,7 @@ public class Segregation extends Simulation {
 
 	@Override
 	public void update() {
+		System.out.print("called update");
 		List<SegregationCell> occupiedCells=new ArrayList<>();
 		List<SegregationCell> emptyCells=new ArrayList<>();
 		for(int i=0;i<getMyGrid().getRows();i++){
@@ -26,23 +30,34 @@ public class Segregation extends Simulation {
 				SegregationCell cell=(SegregationCell)getMyGrid().getCell(i, j);
 				if(cell.getState().equals(EMPTY)){
 					emptyCells.add(cell);
+				}else{
+					occupiedCells.add(cell);
 				}
 			}
 		}
 		
 		for(SegregationCell cell:occupiedCells){
 			if(!cell.alwaysSatisfied()){
-				List<Cell> cellNeighbors=getMyGrid().getEightNeighbors(cell.getRow(),cell.getCol());
-				List<Cell> emptyNeighbors=getStateSpecificSubset(cellNeighbors,EMPTY);
-				List<Cell> sameKinds=getStateSpecificSubset(cellNeighbors,cell.getState());
-				double occupiedNeighbors=cellNeighbors.size()-emptyNeighbors.size();
-				double similarityIndex=occupiedNeighbors/sameKinds.size();
 				
+				List<Cell> cellNeighbors=getMyGrid().getEightNeighbors(cell.getRow(),cell.getCol());
+				System.out.println("cellNeighbors:"+cellNeighbors.size());
+				List<Cell> emptyNeighbors=getStateSpecificSubset(cellNeighbors,EMPTY);
+				System.out.println("emptyNeighbors:"+emptyNeighbors.size());
+				List<Cell> similarNeighbors=getStateSpecificSubset(cellNeighbors,cell.getState());
+				System.out.println("similarNeighbors:"+similarNeighbors.size());
+				double occupiedNeighbors=cellNeighbors.size()-emptyNeighbors.size();
+				double numberOfSimilarNeighbors=similarNeighbors.size();
+				double similarityIndex=numberOfSimilarNeighbors/occupiedNeighbors;
+				
+				System.out.println("occupiedNeighbors"+occupiedNeighbors);
+				System.out.println("num same kind"+numberOfSimilarNeighbors);
+				System.out.println("Similarity:"+similarityIndex);
+				System.out.println("Needed:"+cell.getSatisfactionRequirement());
 				if(similarityIndex<cell.getSatisfactionRequirement()){
 					Random rn = new Random();
-					int index=rn.nextInt(emptyNeighbors.size());
-					getMyGrid().switchCell(cell, emptyNeighbors.get(index));
-					
+					int index=rn.nextInt(emptyCells.size());
+					getMyGrid().switchCell(cell, emptyCells.get(index));
+					System.out.print("attempted switch");
 				}
 			}
 		}
@@ -52,8 +67,22 @@ public class Segregation extends Simulation {
 
 	@Override
 	public void initiateSimulation() {
-		// TODO Auto-generated method stub
-		
+		for (int[] coordinates : initialCells.keySet()) {
+			String cellType = initialCells.get(coordinates);	
+			SegregationCell cell = null;
+			if (cellType.equals(TYPE1)) {
+				cell = new SegregationCell(TYPE1);
+			} else if (cellType.equals(TYPE2)) {
+				cell = new SegregationCell(TYPE2);
+			}else if (cellType.equals(EMPTY)){
+				cell=new SegregationCell(EMPTY);
+			}else{
+				System.out.print(cellType);
+			}
+			getMyGrid().setCell(coordinates[0],coordinates[1],cell);
+			cell.setRow(coordinates[0]);
+			cell.setCol(coordinates[1]);
+		}
 	}
 
 	@Override

@@ -6,6 +6,7 @@ import java.util.Random;
 
 import BackEndGrid.BackEndGrid;
 import Cells.Cell;
+import Cells.SegregationCell;
 import Cells_Wator.WatorCreature;
 import Cells_Wator.WatorEmpty;
 import Cells_Wator.WatorPredator;
@@ -135,6 +136,19 @@ public class PredatorPrey extends Simulation {
 
 	@Override
 	public void initiateSimulation() {
+		for (int[] coordinates : initialCells.keySet()) {
+			String cellType = initialCells.get(coordinates);	
+			Class<?> cls;
+			try {
+				cls = Class.forName(cellType);
+				Cell cell=(Cell) cls.newInstance();
+				getMyGrid().setCell(coordinates[0],coordinates[1],cell);
+			} catch (ClassNotFoundException | InstantiationException | IllegalAccessException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		
 		// TODO Auto-generated method stub
 		
 	}
