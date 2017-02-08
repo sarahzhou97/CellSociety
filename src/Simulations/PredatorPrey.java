@@ -2,6 +2,7 @@ package Simulations;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Random;
 
 import BackEndGrid.BackEndGrid;
@@ -10,10 +11,9 @@ import Cells_Wator.WatorCreature;
 import Cells_Wator.WatorEmpty;
 import Cells_Wator.WatorPredator;
 import Cells_Wator.WatorPrey;
-import Utils.PredatorPreyParameterParser;
 
 public class PredatorPrey extends Simulation {
-	public PredatorPrey(PredatorPreyParameterParser parameters) {
+	public PredatorPrey(Map<String,String> parameters) {
 		super(parameters);
 	}
 	

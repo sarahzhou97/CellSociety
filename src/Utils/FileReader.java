@@ -37,17 +37,19 @@ public class FileReader {
 	}
 	
 	public ParameterParser getParser() {
-		String simName = myXMLElement.getAttribute(TAG_ID);
-		if (simName.equals(FIRE_FILE_NAME)) {
-			return new FireParameterParser(myXMLElement);
-		} else if (simName.equals(GAME_OF_LIFE_FILE_NAME)) {
-			return new GameOfLifeParameterParser(myXMLElement);
-		} else if (simName.equals(PREDATOR_PREY_NAME)) {
-			return new PredatorPreyParameterParser(myXMLElement);
-		} else if (simName.equals(SEGREGATION_FILE_NAME)) {
-			return new SegregationParameterParser(myXMLElement);
-		}
-		return null;
+//		String simName = myXMLElement.getAttribute(TAG_ID);
+//		if (simName.equals(FIRE_FILE_NAME)) {
+//			return new FireParameterParser(myXMLElement);
+//		} else if (simName.equals(GAME_OF_LIFE_FILE_NAME)) {
+//			return new GameOfLifeParameterParser(myXMLElement);
+//		} else if (simName.equals(PREDATOR_PREY_NAME)) {
+//			return new PredatorPreyParameterParser(myXMLElement);
+//		} else if (simName.equals(SEGREGATION_FILE_NAME)) {
+//			return new SegregationParameterParser(myXMLElement);
+//		}
+//		return null;
+		
+		return new ParameterParser(myXMLElement);
 	}
 	
 	
