@@ -1,19 +1,19 @@
 package Simulations;
 
-import java.util.ArrayList;
+import java.util.ArrayList;	
 import java.util.List;
+import java.util.Map;
 
 import Cells.Cell;
 import Cells.FireCell;
 import Cells.GameOfLifeCell;
-import Utils.GameOfLifeParameterParser;
 
 public class GameOfLife extends Simulation{
 	
 	private static final String ALIVE = "alive";
 	private static final String DEAD = "dead";
 
-	public GameOfLife(GameOfLifeParameterParser parameters) {
+	public GameOfLife(Map<String,String> parameters) {
 		super(parameters);
 	}
 	

@@ -3,6 +3,7 @@ package Simulations;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import BackEndGrid.BackEndGrid;
 import Cells.Cell;
@@ -15,16 +16,15 @@ public abstract class Simulation {
 	private BackEndGrid myGrid;
 	private int myGridSize;
 	private String myTitle;
-	private ParameterParser myParameters;
+	private Map<String,String> myParameters;
 	
-	HashMap<int[],String> initialCells;
+	Map<int[],String> initialCells;
 	
-	public Simulation(ParameterParser parameters){
+	public Simulation(Map<String,String> parameters){
 		myParameters = parameters;
-		myGridSize = myParameters.getGridSize();
+		myGridSize = Integer.parseInt(myParameters.get("size"));
 		setMyGrid(new BackEndGrid(myGridSize));
-		myTitle = parameters.getTitle();
-		initialCells = parameters.getInitialCells();
+		myTitle = myParameters.get("title");
 	}
 	
 	public abstract void update();
