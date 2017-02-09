@@ -1,5 +1,6 @@
-<?xml version="1.0"?>
+
 <simulation id = "GameOfLife">
 	<title>Game of Life</title>
 	<size>10</size>
+	<probDead>0.5</probDead>
 </simulation>
