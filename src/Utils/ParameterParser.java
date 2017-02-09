@@ -1,58 +1,84 @@
 package Utils;
 
+import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
+
+import org.w3c.dom.Attr;
+import org.w3c.dom.Document;
 import org.w3c.dom.Element;
+import org.w3c.dom.NamedNodeMap;
+import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
+import org.xml.sax.SAXException;
 
-public abstract class ParameterParser {
+
+public class ParameterParser {
 	
 	private String simType;
-	private String myTitle;
-	private int gridSize;
 	
-	NodeList cellList;
+	private Map<String,String> parameters;
 	
-	HashMap<int[],String> initialCells;
+	public static final String TAG_NAME = "simulation";
+	public static final String TAG_ID = "id";
 	
-	public ParameterParser(Element XMLElement) {
-		initialCells = new HashMap<int[],String>();
-		initiateParameters(XMLElement);
-	}
+	private Document myDoc;
 	
-	private void initiateParameters(Element el) {
-		simType=el.getAttribute("id");
-		myTitle=el.getElementsByTagName("title").item(0).getTextContent();
-		gridSize = Integer.parseInt(el.getElementsByTagName("size").item(0).getTextContent());
-		Element cell = (Element) el.getElementsByTagName("cells").item(0);
-		cellList = cell.getElementsByTagName("cell");
-		for (int idx = 0; idx<cellList.getLength();idx++) {
-			String str = cellList.item(idx).getTextContent();
-			String[] strArr = str.split(",");
-			int[] coordinates = new int[2];
-			coordinates[0] = Integer.parseInt(strArr[0]);
-			coordinates[1] = Integer.parseInt(strArr[1]);
-			initialCells.put(coordinates,strArr[2]);
+	public ParameterParser(File file)  {
+		DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
+		DocumentBuilder dBuilder = null;
+		try {
+			dBuilder = dbFactory.newDocumentBuilder();
+		} catch (ParserConfigurationException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
-		setParameters(el);
+		try {
+			myDoc = dBuilder.parse(file);
+		} catch (SAXException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		myDoc.getDocumentElement().normalize();
+		NodeList nodeList = myDoc.getElementsByTagName("*");
+		
+		Element el = (Element) nodeList.item(0);
+		setSimType(el.getAttribute("id"));
+		
+		initiateParameterMap(nodeList);
 	}
 	
-	public int getGridSize() {
-		return gridSize;
+	private void initiateParameterMap(NodeList nodeList) {
+		parameters = new HashMap<String,String>();
+		for (int i = 1; i<nodeList.getLength();i++) {
+			Element element = (Element) nodeList.item(i);
+			String attr = element.getNodeName();
+			String value = myDoc.getElementsByTagName(attr).item(0).getTextContent();
+			//System.out.println(attr+" "+value);
+			parameters.put(attr, value);
+		}
 	}
+	
+	public void setSimType(String simType) {
+		this.simType = simType;
+	}
+
 	
 	public String getSimType() {
 		return simType;
 	}
-	
-	public String getTitle() {
-		return myTitle;
+
+	public Map<String,String> getParameters() {
+		return parameters;
 	}
-	
-	public HashMap<int[],String> getInitialCells() {
-		return initialCells;
-	}
-	
-	protected abstract void setParameters(Element el);
-	
 }

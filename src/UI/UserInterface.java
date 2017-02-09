@@ -4,7 +4,6 @@ import java.io.File;
 import java.util.ResourceBundle;
 
 import CellSociety.CellSocietyView;
-import Utils.FileReader;
 import Utils.ParameterParser;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -39,15 +38,17 @@ public class UserInterface {
 	private Slider mySpeedSlider;
 	private boolean runSimulation;
 	private Scene myScene;
+	private Scene backScene;
 	private FileChooser fileBrowse;
 	private ParameterParser myDataFile;
 	private ResourceBundle myResources;
 	private double myWidth;
 	private double myHeight;
 
-	public UserInterface(Stage mainStage, String resources) {
+	public UserInterface(Stage mainStage, String resources, Scene previousScene) {
 		fileBrowse = new FileChooser();
 		myResources = ResourceBundle.getBundle(resources);
+		backScene = previousScene;
 		myStage = mainStage;
 		myScreen = new BorderPane();
 		myScreen.setTop(setUpToolBar());
@@ -60,7 +61,9 @@ public class UserInterface {
 		toolBar.setAlignment(Pos.TOP_RIGHT);
 		Button openFileButton = new Button(myResources.getString("OpenFile"));
 		openFileButton.setOnAction(e -> openFileBrowser());
-		toolBar.getChildren().addAll(openFileButton);
+		Button returnToMainMenu = new Button(myResources.getString("ReturnMainMenu"));
+		returnToMainMenu.setOnAction(e -> goBackToMenu());
+		toolBar.getChildren().addAll(openFileButton, returnToMainMenu);
 		return toolBar;
 	}
 
@@ -133,12 +136,16 @@ public class UserInterface {
 	private void openFileBrowser() {
 		File readFile = fileBrowse.showOpenDialog(myStage);
 		if (readFile != null) {
-			FileReader myFileReader = new FileReader(readFile);
-			myDataFile = myFileReader.getParser();
+			ParameterParser myParameterParser = new ParameterParser(readFile);
+			myDataFile = myParameterParser;
 			getNewSimulation();
 		} else {
 			return;
 		}
+	}
+	
+	private void goBackToMenu() {
+		myStage.setScene(backScene);
 	}
 
 	private void getNewSimulation() {

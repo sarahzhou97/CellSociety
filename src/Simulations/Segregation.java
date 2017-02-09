@@ -1,20 +1,19 @@
 package Simulations;
 
-import java.util.ArrayList;
+import java.util.ArrayList;	
 import java.util.List;
+import java.util.Map;
 import java.util.Random;
 
 import Cells.Cell;
-import Cells.GameOfLifeCell;
 import Cells.SegregationCell;
-import Utils.SegregationParameterParser;
 
 public class Segregation extends Simulation {
 	private final String EMPTY = "empty"; // duplicated code
 	private final String TYPE1 = "type1";
 	private final String TYPE2 = "type2";
 
-	public Segregation(SegregationParameterParser parameters) {
+	public Segregation(Map<String,String> parameters) {
 		super(parameters);
 	}
 
