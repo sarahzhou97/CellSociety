@@ -6,7 +6,6 @@ import java.util.Map;
 import java.util.Random;
 
 import Cells.Cell;
-import Cells.GameOfLifeCell;
 import Cells.SegregationCell;
 
 public class Segregation extends Simulation {

@@ -1,20 +1,21 @@
 package Simulations;
 
-import java.util.ArrayList;	
 import java.util.List;
 import java.util.Map;
 
 import Cells.Cell;
-import Cells.FireCell;
 import Cells.GameOfLifeCell;
 
 public class GameOfLife extends Simulation{
 	
 	private static final String ALIVE = "alive";
 	private static final String DEAD = "dead";
+	
+	private double probDead;
 
 	public GameOfLife(Map<String,String> parameters) {
 		super(parameters);
+		probDead = Double.parseDouble(parameters.get("probDead"));
 	}
 	
 	@Override
@@ -50,15 +51,26 @@ public class GameOfLife extends Simulation{
 
 	@Override
 	public void initiateSimulation() {
-		for (int[] coordinates : initialCells.keySet()) {
-			String cellType = initialCells.get(coordinates);
-			GameOfLifeCell cell = null;
-			if (cellType.equals(DEAD)) {
-				cell = new GameOfLifeCell(DEAD);
-			} else if (cellType.equals(ALIVE)) {
-				cell = new GameOfLifeCell(ALIVE);
-			}
-			getMyGrid().setCell(coordinates[0],coordinates[1],cell);
+//		for (int[] coordinates : initialCells.keySet()) {
+//			String cellType = initialCells.get(coordinates);
+//			GameOfLifeCell cell = null;
+//			if (cellType.equals(DEAD)) {
+//				cell = new GameOfLifeCell(DEAD);
+//			} else if (cellType.equals(ALIVE)) {
+//				cell = new GameOfLifeCell(ALIVE);
+//			}
+//			getMyGrid().setCell(coordinates[0],coordinates[1],cell);
+//		}
+		
+		for (int i=0; i<getGridSize();i++) {
+			for (int j = 0; j<getGridSize();j++) {
+				double rand = Math.random();
+				if (rand<probDead) {
+					getMyGrid().setCell(i, j, new GameOfLifeCell(DEAD));
+				} else {
+					getMyGrid().setCell(i, j, new GameOfLifeCell(ALIVE));
+				}
+	}
 		}
 	}
 

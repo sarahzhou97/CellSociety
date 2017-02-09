@@ -4,7 +4,6 @@ import java.io.File;
 import java.util.ResourceBundle;
 
 import CellSociety.CellSocietyView;
-import Utils.FileReader;
 import Utils.ParameterParser;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -133,8 +132,8 @@ public class UserInterface {
 	private void openFileBrowser() {
 		File readFile = fileBrowse.showOpenDialog(myStage);
 		if (readFile != null) {
-			FileReader myFileReader = new FileReader(readFile);
-			myDataFile = myFileReader.getParser();
+			ParameterParser myParameterParser = new ParameterParser(readFile);
+			myDataFile = myParameterParser;
 			getNewSimulation();
 		} else {
 			return;

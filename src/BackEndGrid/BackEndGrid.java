@@ -6,7 +6,6 @@ import java.util.Collection;
 import java.util.List;
 
 import Cells.Cell;
-import Utils.FileReader;
 
 public class BackEndGrid {
 	private double canvasWidth=200;
@@ -16,7 +15,6 @@ public class BackEndGrid {
 	private Cell[][] myCellGrid;
 	private int columns;
 	private int rows;
-	private FileReader myFileReader;
 
 	public BackEndGrid(int size) {
 		myCellGrid = new Cell[size][size];
