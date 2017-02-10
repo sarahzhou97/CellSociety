@@ -22,17 +22,16 @@ public class InitiateCS {
 	private double myHeight;
 	Map<String,String> myParameters;
 	
-	public InitiateCS(ParameterParser dataFile, double gridWidth, double gridHeight, Color backColor) {
-		myDataFile = dataFile;
+	public InitiateCS(String sim, double gridWidth, double gridHeight, Color backColor) {
 		myWidth = gridWidth;
 		myHeight = gridHeight;
 		myColor = backColor;
-		instantiateSimulation();
+		instantiateSimulation(sim);
 		myDisplay = new FrontEndGrid(mySimulation.getMyGrid(), myWidth, myHeight, myColor);
 	}
 	
-	public void instantiateSimulation() {
-		String simType = myDataFile.getSimType();
+	public void instantiateSimulation(String simType) {
+		/*String simType = myDataFile.getSimType();
 		myParameters = myDataFile.getParameters();
 		if (simType.equals("Fire")) {
 			mySimulation = new Fire(myParameters);
@@ -44,7 +43,7 @@ public class InitiateCS {
 			mySimulation = new Segregation(myParameters);
 		} else {
 			System.exit(1);
-		}
+		}*/
 		mySimulation.initiateSimulation();
 	}
 	/*

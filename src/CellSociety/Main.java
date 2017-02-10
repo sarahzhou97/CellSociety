@@ -29,7 +29,7 @@ public class Main extends Application {
 		//myScreen = new MainScreen(primaryStage, mySims, APPLICATION_HEIGHT, APPLICATION_WIDTH);
 		primaryStage.show();
 	}
-	
+	/*
 	private void getSimulationList() {
 		mySimulations = new HashMap<String, Simulation>();
 		//mySimulations.put("Fire", new Fire());
@@ -37,6 +37,7 @@ public class Main extends Application {
 		//mySimulations.put("Predator Prey", new PredatorPrey());
 		//mySimulations.put("Segregation", new Segregation());
 	}
+	*/
 
 	public static void main(String[] args) {
 		launch(args);
