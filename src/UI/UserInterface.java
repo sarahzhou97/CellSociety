@@ -22,7 +22,7 @@ import javafx.scene.paint.Color;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
-public class UserInterface {
+public abstract class UserInterface {
 	public static final int BUTTON_SPACING = 10;
 	public static final Color DEFAULT_COLOR = Color.WHITE;
 	public static final double GRID_SIZE_RATIO = .80;
@@ -31,6 +31,7 @@ public class UserInterface {
 	private InitiateCS myInitializer;
 	private Stage myStage;
 	private BorderPane myScreen;
+	private VBox myControlPanel;
 	private Button startButton;
 	private Button stepButton;
 	private Button stopButton;
@@ -39,14 +40,14 @@ public class UserInterface {
 	private boolean runSimulation;
 	private Scene myScene;
 	private Scene backScene;
-	private FileChooser fileBrowse;
+	//private FileChooser fileBrowse;
 	private ParameterParser myDataFile;
 	private ResourceBundle myResources;
 	private double myWidth;
 	private double myHeight;
 
 	public UserInterface(Stage mainStage, String resources, Scene previousScene) {
-		fileBrowse = new FileChooser();
+		//fileBrowse = new FileChooser();
 		myResources = ResourceBundle.getBundle(resources);
 		backScene = previousScene;
 		myStage = mainStage;
@@ -59,13 +60,16 @@ public class UserInterface {
 	private Node setUpToolBar() {
 		HBox toolBar = new HBox();
 		toolBar.setAlignment(Pos.TOP_RIGHT);
-		Button openFileButton = new Button(myResources.getString("OpenFile"));
-		openFileButton.setOnAction(e -> openFileBrowser());
+		//Button openFileButton = new Button(myResources.getString("OpenFile"));
+		//openFileButton.setOnAction(e -> openFileBrowser());
 		Button returnToMainMenu = new Button(myResources.getString("ReturnMainMenu"));
 		returnToMainMenu.setOnAction(e -> goBackToMenu());
-		toolBar.getChildren().addAll(openFileButton, returnToMainMenu);
+		toolBar.getChildren().add(returnToMainMenu);
+		extendToolBar(toolBar);
 		return toolBar;
 	}
+	
+	public abstract void extendToolBar(Node toolBar);
 
 	private Node setControlPanel() {
 		VBox controlPanel = new VBox();
@@ -125,6 +129,35 @@ public class UserInterface {
 		controlButton.setMaxWidth(Double.MAX_VALUE);
 		return controlButton;
 	}
+	
+	public CellSocietyView getCellSociety() {
+		return myCellSociety;
+	}
+	
+	public void setCellSociety(CellSocietyView newView) {
+		myCellSociety = newView;
+		enableButtons();
+	}
+	
+	public void setCenterNode(Node gridNode) {
+		myScreen.setCenter(gridNode);
+	}
+	
+	public Stage getStage() {
+		return myStage;
+	}
+	
+	public String getResources(String resourceKey) {
+		return myResources.getString(resourceKey);
+	}
+	
+	public double getWidth() {
+		return myWidth;
+	}
+	
+	public double getHeight() {
+		return myHeight;
+	}
 
 	public void setUIScreen(double screenWidth, double screenHeight) {
 		myWidth = screenWidth;
@@ -133,6 +166,7 @@ public class UserInterface {
 		myStage.setScene(myScene);
 	}
 
+	/*
 	private void openFileBrowser() {
 		File readFile = fileBrowse.showOpenDialog(myStage);
 		if (readFile != null) {
@@ -142,24 +176,26 @@ public class UserInterface {
 		} else {
 			return;
 		}
-	}
+	}*/
 	
 	private void goBackToMenu() {
 		myStage.setScene(backScene);
 	}
+	
+	public abstract void getNewSimulation(String simType);
 
-	private void getNewSimulation() {
+	/*private void getNewSimulation() {
 		myInitializer = new InitiateCS(myDataFile, GRID_SIZE_RATIO * myWidth, GRID_SIZE_RATIO * myHeight,
 				DEFAULT_COLOR);
 		myCellSociety = myInitializer.getCellSociety();
 		myScreen.setCenter(myInitializer.getGridNode());
 		enableButtons();
-	}
+	}*/
 
 	private void enableButtons() {
 		startButton.setDisable(myCellSociety == null || runSimulation);
 		stepButton.setDisable(myCellSociety == null);
 		stopButton.setDisable(myCellSociety == null || !runSimulation);
-		resetButton.setDisable(myInitializer == null);
+		resetButton.setDisable(myCellSociety == null);
 	}
 }

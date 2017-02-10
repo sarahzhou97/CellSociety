@@ -20,7 +20,7 @@ public class Fire extends Simulation {
 	private List<Cell> burningList;
 	private List<Cell> emptyList;
 
-	public Fire(Map<String,String> parameters) {
+	public Fire(Map<String,String> parameters, ) {
 		super(parameters);
 		stop = false;
 		probCatch = Double.parseDouble(parameters.get("probCatch"));
@@ -97,31 +97,24 @@ public class Fire extends Simulation {
 	}
 	
 	public void initiateSimulation() {
-//		for (int[] coordinates : getInitCells().keySet()) {
-//			String cellType = initialCells.get(coordinates);
-//			FireCell cell = null;
-//			if (cellType.equals(BURNING)) {
-//				cell = new FireCell(BURNING);
-//			} else if (cellType.equals(EMPTY)) {
-//				cell = new FireCell(EMPTY);
-//			} else if (cellType.equals(TREE)) {
-//				cell = new FireCell(TREE);
-//			}
-//			getMyGrid().setCell(coordinates[0],coordinates[1],cell);
-//		}
-		
-		int gridSize = getGridSize();
-		for (int i=0; i<gridSize;i++) {
-			for (int j = 0; j<gridSize;j++) {
-				if (isBorderCell(i,j,gridSize)) {
-					setEmptyCell(i,j);
-				} else if (isMiddleCell(i,j,gridSize)){
-					setBurningCell(i,j);
-				} else {
-					setTreeCell(i,j);
-				}
-			}
+		for (int[] coordinates : initialCells.keySet()) {
+			String cellType = initialCells.get(coordinates);
+			FireCell cell = null;
+			cell = new FireCell(cellType);
+			getMyGrid().setCell(coordinates[0],coordinates[1],cell);
 		}
+//			int gridSize = getGridSize();
+//			for (int i=0; i<gridSize;i++) {
+//				for (int j = 0; j<gridSize;j++) {
+//					if (isBorderCell(i,j,gridSize)) {
+//						setEmptyCell(i,j);
+//					} else if (isMiddleCell(i,j,gridSize)){
+//						setBurningCell(i,j);
+//					} else {
+//						setTreeCell(i,j);
+//					}
+//				}
+//			}
 	}
 	
 	private boolean isBorderCell(int row, int col, int gridSize) {
@@ -147,11 +140,16 @@ public class Fire extends Simulation {
 	private void setTreeCell(int row, int col) {
 		getMyGrid().setCell(row, col, new FireCell(TREE));
 	}
+	
+	public void setProbCatch(double probCatch) {
+		this.probCatch=probCatch;
+	}
 
 	@Override
 	public void calculateStatus() {
 		// TODO Auto-generated method stub
 		
 	}
+
 
 }
