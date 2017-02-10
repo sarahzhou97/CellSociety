@@ -17,10 +17,11 @@ public class BackEndGrid {
 	private int rows;
 
 	public BackEndGrid(int size) {
-		myCellGrid = new Cell[size][size];
+		
+		//myCellGrid = new Cell[size][size];
 		//myFileReader = new FileReader();//commented this because it caused compile errors, but may be put back in later
-		this.columns=size;
-		this.rows=size;
+		//this.columns=size;
+		//this.rows=size;
 	}
 
 	public Cell getCell(int x,int y){

@@ -112,11 +112,8 @@ public class PredatorPrey extends Simulation {
 		List<Cell> allCellsAfterPredatorAction=getAllCells();
 		List<Cell> preyCells=getClassSpecificSubcells(allCellsAfterPredatorAction,"Cells_Wator.WatorPrey");
 		for(Cell prey: preyCells){
-			System.out.println("Before prey moved: "+getWatorClassCount("WatorPredator"));
 			moveIfAble((WatorPrey)prey);
-			System.out.println("After prey moved: "+getWatorClassCount("WatorPredator"));
 			handleReproduction((WatorPrey)prey);
-			System.out.println("After prey sex: "+getWatorClassCount("WatorPredator"));
 		}
 
 		
