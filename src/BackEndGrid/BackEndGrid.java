@@ -1,9 +1,7 @@
 package BackEndGrid;
 
 
-import java.lang.reflect.Constructor;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
 import Cells.Cell;
@@ -49,11 +47,7 @@ public class BackEndGrid {
 		int cell2Col=cell2.getCol();
 		
 		setCell(cell1.getRow(), cell1.getCol(), cell2);
-		cell2.setRow(cell1.getRow());
-		cell2.setCol(cell1.getCol());
 		setCell(cell2Row, cell2Col, cell1);
-		cell1.setRow(cell2Row);
-		cell1.setCol(cell2Col);
 	}
 
 	public void setCell(int row, int col, Cell cell) {

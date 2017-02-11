@@ -38,12 +38,14 @@ public class GameOfLife extends Simulation{
 		}
 		if (cell.getState().equals(ALIVE)) {
 			if (numAliveNeighbors<2||numAliveNeighbors>3) {
-				cell.updateState(DEAD);
+				getMyGrid().setCell(cell.getRow(), cell.getCol(), new GameOfLifeCell(DEAD));
+				//cell.updateState(DEAD);
 				return;
 			}
 		} else if (cell.getState().equals(DEAD)) {
 			if (numAliveNeighbors==3) {
-				cell.updateState(ALIVE);
+				getMyGrid().setCell(cell.getRow(), cell.getCol(), new GameOfLifeCell(ALIVE));
+				//cell.updateState(ALIVE);
 				return;
 			}
 		}

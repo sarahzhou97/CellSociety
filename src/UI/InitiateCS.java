@@ -8,6 +8,7 @@ import Simulations.GameOfLife;
 import Simulations.PredatorPrey;
 import Simulations.Segregation;
 import Simulations.Simulation;
+import UI_FrontEndGrid.BaseFrontEndGrid;
 import Utils.ParameterParser;
 import javafx.scene.Node;
 import javafx.scene.paint.Color;
@@ -16,7 +17,7 @@ public class InitiateCS {
 
 	private Simulation mySimulation;
 	private ParameterParser myDataFile;
-	private FrontEndGrid myDisplay;
+	private BaseFrontEndGrid myDisplay;
 	private Color myColor;
 	private double myWidth;
 	private double myHeight;
@@ -28,7 +29,7 @@ public class InitiateCS {
 		myHeight = gridHeight;
 		myColor = backColor;
 		instantiateSimulation(sim);
-		myDisplay = new FrontEndGrid(mySimulation.getMyGrid(), myWidth, myHeight, myColor);
+		myDisplay = new BaseFrontEndGrid(mySimulation.getMyGrid(), myWidth, myHeight, myColor);
 	}
 	
 	public void instantiateSimulation(String simType) {

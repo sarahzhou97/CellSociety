@@ -24,7 +24,7 @@ public class Segregation extends Simulation {
 		List<SegregationCell> emptyCells = new ArrayList<>();
 		for (int i = 0; i < getMyGrid().getRows(); i++) {
 			for (int j = 0; j < getMyGrid().getColumns(); j++) {
-				SegregationCell cell = (SegregationCell) getMyGrid().getCell(i, j);
+				SegregationCell cell = (SegregationCell) getMyGrid().tryGetCell(i, j);
 				if (cell.getState().equals(EMPTY)) {
 					emptyCells.add(cell);
 				} else {
@@ -36,14 +36,14 @@ public class Segregation extends Simulation {
 		for (SegregationCell cell : occupiedCells) {
 			if (!cell.alwaysSatisfied()) {
 
-				List<Cell> cellNeighbors = getMyGrid().getNeighbors(cell.getRow(), cell.getCol());
+				List<Cell> cellNeighbors = getMyGrid().getEightNeighbors(cell.getRow(), cell.getCol());
 				List<Cell> emptyNeighbors = getStateSpecificSubset(cellNeighbors, EMPTY);
 				List<Cell> similarNeighbors = getStateSpecificSubset(cellNeighbors, cell.getState());
 				double occupiedNeighbors = cellNeighbors.size() - emptyNeighbors.size();
 				double numberOfSimilarNeighbors = similarNeighbors.size();
 				double similarityIndex = numberOfSimilarNeighbors / occupiedNeighbors;
 
-				if (similarityIndex < cell.getSatisfactionRequirement()) {
+				if (similarityIndex < satisfactionRequirement) {
 					Random rn = new Random();
 					int index = rn.nextInt(emptyCells.size());
 					getMyGrid().switchCell(cell, emptyCells.get(index));
