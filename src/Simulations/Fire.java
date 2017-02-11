@@ -11,6 +11,7 @@ public class Fire extends Simulation {
 
 	private double probCatch;
 
+
 	private boolean stop;
 
 	private static final String EMPTY = "empty";
@@ -50,7 +51,7 @@ public class Fire extends Simulation {
 		int gridSize = getGridSize();
 		for (int i=0; i<gridSize;i++) {
 			for (int j = 0; j<gridSize;j++) {
-				if (getMyGrid().getCell(i, j).getState().equals(BURNING)) {
+				if (getMyGrid().tryGetCell(i, j).getState().equals(BURNING)) {
 					return true;
 				}
 			}
@@ -59,7 +60,7 @@ public class Fire extends Simulation {
 	}
 
 	private void applyRules(int row, int col) {
-		Cell cell = getMyGrid().getCell(row, col);
+		Cell cell = getMyGrid().tryGetCell(row, col);
 		if (cell.getState().equals(TREE)) {
 			if (existsBurningNeighbor(getMyGrid().getFourNeighbors(row,col))) {
 				calculateNewStateOfTree((FireCell) cell);
@@ -88,9 +89,11 @@ public class Fire extends Simulation {
 	private void updateTrees() {
 		for (Cell cell : burningList) {
 			cell.updateState(BURNING);
+			updateCellInMap(cell);
 		}
 		for (Cell cell : emptyList) {
 			cell.updateState(EMPTY);
+			updateCellInMap(cell);
 		}
 		burningList.clear();
 		emptyList.clear();
@@ -143,6 +146,7 @@ public class Fire extends Simulation {
 	
 	public void setProbCatch(double probCatch) {
 		this.probCatch=probCatch;
+		getMyParameters().put("probCatch", Double.toString(probCatch));
 	}
 
 	@Override
@@ -150,6 +154,5 @@ public class Fire extends Simulation {
 		// TODO Auto-generated method stub
 		
 	}
-
 
 }

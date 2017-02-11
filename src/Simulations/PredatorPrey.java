@@ -117,7 +117,7 @@ public class PredatorPrey extends Simulation {
 		BackEndGrid grid=getMyGrid();
 		for(int i=0; i<grid.getRows();i++){
 			for(int j=0;j<grid.getColumns();j++){
-				allCells.add(grid.getCell(i, j));
+				allCells.add(grid.tryGetCell(i, j));
 			}
 		}
 		return allCells;

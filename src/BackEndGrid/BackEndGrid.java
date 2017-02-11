@@ -13,7 +13,7 @@ public class BackEndGrid {
 	private int maxColumns;
 	private int maxRows;
 	private final int growthRange=5;
-	private boolean infinite=true;
+	private boolean infinite;
 	private boolean toiroidal;
 
 	public BackEndGrid(int size) {
@@ -23,7 +23,13 @@ public class BackEndGrid {
 		this.maxColumns=size;
 		this.maxRows=size;
 	}
-//needs work
+	//returns null and no exceptions
+	public Cell tryGetCell(int x,int y){
+		if(toiroidal) return myCellGrid[x%maxRows][y%maxColumns];
+		if(x>=0&&x<maxRows&&y>=0&&y<maxColumns) return myCellGrid[x][y];
+		return null;
+	}
+	//exceptions can occur
 	public Cell getCell(int x,int y){
 		if(toiroidal) return myCellGrid[x%maxRows][y%maxColumns];
 		else return myCellGrid[x][y];
@@ -94,34 +100,31 @@ public class BackEndGrid {
 		maxColumns+=Math.abs(columnDisplacement);
 	}
 	
+	//these neighbour functions will be implemented by subclasses.
 	public List<Cell> getFourNeighbors(int row, int col) {
 		List<Cell> neighborList = new ArrayList<Cell>();
-		if (row>0) {
-			neighborList.add(getCell(row-1,col));
-		} if (row<maxRows-1) {
-			neighborList.add(getCell(row+1,col));
-		} if (col>0) {
-			neighborList.add(getCell(row,col-1));
-		} if (col<maxColumns-1) {
-			neighborList.add(getCell(row,col+1));
-		}
+		neighborList.add(tryGetCell(row-1,col));
+		neighborList.add(tryGetCell(row+1,col));
+		neighborList.add(tryGetCell(row,col-1));
+		neighborList.add(tryGetCell(row,col+1));
+		
 		return neighborList;
 	}
-	
 	
 	public List<Cell> getEightNeighbors(int row, int col) {
 		List<Cell> neighborList = new ArrayList<Cell>();
 		neighborList.addAll(getFourNeighbors(row, col));
-		if (row>0&&col>0) {
-			neighborList.add(getCell(row-1,col-1));
-		} if (row>0&&col<myCellGrid.length-1) {
-			neighborList.add(getCell(row-1,col+1));
-		} if (row<myCellGrid.length-1&&col>0) {
-			neighborList.add(getCell(row+1,col-1));
-		} if (row<myCellGrid.length-1&&col<myCellGrid.length-1) {
-			neighborList.add(getCell(row+1,col+1));
-		}
+		neighborList.add(tryGetCell(row-1,col-1));
+		neighborList.add(tryGetCell(row-1,col+1));
+		neighborList.add(tryGetCell(row+1,col-1));
+		neighborList.add(tryGetCell(row+1,col+1));
+		
 		return neighborList;
 	}
+	//to be overriden depending on each simulation
+	public List<Cell> getNeighbors(int row, int column){
+		return null;
+	}
+	
 	
 }

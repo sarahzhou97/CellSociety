@@ -36,7 +36,7 @@ public class Segregation extends Simulation {
 		for (SegregationCell cell : occupiedCells) {
 			if (!cell.alwaysSatisfied()) {
 
-				List<Cell> cellNeighbors = getMyGrid().getEightNeighbors(cell.getRow(), cell.getCol());
+				List<Cell> cellNeighbors = getMyGrid().getNeighbors(cell.getRow(), cell.getCol());
 				List<Cell> emptyNeighbors = getStateSpecificSubset(cellNeighbors, EMPTY);
 				List<Cell> similarNeighbors = getStateSpecificSubset(cellNeighbors, cell.getState());
 				double occupiedNeighbors = cellNeighbors.size() - emptyNeighbors.size();
