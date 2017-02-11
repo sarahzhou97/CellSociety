@@ -13,6 +13,10 @@ import Cells_Wator.WatorPredator;
 import Cells_Wator.WatorPrey;
 
 public class PredatorPrey extends Simulation {
+	private int PREY_GESTATION_PERIOD=5;
+	private int PREDATOR_GESTATION_PERIOD=10;
+	private int starveTime=5;
+	
 	public PredatorPrey(Map<String,String> parameters,Map<int[],String> cells) {
 		super(parameters,cells);
 	}
@@ -22,8 +26,17 @@ public class PredatorPrey extends Simulation {
 		getMyGrid().setCell(x,y,creature);
 	}
 	
-	public void handleReproduction(WatorCreature creature){
-		if(creature.getGestationPeriod()==creature.getTimeSinceBirth()){
+	public void handleReproduction(WatorPredator creature){//duplicate code, i know, but it removes typecasting code smell
+		if(PREDATOR_GESTATION_PERIOD==creature.getTimeSinceBirth()){
+			birthIfAble(creature);
+		}
+		else{
+			creature.incrementTimeSinceBirth();
+		}
+	}
+	
+	public void handleReproduction(WatorPrey creature){
+		if(PREY_GESTATION_PERIOD==creature.getTimeSinceBirth()){
 			birthIfAble(creature);
 		}
 		else{
@@ -69,7 +82,7 @@ public class PredatorPrey extends Simulation {
 	
 	public void handleHunger(WatorPredator creature){
 		creature.incrementTimeSinceAte();
-		if(creature.getTimeSinceAte()>=creature.getMaxHungerPeriod()){
+		if(creature.getTimeSinceAte()>=starveTime){
 			getMyGrid().setCell(creature.getRow(),creature.getCol(),new WatorEmpty());
 		}
 	}	
