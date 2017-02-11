@@ -10,12 +10,10 @@ public class GameOfLife extends Simulation{
 	
 	private static final String ALIVE = "alive";
 	private static final String DEAD = "dead";
-	
-	private double probDead;
 
 	public GameOfLife(Map<String,String> parameters,Map<int[],String> cells) {
 		super(parameters,cells);
-		probDead = Double.parseDouble(parameters.get("probDead"));
+		//probDead = Double.parseDouble(parameters.get("probDead"));
 	}
 	
 	@Override

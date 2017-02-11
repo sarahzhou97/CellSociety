@@ -56,7 +56,6 @@ public class ParameterParser {
 		for (int i = 1; i<nodeList.getLength();i++) {
 			Element element = (Element) nodeList.item(i);
 			String attr = element.getNodeName();
-			System.out.println(attr);
 			if (attr.equals("cells")) { 
 				initiateCellMap(element);
 				continue;
