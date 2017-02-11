@@ -58,7 +58,13 @@ public class UserInterface {
 		HBox toolBar = new HBox();
 		toolBar.setAlignment(Pos.TOP_RIGHT);
 		Button openFileButton = new Button(myResources.getString("OpenFile"));
-		openFileButton.setOnAction(e -> openFileBrowser());
+		openFileButton.setOnAction(e -> {
+			try{
+			openFileBrowser();
+			}catch(Exception exception){
+				
+			}
+		});
 		toolBar.getChildren().addAll(openFileButton);
 		return toolBar;
 	}

@@ -26,6 +26,8 @@ public class ParameterParser {
 	
 	private Map<String,String> parameters;
 	
+	private Map<int[],String> cells;
+	
 	public static final String TAG_NAME = "simulation";
 	public static final String TAG_ID = "id";
 	
@@ -63,9 +65,27 @@ public class ParameterParser {
 		for (int i = 1; i<nodeList.getLength();i++) {
 			Element element = (Element) nodeList.item(i);
 			String attr = element.getNodeName();
+			if (attr.equals("cells")) { 
+				initiateCellMap(element);
+				continue;
+			}
 			String value = myDoc.getElementsByTagName(attr).item(0).getTextContent();
 			//System.out.println(attr+" "+value);
 			parameters.put(attr, value);
+		}
+	}
+	
+	private void initiateCellMap(Element el) {
+		cells = new HashMap<int[],String>();
+		Element cell = (Element) el.getElementsByTagName("cells").item(0);
+		NodeList cellList = cell.getElementsByTagName("cell");
+		for (int idx = 0; idx<cellList.getLength();idx++) {
+			String str = cellList.item(idx).getTextContent();
+			String[] strArr = str.split(",");
+			int[] coordinates = new int[2];
+			coordinates[0] = Integer.parseInt(strArr[0]);
+			coordinates[1] = Integer.parseInt(strArr[1]);
+			cells.put(coordinates,strArr[2]);
 		}
 	}
 	
@@ -80,5 +100,9 @@ public class ParameterParser {
 
 	public Map<String,String> getParameters() {
 		return parameters;
+	}
+	
+	public Map<int[],String> getCells(){
+		return cells;
 	}
 }

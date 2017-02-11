@@ -21,6 +21,7 @@ public class InitiateCS {
 	private double myWidth;
 	private double myHeight;
 	Map<String,String> myParameters;
+	Map<int[], String> myCells;
 	
 	public InitiateCS(ParameterParser dataFile, double gridWidth, double gridHeight, Color backColor) {
 		myDataFile = dataFile;
@@ -32,20 +33,21 @@ public class InitiateCS {
 	}
 	
 	public void instantiateSimulation() {
-		String simType = myDataFile.getSimType();
-		myParameters = myDataFile.getParameters();
-		if (simType.equals("Fire")) {
-			mySimulation = new Fire(myParameters);
-		} else if (simType.equals("GameOfLife")) {
-			mySimulation = new GameOfLife(myParameters);
-		} else if (simType.equals("PredatorPrey")) {
-			mySimulation = new PredatorPrey(myParameters);
-		} else if (simType.equals("Segregation")) {
-			mySimulation = new Segregation(myParameters);
-		} else {
-			System.exit(1);
-		}
-		mySimulation.initiateSimulation();
+//		String simType = myDataFile.getSimType();
+//		myParameters = myDataFile.getParameters();
+//		myCells = myDataFile.getCells();
+//		if (simType.equals("Fire")) {
+//			mySimulation = new Fire(myParameters,myCells);
+//		} else if (simType.equals("GameOfLife")) {
+//			mySimulation = new GameOfLife(myParameters,myCells);
+//		} else if (simType.equals("PredatorPrey")) {
+//			mySimulation = new PredatorPrey(myParameters,myCells);
+//		} else if (simType.equals("Segregation")) {
+//			mySimulation = new Segregation(myParameters,myCells);
+//		} else {
+//			System.exit(1);
+//		}
+//		mySimulation.initiateSimulation();
 	}
 	/*
 	public void setGridDisplay() {
