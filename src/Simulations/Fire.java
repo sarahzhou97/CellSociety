@@ -97,8 +97,8 @@ public class Fire extends Simulation {
 	}
 	
 	public void initiateSimulation() {
-		for (int[] coordinates : initialCells.keySet()) {
-			String cellType = initialCells.get(coordinates);
+		for (int[] coordinates : getMyCells().keySet()) {
+			String cellType = getMyCells().get(coordinates);
 			FireCell cell = null;
 			cell = new FireCell(cellType);
 			getMyGrid().setCell(coordinates[0],coordinates[1],cell);
