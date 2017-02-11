@@ -13,8 +13,8 @@ public class Segregation extends Simulation {
 	private final String TYPE1 = "type1";
 	private final String TYPE2 = "type2";
 
-	public Segregation(Map<String,String> parameters) {
-		super(parameters);
+	public Segregation(Map<String,String> parameters,Map<int[],String> cells) {
+		super(parameters,cells);
 	}
 
 	@Override
@@ -53,8 +53,8 @@ public class Segregation extends Simulation {
 
 	@Override
 	public void initiateSimulation() {
-		for (int[] coordinates : initialCells.keySet()) {
-			String cellType = initialCells.get(coordinates);
+		for (int[] coordinates : getMyCells().keySet()) {
+			String cellType = getMyCells().get(coordinates);
 			SegregationCell cell = null;
 			if (cellType.equals(TYPE1)) {
 				cell = new SegregationCell(TYPE1);

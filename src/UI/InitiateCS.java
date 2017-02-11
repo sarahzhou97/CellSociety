@@ -21,6 +21,7 @@ public class InitiateCS {
 	private double myWidth;
 	private double myHeight;
 	Map<String,String> myParameters;
+	Map<int[], String> myCells;
 	
 	public InitiateCS(String sim, double gridWidth, double gridHeight, Color backColor) {
 		myWidth = gridWidth;
