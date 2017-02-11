@@ -20,8 +20,8 @@ public class Fire extends Simulation {
 	private List<Cell> burningList;
 	private List<Cell> emptyList;
 
-	public Fire(Map<String,String> parameters, ) {
-		super(parameters);
+	public Fire(Map<String,String> parameters, Map<int[],String> cells) {
+		super(parameters,cells);
 		stop = false;
 		probCatch = Double.parseDouble(parameters.get("probCatch"));
 		burningList = new ArrayList<Cell>();
@@ -97,8 +97,8 @@ public class Fire extends Simulation {
 	}
 	
 	public void initiateSimulation() {
-		for (int[] coordinates : initialCells.keySet()) {
-			String cellType = initialCells.get(coordinates);
+		for (int[] coordinates : getMyCells().keySet()) {
+			String cellType = getMyCells().get(coordinates);
 			FireCell cell = null;
 			cell = new FireCell(cellType);
 			getMyGrid().setCell(coordinates[0],coordinates[1],cell);

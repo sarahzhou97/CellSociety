@@ -13,8 +13,8 @@ import Cells_Wator.WatorPredator;
 import Cells_Wator.WatorPrey;
 
 public class PredatorPrey extends Simulation {
-	public PredatorPrey(Map<String,String> parameters) {
-		super(parameters);
+	public PredatorPrey(Map<String,String> parameters,Map<int[],String> cells) {
+		super(parameters,cells);
 	}
 	
 	public void moveToAndReplace(int x, int y,Cell creature){//Replaces target cell and leaves blank cell behind
@@ -118,8 +118,8 @@ public class PredatorPrey extends Simulation {
 
 	@Override
 	public void initiateSimulation() {
-		for (int[] coordinates : initialCells.keySet()) {
-			String cellType = initialCells.get(coordinates);	
+		for (int[] coordinates : getMyCells().keySet()) {
+			String cellType = getMyCells().get(coordinates);	
 			Class<?> cls;
 			try {
 				cls = Class.forName("Cells_Wator."+cellType);

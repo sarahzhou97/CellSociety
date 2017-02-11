@@ -17,11 +17,11 @@ public abstract class Simulation {
 	private int myGridSize;
 	private String myTitle;
 	private Map<String,String> myParameters;
+	private Map<int[],String> myCells;
 	
-	Map<int[],String> initialCells;
-	
-	public Simulation(Map<String,String> parameters){
+	public Simulation(Map<String,String> parameters, Map<int[],String> cells){
 		myParameters = parameters;
+		myCells = cells;
 		myGridSize = Integer.parseInt(myParameters.get("size"));
 		setMyGrid(new BackEndGrid(myGridSize));
 		myTitle = myParameters.get("title");
@@ -91,6 +91,14 @@ public abstract class Simulation {
 	
 	public String getTitle() {
 		return myTitle;
+	}
+	
+	public Map<String,String> getMyParameters() {
+		return myParameters;
+	}
+	
+	public Map<int[],String> getMyCells() {
+		return myCells;
 	}
 
 	
