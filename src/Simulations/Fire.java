@@ -11,6 +11,7 @@ public class Fire extends Simulation {
 
 	private double probCatch;
 
+
 	private boolean stop;
 
 	private static final String EMPTY = "empty";
@@ -88,9 +89,11 @@ public class Fire extends Simulation {
 	private void updateTrees() {
 		for (Cell cell : burningList) {
 			cell.updateState(BURNING);
+			updateCellInMap(cell);
 		}
 		for (Cell cell : emptyList) {
 			cell.updateState(EMPTY);
+			updateCellInMap(cell);
 		}
 		burningList.clear();
 		emptyList.clear();
@@ -143,6 +146,7 @@ public class Fire extends Simulation {
 	
 	public void setProbCatch(double probCatch) {
 		this.probCatch=probCatch;
+		getMyParameters().put("probCatch", Double.toString(probCatch));
 	}
 
 	@Override
@@ -150,6 +154,5 @@ public class Fire extends Simulation {
 		// TODO Auto-generated method stub
 		
 	}
-
 
 }

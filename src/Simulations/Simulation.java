@@ -86,6 +86,13 @@ public abstract class Simulation {
 	public Map<int[],String> getMyCells() {
 		return myCells;
 	}
+	
+	public void updateCellInMap(Cell cell) {
+		int[] coordinates = new int[2];
+		coordinates[0] = cell.getRow();
+		coordinates[1] = cell.getCol();
+		myCells.put(coordinates, cell.getState());
+	}
 
 	
 }
