@@ -21,18 +21,12 @@ import org.xml.sax.SAXException;
 
 
 public class ParameterParser {
-	
 	private String simType;
-	
 	private Map<String,String> parameters;
-	
 	private Map<int[],String> cells;
-	
 	public static final String TAG_NAME = "simulation";
 	public static final String TAG_ID = "id";
-	
 	private Document myDoc;
-	
 	public ParameterParser(File file)  {
 		DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
 		DocumentBuilder dBuilder = null;
@@ -53,18 +47,16 @@ public class ParameterParser {
 		}
 		myDoc.getDocumentElement().normalize();
 		NodeList nodeList = myDoc.getElementsByTagName("*");
-		
 		Element el = (Element) nodeList.item(0);
 		setSimType(el.getAttribute("id"));
-		
 		initiateParameterMap(nodeList);
 	}
-	
 	private void initiateParameterMap(NodeList nodeList) {
 		parameters = new HashMap<String,String>();
 		for (int i = 1; i<nodeList.getLength();i++) {
 			Element element = (Element) nodeList.item(i);
 			String attr = element.getNodeName();
+			System.out.println(attr);
 			if (attr.equals("cells")) { 
 				initiateCellMap(element);
 				continue;
@@ -74,11 +66,9 @@ public class ParameterParser {
 			parameters.put(attr, value);
 		}
 	}
-	
 	private void initiateCellMap(Element el) {
 		cells = new HashMap<int[],String>();
-		Element cell = (Element) el.getElementsByTagName("cells").item(0);
-		NodeList cellList = cell.getElementsByTagName("cell");
+		NodeList cellList = el.getElementsByTagName("cell");
 		for (int idx = 0; idx<cellList.getLength();idx++) {
 			String str = cellList.item(idx).getTextContent();
 			String[] strArr = str.split(",");
@@ -88,12 +78,10 @@ public class ParameterParser {
 			cells.put(coordinates,strArr[2]);
 		}
 	}
-	
 	public void setSimType(String simType) {
 		this.simType = simType;
 	}
 
-	
 	public String getSimType() {
 		return simType;
 	}
@@ -101,7 +89,6 @@ public class ParameterParser {
 	public Map<String,String> getParameters() {
 		return parameters;
 	}
-	
 	public Map<int[],String> getCells(){
 		return cells;
 	}
