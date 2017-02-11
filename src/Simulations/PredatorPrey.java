@@ -95,7 +95,8 @@ public class PredatorPrey extends Simulation {
 		for(Cell prey: preyCells){
 			moveIfAble((WatorPrey)prey);
 			handleReproduction((WatorPrey)prey);
-		}	
+		}
+
 	}
 
 	private List<Cell> getAllCells() {

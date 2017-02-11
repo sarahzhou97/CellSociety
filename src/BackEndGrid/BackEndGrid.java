@@ -17,7 +17,8 @@ public class BackEndGrid {
 	private boolean toiroidal;
 
 	public BackEndGrid(int size) {
-		myCellGrid = new Cell[size][size];
+		
+		//myCellGrid = new Cell[size][size];
 		//myFileReader = new FileReader();//commented this because it caused compile errors, but may be put back in later
 		this.maxColumns=size;
 		this.maxRows=size;
@@ -123,5 +124,4 @@ public class BackEndGrid {
 		return neighborList;
 	}
 	
-	public List<Cell> getTriangularNeighbors
 }
