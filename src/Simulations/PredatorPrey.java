@@ -13,6 +13,10 @@ import Cells_Wator.WatorPredator;
 import Cells_Wator.WatorPrey;
 
 public class PredatorPrey extends Simulation {
+	private int PREY_GESTATION_PERIOD=5;
+	private int PREDATOR_GESTATION_PERIOD=10;
+	private int starveTime=5;
+	
 	public PredatorPrey(Map<String,String> parameters,Map<int[],String> cells) {
 		super(parameters,cells);
 	}
@@ -22,8 +26,17 @@ public class PredatorPrey extends Simulation {
 		getMyGrid().setCell(x,y,creature);
 	}
 	
-	public void handleReproduction(WatorCreature creature){
-		if(creature.getGestationPeriod()==creature.getTimeSinceBirth()){
+	public void handleReproduction(WatorPredator creature){//duplicate code, i know, but it removes typecasting code smell
+		if(PREDATOR_GESTATION_PERIOD==creature.getTimeSinceBirth()){
+			birthIfAble(creature);
+		}
+		else{
+			creature.incrementTimeSinceBirth();
+		}
+	}
+	
+	public void handleReproduction(WatorPrey creature){
+		if(PREY_GESTATION_PERIOD==creature.getTimeSinceBirth()){
 			birthIfAble(creature);
 		}
 		else{
@@ -69,29 +82,10 @@ public class PredatorPrey extends Simulation {
 	
 	public void handleHunger(WatorPredator creature){
 		creature.incrementTimeSinceAte();
-		if(creature.getTimeSinceAte()>=creature.getMaxHungerPeriod()){
+		if(creature.getTimeSinceAte()>=starveTime){
 			getMyGrid().setCell(creature.getRow(),creature.getCol(),new WatorEmpty());
 		}
-	}
-	
-	
-	public List<Cell> getClassSpecificSubcells(List<Cell> list,String className){
-		List<Cell> sublist=new ArrayList<>();
-		Class<?> cls;
-		try {
-			cls = Class.forName(className);
-			for(Cell item:list){
-				if(cls.isInstance(item)){	
-					sublist.add(item);
-				}
-			}
-		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return sublist;
-	}
-	
+	}	
 
 	@Override
 	public void update() {
@@ -107,20 +101,14 @@ public class PredatorPrey extends Simulation {
 			handleReproduction((WatorPredator)predator);
 			handleHunger((WatorPredator)predator);
 		}
-
 		
 		List<Cell> allCellsAfterPredatorAction=getAllCells();
 		List<Cell> preyCells=getClassSpecificSubcells(allCellsAfterPredatorAction,"Cells_Wator.WatorPrey");
 		for(Cell prey: preyCells){
-			System.out.println("Before prey moved: "+getWatorClassCount("WatorPredator"));
 			moveIfAble((WatorPrey)prey);
-			System.out.println("After prey moved: "+getWatorClassCount("WatorPredator"));
 			handleReproduction((WatorPrey)prey);
-			System.out.println("After prey sex: "+getWatorClassCount("WatorPredator"));
 		}
 
-		
-		
 	}
 
 	private List<Cell> getAllCells() {
@@ -128,7 +116,7 @@ public class PredatorPrey extends Simulation {
 		BackEndGrid grid=getMyGrid();
 		for(int i=0; i<grid.getRows();i++){
 			for(int j=0;j<grid.getColumns();j++){
-				allCells.add(grid.getCell(i, j));
+				allCells.add(grid.tryGetCell(i, j));
 			}
 		}
 		return allCells;

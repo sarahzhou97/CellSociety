@@ -24,11 +24,11 @@ public class GameOfLife extends Simulation{
 			for (int j = 0; j<getGridSize();j++) {
 				applyRulesToCell(i,j);
 			}
-			}
+		}
 	}
 	
 	private void applyRulesToCell(int row, int col) {
-		GameOfLifeCell cell = (GameOfLifeCell) getMyGrid().getCell(row, col);
+		GameOfLifeCell cell = (GameOfLifeCell) getMyGrid().tryGetCell(row, col);
 		List<Cell> neighbors = getMyGrid().getEightNeighbors(row, col);
 		int numAliveNeighbors=0;
 		for (Cell gameCell : neighbors) {

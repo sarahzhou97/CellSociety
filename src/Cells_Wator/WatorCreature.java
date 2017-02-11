@@ -16,20 +16,17 @@ public abstract class WatorCreature extends Cell{
 		timeSinceBirth=0;
 	}
 	
-	public void setGestationPeriod(int period){
-		gestationPeriod=period;
-	}
-	
-	public int getGestationPeriod(){
-		return gestationPeriod;
-	}
-	
 	public int getTimeSinceBirth(){
 		return timeSinceBirth;
 	}
 	
 	public void incrementTimeSinceBirth(){
 		timeSinceBirth++;
+	}
+	
+	@Override
+	public Cell getEmptyCell(){
+		return new WatorEmpty();
 	}
 	
 	public abstract WatorCreature makeChild();

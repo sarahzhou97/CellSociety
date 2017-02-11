@@ -27,4 +27,10 @@ public class FireCell extends Cell {
 		
 	}
 
+	@Override
+	public Cell getEmptyCell() {
+		// TODO Auto-generated method stub
+		return new FireCell("empty");
+	}
+
 }

@@ -51,7 +51,7 @@ public class Fire extends Simulation {
 		int gridSize = getGridSize();
 		for (int i=0; i<gridSize;i++) {
 			for (int j = 0; j<gridSize;j++) {
-				if (getMyGrid().getCell(i, j).getState().equals(BURNING)) {
+				if (getMyGrid().tryGetCell(i, j).getState().equals(BURNING)) {
 					return true;
 				}
 			}
@@ -60,7 +60,7 @@ public class Fire extends Simulation {
 	}
 
 	private void applyRules(int row, int col) {
-		Cell cell = getMyGrid().getCell(row, col);
+		Cell cell = getMyGrid().tryGetCell(row, col);
 		if (cell.getState().equals(TREE)) {
 			if (existsBurningNeighbor(getMyGrid().getFourNeighbors(row,col))) {
 				calculateNewStateOfTree((FireCell) cell);

@@ -20,4 +20,10 @@ public class GameOfLifeCell extends Cell {
 		}
 	}
 
+	@Override
+	public Cell getEmptyCell() {
+		// TODO Auto-generated method stub
+		return new GameOfLifeCell("dead");
+	}
+
 }
