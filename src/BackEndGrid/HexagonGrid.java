@@ -6,7 +6,6 @@ import java.util.List;
 import Cells.Cell;
 
 public class HexagonGrid extends BackEndGrid{
-
 	public HexagonGrid(int size) {
 		super(size);
 		// TODO Auto-generated constructor stub
@@ -24,7 +23,7 @@ public class HexagonGrid extends BackEndGrid{
 			neighbors.add(tryGetCell(row-1,column));
 			neighbors.add(tryGetCell(row+1,column));
 		}
-		if(row%2==0){
+		if(row%2==1){
 			neighbors.add(tryGetCell(row-1,column));
 			neighbors.add(tryGetCell(row+1,column));
 			neighbors.add(tryGetCell(row-1,column+1));
@@ -33,5 +32,4 @@ public class HexagonGrid extends BackEndGrid{
 		
 		return null;
 	}
-
 }
