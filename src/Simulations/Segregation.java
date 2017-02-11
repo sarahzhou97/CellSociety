@@ -12,6 +12,7 @@ public class Segregation extends Simulation {
 	private final String EMPTY = "empty"; // duplicated code
 	private final String TYPE1 = "type1";
 	private final String TYPE2 = "type2";
+	private double satisfactionRequirement=0.5;
 
 	public Segregation(Map<String,String> parameters,Map<int[],String> cells) {
 		super(parameters,cells);
@@ -35,7 +36,7 @@ public class Segregation extends Simulation {
 		for (SegregationCell cell : occupiedCells) {
 			if (!cell.alwaysSatisfied()) {
 
-				List<Cell> cellNeighbors = getMyGrid().getEightNeighbors(cell.getRow(), cell.getCol());
+				List<Cell> cellNeighbors = getMyGrid().getNeighbors(cell.getRow(), cell.getCol());
 				List<Cell> emptyNeighbors = getStateSpecificSubset(cellNeighbors, EMPTY);
 				List<Cell> similarNeighbors = getStateSpecificSubset(cellNeighbors, cell.getState());
 				double occupiedNeighbors = cellNeighbors.size() - emptyNeighbors.size();

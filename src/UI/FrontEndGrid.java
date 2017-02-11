@@ -36,7 +36,7 @@ public class FrontEndGrid {
 		double cellHeight=canvasHeight/rows;
 		for(int i=0;i<columns;i++){
 			for(int j=0;j<rows;j++){
-				Color javaColor=myGrid.getCell(i,j).getColor();
+				Color javaColor=myGrid.tryGetCell(i,j).getColor();
 				gc.setFill(javaColor);
 				gc.fillRect(i*cellWidth, j*cellHeight, (i+1)*cellWidth, (j+1)*cellHeight);
 			}

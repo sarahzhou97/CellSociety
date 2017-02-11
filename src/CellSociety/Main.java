@@ -32,10 +32,10 @@ public class Main extends Application {
 	/*
 	private void getSimulationList() {
 		mySimulations = new HashMap<String, Simulation>();
-		mySimulations.put("Fire", new Fire());
-		mySimulations.put("Game of Life", new GameOfLife());
-		mySimulations.put("Predator Prey", new PredatorPrey());
-		mySimulations.put("Segregation", new Segregation());
+		//mySimulations.put("Fire", new Fire());
+		//mySimulations.put("Game of Life", new GameOfLife());
+		//mySimulations.put("Predator Prey", new PredatorPrey());
+		//mySimulations.put("Segregation", new Segregation());
 	}
 	*/
 

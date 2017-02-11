@@ -1,10 +1,9 @@
 package UI;
 
-import java.io.File;
+import java.util.Map;
 import java.util.ResourceBundle;
 
 import CellSociety.CellSocietyView;
-import Utils.ParameterParser;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
@@ -17,9 +16,9 @@ import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
-import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
 public abstract class UserInterface {
@@ -28,10 +27,8 @@ public abstract class UserInterface {
 	public static final double GRID_SIZE_RATIO = .80;
 
 	private CellSocietyView myCellSociety;
-	private InitiateCS myInitializer;
 	private Stage myStage;
 	private BorderPane myScreen;
-	private VBox myControlPanel;
 	private Button startButton;
 	private Button stepButton;
 	private Button stopButton;
@@ -40,14 +37,11 @@ public abstract class UserInterface {
 	private boolean runSimulation;
 	private Scene myScene;
 	private Scene backScene;
-	//private FileChooser fileBrowse;
-	private ParameterParser myDataFile;
 	private ResourceBundle myResources;
 	private double myWidth;
 	private double myHeight;
 
 	public UserInterface(Stage mainStage, String resources, Scene previousScene) {
-		//fileBrowse = new FileChooser();
 		myResources = ResourceBundle.getBundle(resources);
 		backScene = previousScene;
 		myStage = mainStage;
@@ -60,16 +54,15 @@ public abstract class UserInterface {
 	private Node setUpToolBar() {
 		HBox toolBar = new HBox();
 		toolBar.setAlignment(Pos.TOP_RIGHT);
-		//Button openFileButton = new Button(myResources.getString("OpenFile"));
-		//openFileButton.setOnAction(e -> openFileBrowser());
 		Button returnToMainMenu = new Button(myResources.getString("ReturnMainMenu"));
 		returnToMainMenu.setOnAction(e -> goBackToMenu());
 		toolBar.getChildren().add(returnToMainMenu);
 		extendToolBar(toolBar);
+		toolBar.getChildren().add(testAdd());
 		return toolBar;
 	}
 	
-	public abstract void extendToolBar(Node toolBar);
+	public abstract void extendToolBar(Pane toolBar);
 
 	private Node setControlPanel() {
 		VBox controlPanel = new VBox();
@@ -122,6 +115,14 @@ public abstract class UserInterface {
 
 		});
 	}
+	
+	private Node testAdd() {
+		Button testButton = new Button("lol");
+		Button otherTest = new Button("lmao");
+		VBox newVBox = new VBox();
+		newVBox.getChildren().addAll(testButton,otherTest);
+		return newVBox;
+	}
 
 	private Button initiateButton(String resourceString, EventHandler<ActionEvent> handler) {
 		Button controlButton = new Button(resourceString);
@@ -129,9 +130,18 @@ public abstract class UserInterface {
 		controlButton.setMaxWidth(Double.MAX_VALUE);
 		return controlButton;
 	}
+	/*
+	public void getNewSimulation() {
+		InitiateCS myInitializer = new InitiateCS(mySimType, mySimParameters, mySimCells, GRID_SIZE_RATIO * getWidth(), GRID_SIZE_RATIO * getHeight(),
+				DEFAULT_COLOR);
+		setCellSociety(myInitializer.getCellSociety());
+		setCenterNode(myInitializer.getGridNode());
+	}*/
 	
-	public CellSocietyView getCellSociety() {
-		return myCellSociety;
+	public abstract void getNewSimulation();
+	
+	public void setParameterMaps(String sim, Map<String,String> params, Map<int[],String> cells) {
+		
 	}
 	
 	public void setCellSociety(CellSocietyView newView) {
@@ -163,34 +173,13 @@ public abstract class UserInterface {
 		myWidth = screenWidth;
 		myHeight = screenHeight;
 		myScene = new Scene(myScreen, myWidth, myHeight);
+		myScene.getStylesheets().add("resources/gui_screen.css");
 		myStage.setScene(myScene);
 	}
-
-	/*
-	private void openFileBrowser() {
-		File readFile = fileBrowse.showOpenDialog(myStage);
-		if (readFile != null) {
-			ParameterParser myParameterParser = new ParameterParser(readFile);
-			myDataFile = myParameterParser;
-			getNewSimulation();
-		} else {
-			return;
-		}
-	}*/
 	
 	private void goBackToMenu() {
 		myStage.setScene(backScene);
 	}
-	
-	public abstract void getNewSimulation(String simType);
-
-	/*private void getNewSimulation() {
-		myInitializer = new InitiateCS(myDataFile, GRID_SIZE_RATIO * myWidth, GRID_SIZE_RATIO * myHeight,
-				DEFAULT_COLOR);
-		myCellSociety = myInitializer.getCellSociety();
-		myScreen.setCenter(myInitializer.getGridNode());
-		enableButtons();
-	}*/
 
 	private void enableButtons() {
 		startButton.setDisable(myCellSociety == null || runSimulation);
