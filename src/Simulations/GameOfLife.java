@@ -13,8 +13,8 @@ public class GameOfLife extends Simulation{
 	
 	private double probDead;
 
-	public GameOfLife(Map<String,String> parameters) {
-		super(parameters);
+	public GameOfLife(Map<String,String> parameters,Map<int[],String> cells) {
+		super(parameters,cells);
 		probDead = Double.parseDouble(parameters.get("probDead"));
 	}
 	
@@ -51,10 +51,14 @@ public class GameOfLife extends Simulation{
 
 	@Override
 	public void initiateSimulation() {
-		for (int[] coordinates : initialCells.keySet()) {
-			String cellType = initialCells.get(coordinates);
+		for (int[] coordinates : getMyCells().keySet()) {
+			String cellType = getMyCells().get(coordinates);
 			GameOfLifeCell cell = null;
-			cell = new GameOfLifeCell(cellType);
+			if (cellType.equals(DEAD)) {
+				cell = new GameOfLifeCell(DEAD);
+			} else if (cellType.equals(ALIVE)) {
+				cell = new GameOfLifeCell(ALIVE);
+			}
 			getMyGrid().setCell(coordinates[0],coordinates[1],cell);
 		}
 		

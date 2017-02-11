@@ -20,8 +20,8 @@ public class Fire extends Simulation {
 	private List<Cell> burningList;
 	private List<Cell> emptyList;
 
-	public Fire(Map<String,String> parameters, ) {
-		super(parameters);
+	public Fire(Map<String,String> parameters, Map<int[],String> cells) {
+		super(parameters,cells);
 		stop = false;
 		probCatch = Double.parseDouble(parameters.get("probCatch"));
 		burningList = new ArrayList<Cell>();
