@@ -2,7 +2,6 @@ package Cells;
 
 //import java.awt.Color;
 import javafx.scene.paint.Color;
-import java.awt.Point;
 
 
 public abstract class Cell {
@@ -51,7 +50,6 @@ public abstract class Cell {
 	public void setState(String state) {
 		myState = state;
 	}
-	
-	
 
+	public abstract Cell getEmptyCell();
 }

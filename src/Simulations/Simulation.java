@@ -43,6 +43,23 @@ public abstract class Simulation {
 		return sublist;
 	}
 	
+	public List<Cell> getClassSpecificSubcells(List<Cell> list,String className){
+		List<Cell> sublist=new ArrayList<>();
+		Class<?> cls;
+		try {
+			cls = Class.forName(className);
+			for(Cell item:list){
+				if(cls.isInstance(item)){	
+					sublist.add(item);
+				}
+			}
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return sublist;
+	}
+	
 	public void play() {
 		
 	}
@@ -55,9 +72,6 @@ public abstract class Simulation {
 		
 	}
 	
-	public void switchCell(){
-		
-	}
 	
 	public void moveToAndReplaceCell(){
 		

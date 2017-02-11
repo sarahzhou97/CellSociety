@@ -50,4 +50,10 @@ public class SegregationCell extends Cell{
 		return alwaysBeSatisfied;
 	}
 
+	@Override
+	public Cell getEmptyCell() {
+		// TODO Auto-generated method stub
+		return new SegregationCell("empty");
+	}
+
 }

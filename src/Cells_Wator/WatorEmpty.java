@@ -19,4 +19,10 @@ public class WatorEmpty extends Cell{
 		
 	}
 
+	@Override
+	public Cell getEmptyCell() {
+		// TODO Auto-generated method stub
+		return new WatorEmpty();
+	}
+
 }

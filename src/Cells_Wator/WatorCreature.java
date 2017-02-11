@@ -32,5 +32,10 @@ public abstract class WatorCreature extends Cell{
 		timeSinceBirth++;
 	}
 	
+	@Override
+	public Cell getEmptyCell(){
+		return new WatorEmpty();
+	}
+	
 	public abstract WatorCreature makeChild();
 }

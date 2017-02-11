@@ -72,26 +72,7 @@ public class PredatorPrey extends Simulation {
 		if(creature.getTimeSinceAte()>=creature.getMaxHungerPeriod()){
 			getMyGrid().setCell(creature.getRow(),creature.getCol(),new WatorEmpty());
 		}
-	}
-	
-	
-	public List<Cell> getClassSpecificSubcells(List<Cell> list,String className){
-		List<Cell> sublist=new ArrayList<>();
-		Class<?> cls;
-		try {
-			cls = Class.forName(className);
-			for(Cell item:list){
-				if(cls.isInstance(item)){	
-					sublist.add(item);
-				}
-			}
-		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return sublist;
-	}
-	
+	}	
 
 	@Override
 	public void update() {
@@ -112,15 +93,9 @@ public class PredatorPrey extends Simulation {
 		List<Cell> allCellsAfterPredatorAction=getAllCells();
 		List<Cell> preyCells=getClassSpecificSubcells(allCellsAfterPredatorAction,"Cells_Wator.WatorPrey");
 		for(Cell prey: preyCells){
-			System.out.println("Before prey moved: "+getWatorClassCount("WatorPredator"));
 			moveIfAble((WatorPrey)prey);
-			System.out.println("After prey moved: "+getWatorClassCount("WatorPredator"));
 			handleReproduction((WatorPrey)prey);
-			System.out.println("After prey sex: "+getWatorClassCount("WatorPredator"));
-		}
-
-		
-		
+		}	
 	}
 
 	private List<Cell> getAllCells() {
