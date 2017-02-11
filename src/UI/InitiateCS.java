@@ -17,42 +17,34 @@ public class InitiateCS {
 
 	private Simulation mySimulation;
 	private ParameterParser myDataFile;
-	private BaseFrontEndGrid myDisplay;
+	private FrontEndGrid myDisplay;
 	private Color myColor;
 	private double myWidth;
 	private double myHeight;
-	Map<String,String> myParameters;
-	Map<int[], String> myCells;
 	
-	public InitiateCS(String sim, double gridWidth, double gridHeight, Color backColor) {
+	public InitiateCS(String sim, Map<String,String> params, Map<int[], String> cells, double gridWidth, double gridHeight, Color backColor) {
 		myWidth = gridWidth;
 		myHeight = gridHeight;
-		myColor = backColor;	
-		instantiateSimulation(sim);
-		myDisplay = new BaseFrontEndGrid(mySimulation.getMyGrid(), myWidth, myHeight, myColor);
+		myColor = backColor;
+		instantiateSimulation(sim, params, cells);
+		myDisplay = new FrontEndGrid(mySimulation.getMyGrid(), myWidth, myHeight, myColor);
+
 	}
 	
-	public void instantiateSimulation(String simType) {
-		/*String simType = myDataFile.getSimType();
-		myParameters = myDataFile.getParameters();
+	public void instantiateSimulation(String simType, Map<String,String> myParameters, Map<int[], String> myCells) {
 		if (simType.equals("Fire")) {
-			mySimulation = new Fire(myParameters);
+			mySimulation = new Fire(myParameters, myCells);
 		} else if (simType.equals("GameOfLife")) {
-			mySimulation = new GameOfLife(myParameters);
+			mySimulation = new GameOfLife(myParameters, myCells);
 		} else if (simType.equals("PredatorPrey")) {
-			mySimulation = new PredatorPrey(myParameters);
+			mySimulation = new PredatorPrey(myParameters, myCells);
 		} else if (simType.equals("Segregation")) {
-			mySimulation = new Segregation(myParameters);
+			mySimulation = new Segregation(myParameters, myCells);
 		} else {
 			System.exit(1);
-		}*/
+		}
 		mySimulation.initiateSimulation();
 	}
-	/*
-	public void setGridDisplay() {
-		
-		myDisplay.updateGrid();
-	}*/
 	
 	public Node getGridNode() {
 		myDisplay.updateGrid();
@@ -61,9 +53,5 @@ public class InitiateCS {
 	
 	public CellSocietyView getCellSociety() {
 		return new CellSocietyView(mySimulation, myDisplay);
-	}
-	
-	public String getSimTitle() {
-		return myParameters.get("title");
 	}
 }
