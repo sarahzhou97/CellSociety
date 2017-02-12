@@ -1,11 +1,9 @@
 <?xml version="1.0"?>
 <simulation id="PredatorPrey">
 		<title>Predator and Prey</title>
-		<fishBreedRate>0.75</fishBreedRate>
-		<sharkBreedRate>0.5</sharkBreedRate>
-		<sharkStarveRate>0.25</sharkStarveRate>
-		<percentFish>0.5</percentFish>
-		<percentShark>0.25</percentShark>
+		<preyGestationPeriod>3</preyGestationPeriod>
+		<predatorGestationPeriod>6</predatorGestationPeriod>
+		<starveTime>4</starveTime>
 		<size>10</size>
 		<cells>
 			<cell>0,0,WatorPrey</cell>
