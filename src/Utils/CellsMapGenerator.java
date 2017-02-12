@@ -5,7 +5,6 @@ import java.util.Map;
 import java.util.ResourceBundle;
 
 public class CellsMapGenerator {
-	
 	private final static String PROBABILITY = "probability";
 	private final static String NUMBER = "number";
 	

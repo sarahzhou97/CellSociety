@@ -7,7 +7,7 @@ import javafx.animation.Timeline;
 import javafx.util.Duration;
 
 public class CellSocietyView {
-	public static final int DEFAULT_GRID_SIZE = 30;
+	//public static final int DEFAULT_GRID_SIZE = 30;
 	public static final double DEFAULT_SPEED = 150;
 
 	private Simulation mySimulation;
