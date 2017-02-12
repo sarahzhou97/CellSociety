@@ -31,8 +31,6 @@ public abstract class Simulation {
 	
 	public abstract void initiateSimulation();
 	
-	public abstract void calculateStatus();
-	
 	public List<Cell> getStateSpecificSubset(List<Cell> cells, String state){
 		List<Cell> sublist=new ArrayList<Cell>();
 		for(Cell cell:cells){
