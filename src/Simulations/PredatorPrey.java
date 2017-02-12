@@ -13,9 +13,13 @@ import Cells_Wator.WatorPredator;
 import Cells_Wator.WatorPrey;
 
 public class PredatorPrey extends Simulation {
-	private int PREY_GESTATION_PERIOD=5;
-	private int PREDATOR_GESTATION_PERIOD=10;
-	private int starveTime=5;
+	private int preyGestationPeriod;
+	private int predatorGestationPeriod;
+	private int starveTime;
+	
+	private int numPrey;
+	private int numPredator;
+	
 	
 	public PredatorPrey(Map<String,String> parameters,Map<int[],String> cells) {
 		super(parameters,cells);
@@ -27,7 +31,7 @@ public class PredatorPrey extends Simulation {
 	}
 	
 	public void handleReproduction(WatorPredator creature){//duplicate code, i know, but it removes typecasting code smell
-		if(PREDATOR_GESTATION_PERIOD==creature.getTimeSinceBirth()){
+		if(predatorGestationPeriod==creature.getTimeSinceBirth()){
 			birthIfAble(creature);
 		}
 		else{
@@ -36,7 +40,7 @@ public class PredatorPrey extends Simulation {
 	}
 	
 	public void handleReproduction(WatorPrey creature){
-		if(PREY_GESTATION_PERIOD==creature.getTimeSinceBirth()){
+		if(preyGestationPeriod==creature.getTimeSinceBirth()){
 			birthIfAble(creature);
 		}
 		else{
@@ -146,11 +150,28 @@ public class PredatorPrey extends Simulation {
 		// TODO Auto-generated method stub		
 	}
 	
+	public void setPreyGestationPeriod(int preyGestationPeriod) {
+		this.preyGestationPeriod=preyGestationPeriod;
+		getMyParameters().put("preyGestationPeriod", Integer.toString(preyGestationPeriod));
+	}
+	
+	public void setPredatorGestationPeriod(int predatorGestationPeriod) {
+		this.predatorGestationPeriod=predatorGestationPeriod;
+		getMyParameters().put("predatorGestationPeriod", Integer.toString(predatorGestationPeriod));
+	}
+	
+	public void setStarveTime(int starveTime) {
+		this.starveTime=starveTime;
+		getMyParameters().put("starveTime", Integer.toString(starveTime));
+	}
+	
 
-	@Override
-	public void calculateStatus() {
-		// TODO Auto-generated method stub
-		
+	public int getNumPrey() {
+		return numPrey;
+	}
+	
+	public int getNumPredator() {
+		return numPredator;
 	}
 
 }
