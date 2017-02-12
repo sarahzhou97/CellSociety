@@ -139,13 +139,29 @@ public class BaseFrontEndGrid {
 		GraphicsContext gc=gridPicture.getGraphicsContext2D();
 		gc.setFill(defaultColor);
 		gc.fillRect(0, 0, canvasWidth, canvasHeight);
+		for(int i=0;i<myGrid.getRows();i++){
+			for(int j=0;j<myGrid.getColumns();j++){
+				Cell cell=myGrid.getCell(i, j);
+				
+			}
+		}
 	}	
 	
 	private void updateHexagonGrid(){
 		GraphicsContext gc=gridPicture.getGraphicsContext2D();
 		gc.setFill(defaultColor);
 		gc.fillRect(0, 0, canvasWidth, canvasHeight);
-		
+		for(int i=0;i<myGrid.getRows();i++){
+			for(int j=0;j<myGrid.getColumns();j++){
+				Cell cell=myGrid.getCell(i, j);
+				if(i%2==0){
+					drawCell(j*3*cellEdgeLength,i*(Math.sqrt(3)/2)*cellEdgeLength,cell,false,gc);
+				}
+				else{
+					drawCell(j*3*cellEdgeLength+1.5*cellEdgeLength,i*(Math.sqrt(3)/2)*cellEdgeLength,cell,false,gc);
+				}
+			}
+		}
 	}
 	
 	public Node returnDisplay(){
