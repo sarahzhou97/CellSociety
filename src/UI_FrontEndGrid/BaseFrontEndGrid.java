@@ -21,7 +21,7 @@ public class BaseFrontEndGrid {
 	private BackEndGrid myGrid;
 	private Color defaultColor;
 	private String latticeType;
-	private HashMap<String,Color> cellColors;
+	private HashMap<String,Color> cellColors;//Colors a cell based on its getState
 	private final String SQUARELATTICE="square";
 	private final String HEXAGONLATTICE="hexagon";
 	private final String TRIANGLELATTICE="triangle";
