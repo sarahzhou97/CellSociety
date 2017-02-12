@@ -152,17 +152,17 @@ public class PredatorPrey extends Simulation {
 	
 	public void setPreyGestationPeriod(int preyGestationPeriod) {
 		this.preyGestationPeriod=preyGestationPeriod;
-		getMyParameters().put("preyGestationPeriod", Integer.toString(preyGestationPeriod));
+		//getMyParameters().put("preyGestationPeriod", Integer.toString(preyGestationPeriod));
 	}
 	
 	public void setPredatorGestationPeriod(int predatorGestationPeriod) {
 		this.predatorGestationPeriod=predatorGestationPeriod;
-		getMyParameters().put("predatorGestationPeriod", Integer.toString(predatorGestationPeriod));
+		//getMyParameters().put("predatorGestationPeriod", Integer.toString(predatorGestationPeriod));
 	}
 	
 	public void setStarveTime(int starveTime) {
 		this.starveTime=starveTime;
-		getMyParameters().put("starveTime", Integer.toString(starveTime));
+		//getMyParameters().put("starveTime", Integer.toString(starveTime));
 	}
 	
 
@@ -172,6 +172,12 @@ public class PredatorPrey extends Simulation {
 	
 	public int getNumPredator() {
 		return numPredator;
+	}
+	
+	public void updateParametersInSimulation() {
+		setStarveTime(Integer.parseInt(getMyParameters().get("starveTime")));
+		setPredatorGestationPeriod(Integer.parseInt(getMyParameters().get("predatorGestationPeriod")));
+		setPreyGestationPeriod(Integer.parseInt(getMyParameters().get("preyGestationPeriod")));
 	}
 
 }
