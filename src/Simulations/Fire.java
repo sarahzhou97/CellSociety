@@ -20,6 +20,9 @@ public class Fire extends Simulation {
 	
 	private List<Cell> burningList;
 	private List<Cell> emptyList;
+	
+	private int numBurning;
+	private int numTrees;
 
 	public Fire(Map<String,String> parameters, Map<int[],String> cells) {
 		super(parameters,cells);
@@ -27,6 +30,8 @@ public class Fire extends Simulation {
 		probCatch = Double.parseDouble(parameters.get("probCatch"));
 		burningList = new ArrayList<Cell>();
 		emptyList = new ArrayList<Cell>();
+		numTrees = getGridSize()*getGridSize()-3*getGridSize()-1;
+		numBurning = 1;
 	}
 
 	@Override
@@ -95,6 +100,8 @@ public class Fire extends Simulation {
 			cell.updateState(EMPTY);
 			updateCellInMap(cell);
 		}
+		numBurning += burningList.size()-emptyList.size();
+		numTrees-=burningList.size();
 		burningList.clear();
 		emptyList.clear();
 	}
@@ -149,10 +156,14 @@ public class Fire extends Simulation {
 		getMyParameters().put("probCatch", Double.toString(probCatch));
 	}
 
-	@Override
-	public void calculateStatus() {
-		// TODO Auto-generated method stub
-		
+	public int getNumBurning() {
+		return numBurning;
 	}
+	
+	public int getNumTrees() {
+		return numTrees;
+	}
+
+	
 
 }
