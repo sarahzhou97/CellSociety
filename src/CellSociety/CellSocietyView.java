@@ -1,5 +1,7 @@
 package CellSociety;
 
+import java.util.Map;
+
 import Simulations.Simulation;
 import UI_FrontEndGrid.BaseFrontEndGrid;
 import javafx.animation.KeyFrame;
@@ -25,6 +27,10 @@ public class CellSocietyView {
 		cellAnimation = new Timeline();
 		cellAnimation.setCycleCount(Timeline.INDEFINITE);
 		cellAnimation.getKeyFrames().add(gridFrame);
+	}
+	
+	public void updateParams(Map<String,String> newParams) {
+		mySimulation.updateParametersInMap(newParams);
 	}
 
 	public void startOp() {
