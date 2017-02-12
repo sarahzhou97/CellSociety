@@ -128,11 +128,6 @@ public class Fire extends Simulation {
 		return numTrees;
 	}
 
-	@Override
-	public void calculateStatus() {
-		// TODO Auto-generated method stub
-		
-	}
 
 	
 
