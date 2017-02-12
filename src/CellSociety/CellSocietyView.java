@@ -29,8 +29,8 @@ public class CellSocietyView {
 		cellAnimation.getKeyFrames().add(gridFrame);
 	}
 	
-	public void updateParams(Map<String,String> newParams) {
-		mySimulation.updateParametersInMap(newParams);
+	public void updateParams(Map<String,Double> newParams) {
+		mySimulation.updateParameters(newParams);
 	}
 
 	public void startOp() {
