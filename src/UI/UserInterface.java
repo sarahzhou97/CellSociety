@@ -58,9 +58,9 @@ public abstract class UserInterface {
 		toolBar.setAlignment(Pos.TOP_RIGHT);
 		Button returnToMainMenu = new Button(myResources.getString("ReturnMainMenu"));
 		returnToMainMenu.setOnAction(e -> goBackToMenu());
-		toolBar.getChildren().add(returnToMainMenu);
 		Button xmlSaver = new Button(myResources.getString("xmlSave"));
 		xmlSaver.setOnAction(e -> xmlSaver());
+		toolBar.getChildren().addAll(returnToMainMenu, xmlSaver);
 		extendToolBar(toolBar);
 		return toolBar;
 	}
