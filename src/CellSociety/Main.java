@@ -5,7 +5,7 @@ import java.util.Map;
 
 import Simulations.Fire;
 import Simulations.Simulation;
-//import UI.MainScreen;
+import UI.MainScreen;
 import UI.UserInterface;
 import javafx.application.Application;
 import javafx.stage.Stage;
@@ -16,7 +16,7 @@ public class Main extends Application {
 	public static final double APPLICATION_WIDTH = 750;
 
 	private UserInterface myUI;
-	//private MainScreen myScreen;
+	private MainScreen myScreen;
 	private String resourceType = "English";
 	private String[] mySims = {"Fire", "Game of Life", "Predator Prey", "Segregation"};
 	private Map<String, Simulation> mySimulations;
@@ -26,7 +26,7 @@ public class Main extends Application {
 		//primaryStage.setTitle("Cell Society");
 		//myUI = new UserInterface(primaryStage, RESOURCE_TAG + resourceType);
 		//primaryStage.show();
-		//myScreen = new MainScreen(primaryStage, mySims, APPLICATION_HEIGHT, APPLICATION_WIDTH);
+		myScreen = new MainScreen(primaryStage, mySims, APPLICATION_HEIGHT, APPLICATION_WIDTH);
 		primaryStage.show();
 	}
 	/*
