@@ -38,6 +38,7 @@ public class GameOfLife extends Simulation{
 		}
 		if (cell.getState().equals(ALIVE)) {
 			if (numAliveNeighbors<2||numAliveNeighbors>3) {
+
 				cell.updateState(DEAD);
 				numDead++;
 				return;

@@ -9,7 +9,6 @@ import javafx.scene.paint.Color;
  */
 public class SegregationCell extends Cell{
 	private boolean alwaysBeSatisfied=false; //You will never be satisfied, satisfied, satisfieeeeeed....
-	private double satisfactionRequirement=0.5;
 	private final String EMPTY="empty";
 	private final String TYPE1="type1";
 	private final String TYPE2="type2";//we can have more types if we want
@@ -40,10 +39,6 @@ public class SegregationCell extends Cell{
 		} /*else{
 			System.out.print("State Not Found!");//throw exception ideally
 		}*/
-	}
-	
-	public double getSatisfactionRequirement(){
-		return satisfactionRequirement;
 	}
 	
 	public boolean alwaysSatisfied(){

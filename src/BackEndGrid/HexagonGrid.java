@@ -24,7 +24,7 @@ public class HexagonGrid extends BackEndGrid{
 			neighbors.add(tryGetCell(row-1,column));
 			neighbors.add(tryGetCell(row+1,column));
 		}
-		if(row%2==0){
+		if(row%2==1){
 			neighbors.add(tryGetCell(row-1,column));
 			neighbors.add(tryGetCell(row+1,column));
 			neighbors.add(tryGetCell(row-1,column+1));

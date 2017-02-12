@@ -8,6 +8,7 @@ public class WatorPrey extends WatorCreature{
 	public WatorPrey(){
 		super();
 		setColor(PREY_COLOR);
+		setState("WatorPrey");
 	}
 	
 	@Override

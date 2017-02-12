@@ -128,6 +128,7 @@ public class Fire extends Simulation {
 		return numTrees;
 	}
 
+
 	
 
 }
