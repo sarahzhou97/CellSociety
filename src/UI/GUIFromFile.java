@@ -3,7 +3,10 @@ package UI;
 import java.io.File;
 import java.util.Map;
 
+import javax.xml.transform.TransformerException;
+
 import Utils.ParameterParser;
+import Utils.StateSaver;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -49,5 +52,15 @@ public class GUIFromFile extends UserInterface{
 				DEFAULT_COLOR);
 		setCellSociety(myInitializer.getCellSociety());
 		setCenterNode(myInitializer.getGridNode());
+	}
+	
+	@Override
+	public void xmlSaver() {
+		try {
+			StateSaver myState = new StateSaver("empty", mySimType, mySimParameters, mySimCells);
+		} catch (TransformerException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 }

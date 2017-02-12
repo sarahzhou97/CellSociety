@@ -12,8 +12,8 @@ import javafx.stage.Stage;
 
 public class Main extends Application {
 
-	public static final double APPLICATION_HEIGHT = 750;
-	public static final double APPLICATION_WIDTH = 750;
+	public static final double APPLICATION_HEIGHT = 800;
+	public static final double APPLICATION_WIDTH = 800;
 
 	private UserInterface myUI;
 	private MainScreen myScreen;

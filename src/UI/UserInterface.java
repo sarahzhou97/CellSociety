@@ -8,6 +8,7 @@ import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.geometry.Orientation;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Scene;
@@ -19,6 +20,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 public abstract class UserInterface {
@@ -57,8 +59,9 @@ public abstract class UserInterface {
 		Button returnToMainMenu = new Button(myResources.getString("ReturnMainMenu"));
 		returnToMainMenu.setOnAction(e -> goBackToMenu());
 		toolBar.getChildren().add(returnToMainMenu);
+		Button xmlSaver = new Button(myResources.getString("xmlSave"));
+		xmlSaver.setOnAction(e -> xmlSaver());
 		extendToolBar(toolBar);
-		toolBar.getChildren().add(testAdd());
 		return toolBar;
 	}
 	
@@ -69,7 +72,7 @@ public abstract class UserInterface {
 		controlPanel.setAlignment(Pos.CENTER_LEFT);
 		controlPanel.setSpacing(BUTTON_SPACING);
 		initiateControlButtons();
-		Label sliderLabel = new Label(myResources.getString("SliderLabel"));
+		Text sliderLabel = new Text(myResources.getString("SpeedLabel"));
 		controlPanel.getChildren().addAll(startButton, stepButton, stopButton, resetButton, sliderLabel, mySpeedSlider);
 		return controlPanel;
 	}
@@ -114,14 +117,7 @@ public abstract class UserInterface {
 			}
 
 		});
-	}
-	
-	private Node testAdd() {
-		Button testButton = new Button("lol");
-		Button otherTest = new Button("lmao");
-		VBox newVBox = new VBox();
-		newVBox.getChildren().addAll(testButton,otherTest);
-		return newVBox;
+		mySpeedSlider.setOrientation(Orientation.VERTICAL);
 	}
 
 	private Button initiateButton(String resourceString, EventHandler<ActionEvent> handler) {
@@ -130,18 +126,13 @@ public abstract class UserInterface {
 		controlButton.setMaxWidth(Double.MAX_VALUE);
 		return controlButton;
 	}
-	/*
-	public void getNewSimulation() {
-		InitiateCS myInitializer = new InitiateCS(mySimType, mySimParameters, mySimCells, GRID_SIZE_RATIO * getWidth(), GRID_SIZE_RATIO * getHeight(),
-				DEFAULT_COLOR);
-		setCellSociety(myInitializer.getCellSociety());
-		setCenterNode(myInitializer.getGridNode());
-	}*/
+	
+	public abstract void xmlSaver();
 	
 	public abstract void getNewSimulation();
-	
-	public void setParameterMaps(String sim, Map<String,String> params, Map<int[],String> cells) {
-		
+
+	protected CellSocietyView getCellSociety() {
+		return myCellSociety;
 	}
 	
 	public void setCellSociety(CellSocietyView newView) {
