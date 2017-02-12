@@ -10,7 +10,7 @@ public class BackEndGrid {
 	private Cell[][] myCellGrid;
 	private int maxColumns;
 	private int maxRows;
-	private final int growthRange=5;
+	private final int GROWTH_RANGE=5;
 	private boolean infinite;
 	private boolean toiroidal;
 
@@ -59,10 +59,10 @@ public class BackEndGrid {
 	}
 	private void expandIfNeeded(int row, int col, Cell cell) {
 		if(cell.getState().equals("empty")){
-			if(col<=growthRange) growArray(0,-maxColumns,cell);
-			if(col>=maxColumns-growthRange) growArray(0,maxColumns,cell);
-			if(row<=growthRange) growArray(-maxRows,0,cell);
-			if(row>=maxRows-growthRange) growArray(maxRows,0,cell);
+			if(col<=GROWTH_RANGE) growArray(0,-maxColumns,cell);
+			if(col>=maxColumns-GROWTH_RANGE) growArray(0,maxColumns,cell);
+			if(row<=GROWTH_RANGE) growArray(-maxRows,0,cell);
+			if(row>=maxRows-GROWTH_RANGE) growArray(maxRows,0,cell);
 		}
 	}
 	
