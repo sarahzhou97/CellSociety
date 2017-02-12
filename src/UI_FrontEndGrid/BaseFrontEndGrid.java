@@ -29,7 +29,7 @@ public class BaseFrontEndGrid {
 	private double cellEdgeLength;
 
 	public BaseFrontEndGrid(BackEndGrid myGrid, double canvasWidth, double canvasHeight, 
-			Color defaultColor, HashMap<String, Color> cellColors) {
+		Color defaultColor/*,HashMap<String, Color> cellColors*/) {
 		this.defaultColor=defaultColor;//potential to crash and burn
 		this.myGrid=myGrid;
 		this.canvasHeight=canvasHeight;
@@ -39,7 +39,8 @@ public class BaseFrontEndGrid {
 	
 	public void drawCell(double x, double y, Cell cell, boolean reversed, GraphicsContext gc){
 		if(latticeType==SQUARELATTICE){
-			gc.setFill(cellColors.get(cell.getState()));
+			gc.setFill(cell.getColor());
+			//gc.setFill(cellColors.get(cell.getState()));
 			gc.fillRect(x, y, x+cellEdgeLength, y+cellEdgeLength);
 		}
 		
@@ -53,7 +54,8 @@ public class BaseFrontEndGrid {
 	}
 
 	private void drawHexagonCell(double x, double y, Cell cell, GraphicsContext gc) {
-		gc.setFill(cellColors.get(cell.getState()));
+		gc.setFill(cell.getColor());
+		//gc.setFill(cellColors.get(cell.getState()));
 		double[] xPoints=new double[6];
 		double[] yPoints=new double[6];
 		xPoints[0]=x+cellEdgeLength/2;
@@ -72,7 +74,8 @@ public class BaseFrontEndGrid {
 	}
 
 	private void drawTriangleCell(double x, double y, Cell cell, boolean reversed, GraphicsContext gc) {
-		gc.setFill(cellColors.get(cell.getState()));
+		gc.setFill(cell.getColor());
+		//gc.setFill(cellColors.get(cell.getState()));
 		double[] xPoints=new double[3];
 		double[] yPoints=new double[3];
 		if(reversed==false){
@@ -136,14 +139,14 @@ public class BaseFrontEndGrid {
 		GraphicsContext gc=gridPicture.getGraphicsContext2D();
 		gc.setFill(defaultColor);
 		gc.fillRect(0, 0, canvasWidth, canvasHeight);
-		
-	}
+	}	
 	
 	private void updateHexagonGrid(){
+		GraphicsContext gc=gridPicture.getGraphicsContext2D();
+		gc.setFill(defaultColor);
+		gc.fillRect(0, 0, canvasWidth, canvasHeight);
 		
 	}
-	
-	
 	
 	public Node returnDisplay(){
 		return gridPicture;		

@@ -8,6 +8,7 @@ public class WatorPredator extends WatorCreature{
 	
 	public WatorPredator(){
 		setColor(PREDATOR_COLOR);
+		setState("WatorPredator");
 	}
 	
 	public WatorPredator makeChild(){
