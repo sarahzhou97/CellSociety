@@ -2,6 +2,7 @@ package BackEndGrid;
 
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import Cells.Cell;
@@ -10,8 +11,8 @@ public class BackEndGrid {
 	private Cell[][] myCellGrid;
 	private int maxColumns;
 	private int maxRows;
-	private final int growthRange=5;
-	private boolean infinite;
+	private final int GROWTH_RANGE=5;
+	private boolean infinite=true;
 	private boolean toiroidal;
 
 	public BackEndGrid(int size) {
@@ -53,21 +54,20 @@ public class BackEndGrid {
 		myCellGrid[row][col] = cell;
 		cell.setCol(col);
 		cell.setRow(row);
-		if(infinite){
-			expandIfNeeded(row, col, cell);
-		}
 	}
+	
 	private void expandIfNeeded(int row, int col, Cell cell) {
-		if(cell.getState().equals("empty")){
-			if(col<=growthRange) growArray(0,-maxColumns,cell);
-			if(col>=maxColumns-growthRange) growArray(0,maxColumns,cell);
-			if(row<=growthRange) growArray(-maxRows,0,cell);
-			if(row>=maxRows-growthRange) growArray(maxRows,0,cell);
+		if(!cell.getState().equals("empty")){
+			if(col<=GROWTH_RANGE) growArray(0,-maxColumns,cell);
+			if(col>=maxColumns-GROWTH_RANGE) growArray(0,maxColumns,cell);
+			if(row<=GROWTH_RANGE) growArray(-maxRows,0,cell);
+			if(row>=maxRows-GROWTH_RANGE) growArray(maxRows,0,cell);
 		}
 	}
 	
 	public void growArray(int rowDisplacement,int columnDisplacement, Cell toolCell){
-		Cell[][] newCellGrid=new Cell[maxRows+rowDisplacement][maxColumns+columnDisplacement];
+		System.out.print("tried to grow");
+		Cell[][] newCellGrid=new Cell[maxRows+Math.abs(rowDisplacement)][maxColumns+Math.abs(columnDisplacement)];
 		for(int i=0;i<newCellGrid.length;i++){
 			for(int j=0;j<newCellGrid[0].length;j++){
 				Cell emptyCell=toolCell.getEmptyCell();
@@ -96,23 +96,29 @@ public class BackEndGrid {
 	//these neighbour functions will be implemented by subclasses.
 	public List<Cell> getFourNeighbors(int row, int col) {
 		List<Cell> neighborList = new ArrayList<Cell>();
-		if(row-1>=0)neighborList.add(tryGetCell(row-1,col));
-		if(row+1<maxRows)neighborList.add(tryGetCell(row+1,col));
-		if(col-1>=0)neighborList.add(tryGetCell(row,col-1));
-		if(col+1<maxColumns)neighborList.add(tryGetCell(row,col+1));
-		neighborList.remove(null);
+		neighborList.add(tryGetCell(row-1,col));
+		neighborList.add(tryGetCell(row+1,col));
+		neighborList.add(tryGetCell(row,col-1));
+		neighborList.add(tryGetCell(row,col+1));
+		neighborList.removeAll(Collections.singleton(null));
 		return neighborList;
+		
 	}
 	
 	public List<Cell> getEightNeighbors(int row, int col) {
 		List<Cell> neighborList = new ArrayList<Cell>();
 		neighborList.addAll(getFourNeighbors(row, col));
-		if(row-1>=0&&col-1>=0) neighborList.add(getCell(row-1,col-1));
-		if(row-1>=0&&col+1<maxColumns) neighborList.add(getCell(row-1,col+1));
-		if(row+1<maxRows&&col-1>=0) neighborList.add(getCell(row+1,col-1));
-		if(row+1<maxRows&&col+1<maxColumns) neighborList.add(getCell(row+1,col+1));
+		neighborList.add(tryGetCell(row-1,col-1));
+		neighborList.add(tryGetCell(row-1,col+1));
+		neighborList.add(tryGetCell(row+1,col-1));
+		neighborList.add(tryGetCell(row+1,col+1));
+		neighborList.removeAll(Collections.singleton(null));
 		return neighborList;
 	}
+	/*
+	public void addIfReachable(int row, int col, ){
+		
+	}*/
 	//to be overriden depending on each simulation
 	public List<Cell> getNeighbors(int row, int column){
 		return null;

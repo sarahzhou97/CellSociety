@@ -9,6 +9,7 @@ public abstract class Cell {
 	private Color myColor; 
 	private int row;
 	private int col;
+	private boolean makesWorldExpand=true;
 	
 	public Cell() {
 	}
@@ -49,6 +50,14 @@ public abstract class Cell {
 	
 	public void setState(String state) {
 		myState = state;
+	}
+	
+	public boolean makesWorldExpand(){
+		return makesWorldExpand;
+	}
+	
+	public void setMakesWorldExpand(boolean value){
+		makesWorldExpand=value;
 	}
 
 	public abstract Cell getEmptyCell();

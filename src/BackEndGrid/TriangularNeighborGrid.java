@@ -1,16 +1,18 @@
 package BackEndGrid;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import Cells.Cell;
 
-public class TriangleGrid extends BackEndGrid{
+public class TriangularNeighborGrid extends BackEndGrid{
 
-	public TriangleGrid(int size) {
+	public TriangularNeighborGrid(int size) {
 		super(size);
 		// TODO Auto-generated constructor stub
 	}
+
 
 	@Override
 	public List<Cell> getNeighbors(int row, int column) {
@@ -23,6 +25,7 @@ public class TriangleGrid extends BackEndGrid{
 		}else{
 			neighbors.add(tryGetCell(row+1,column));
 		}
+		neighbors.removeAll(Collections.singleton(null));
 		return neighbors;
 	}
 
