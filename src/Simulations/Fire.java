@@ -129,8 +129,8 @@ public class Fire extends Simulation {
 	}
 
 	@Override
-	public void updateParametersInSimulation() {
-		setProbCatch(Double.parseDouble(getMyParameters().get("probCatch")));
+	public void updateParameters(Map<String,Double> parameters) {
+		setProbCatch(parameters.get("probCatch"));
 	}
 	
 

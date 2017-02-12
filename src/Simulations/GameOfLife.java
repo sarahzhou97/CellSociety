@@ -70,7 +70,7 @@ public class GameOfLife extends Simulation{
 	}
 
 	@Override
-	public void updateParametersInSimulation() {
+	public void updateParameters(Map<String,Double> parameters) {
 		
 	}
 

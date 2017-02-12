@@ -73,11 +73,12 @@ public class Segregation extends Simulation {
 	
 	public void setSatisfactionRequirement(double satisfactionRequirement) {
 		this.satisfactionRequirement = satisfactionRequirement;
+		getMyParameters().put("satisfactionRequirement", Double.toString(satisfactionRequirement));
 	}
 
 	@Override
-	public void updateParametersInSimulation() {
-		setSatisfactionRequirement(Integer.parseInt(getMyParameters().get("satisfactionRequirement")));
+	public void updateParameters(Map<String,Double> parameters) {
+		setSatisfactionRequirement(parameters.get("satisfactionRequirement").intValue());
 	}
 
 }
