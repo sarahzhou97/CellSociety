@@ -20,13 +20,13 @@ public class BaseFrontEndGrid {
 	private Canvas gridPicture;
 	private BackEndGrid myGrid;
 	private Color defaultColor;
-	private String latticeType;
+	private String latticeType="triangle";
 	private HashMap<String,Color> cellColors;//Colors a cell based on its getState
-	private final String SQUARELATTICE="square";
-	private final String HEXAGONLATTICE="hexagon";
-	private final String TRIANGLELATTICE="triangle";
+	private final String SQUARE_LATTICE="square";
+	private final String HEXAGON_LATTICE="hexagon";
+	private final String TRIANGLE_LATTICE="triangle";
 	private boolean drawCellBorders;
-	private double cellEdgeLength=25.0;
+	private double cellEdgeLength=60.0;
 
 	public BaseFrontEndGrid(BackEndGrid myGrid, double canvasWidth, double canvasHeight, 
 		Color defaultColor/*,HashMap<String, Color> cellColors*/) {
@@ -38,19 +38,19 @@ public class BaseFrontEndGrid {
 		gridPicture=new Canvas(canvasWidth,canvasHeight);
 	}
 	
-	public void drawCell(double x, double y, Cell cell, boolean reversed, GraphicsContext gc){
-		if(latticeType==SQUARELATTICE){
+	public void drawCell(double x, double y, Cell cell, boolean edgeUpwards, GraphicsContext gc){
+		if(latticeType==SQUARE_LATTICE){
 			gc.setFill(cell.getColor());
 			//gc.setFill(cellColors.get(cell.getState()));
 			gc.fillRect(x, y, x+cellEdgeLength, y+cellEdgeLength);
 		}
 		
-		if(latticeType==HEXAGONLATTICE){
+		if(latticeType==HEXAGON_LATTICE){
 			drawHexagonCell(x, y, cell, gc);
 		}
 		
-		if(latticeType==TRIANGLELATTICE){
-			drawTriangleCell(x, y, cell, reversed, gc);
+		if(latticeType==TRIANGLE_LATTICE){
+			drawTriangleCell(x, y, cell, edgeUpwards, gc);
 		}
 	}
 
@@ -121,7 +121,9 @@ public class BaseFrontEndGrid {
 	}
 
 	public void updateGrid(){
-		updateSquareGrid();
+		if(latticeType==SQUARE_LATTICE)updateSquareGrid();
+		if(latticeType==TRIANGLE_LATTICE)updateTriangleGrid();
+		if(latticeType==HEXAGON_LATTICE)updateHexagonGrid();
 	}
 
 	private void updateSquareGrid() {
@@ -131,13 +133,11 @@ public class BaseFrontEndGrid {
 		
 		int columns=myGrid.getColumns();
 		int rows=myGrid.getRows();
-		double cellWidth=canvasWidth/columns;
-		double cellHeight=canvasHeight/rows;
 		for(int i=0;i<columns;i++){
 			for(int j=0;j<rows;j++){
 				Color javaColor=myGrid.tryGetCell(i,j).getColor();
 				gc.setFill(javaColor);
-				gc.fillRect(i*cellWidth, j*cellHeight, (i+1)*cellWidth, (j+1)*cellHeight);
+				gc.fillRect(i*cellEdgeLength, j*cellEdgeLength, (i+1)*cellEdgeLength, (j+1)*cellEdgeLength);
 			}
 		}
 	}
@@ -149,9 +149,9 @@ public class BaseFrontEndGrid {
 		for(int i=0;i<myGrid.getRows();i++){
 			for(int j=0;j<myGrid.getColumns();j++){
 				Cell cell=myGrid.getCell(i, j);
-				boolean edgeFacesUpwards=false;//don't think this line is necessary but just in case
-				if(i+j==0) edgeFacesUpwards=true;
-				drawCell(j*0.5*cellEdgeLength,i*cellEdgeLength*Math.sqrt(3)/2,cell,edgeFacesUpwards,gc);
+				boolean edgeUpwards=false;//don't think this line is necessary but just in case
+				if((i+j)%2==0) edgeUpwards=true;
+				drawCell(j*0.5*cellEdgeLength,i*cellEdgeLength*Math.sqrt(3)/2,cell,edgeUpwards,gc);
 			}
 		}
 	}	

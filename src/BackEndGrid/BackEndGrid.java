@@ -113,6 +113,10 @@ public class BackEndGrid {
 		if(row+1<maxRows&&col+1<maxColumns) neighborList.add(getCell(row+1,col+1));
 		return neighborList;
 	}
+	/*
+	public void addIfReachable(int row, int col, ){
+		
+	}*/
 	//to be overriden depending on each simulation
 	public List<Cell> getNeighbors(int row, int column){
 		return null;
