@@ -153,6 +153,10 @@ public abstract class UserInterface {
 		myScreen.setCenter(gridNode);
 	}
 	
+	public void setBottomPane(Node gridNode) {
+		myScreen.setBottom(gridNode);
+	}
+	
 	public Stage getStage() {
 		return myStage;
 	}
