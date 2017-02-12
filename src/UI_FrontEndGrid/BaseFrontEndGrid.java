@@ -20,7 +20,7 @@ public class BaseFrontEndGrid {
 	private Canvas gridPicture;
 	private BackEndGrid myGrid;
 	private Color defaultColor;
-	private String latticeType="triangle";
+	private String latticeType="square";
 	private HashMap<String,Color> cellColors;//Colors a cell based on its getState
 	private final String SQUARE_LATTICE="square";
 	private final String HEXAGON_LATTICE="hexagon";
