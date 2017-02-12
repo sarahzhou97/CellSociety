@@ -11,9 +11,11 @@ public class GameOfLife extends Simulation{
 	private static final String ALIVE = "alive";
 	private static final String DEAD = "dead";
 
+	private int numDead; 
+	
 	public GameOfLife(Map<String,String> parameters,Map<int[],String> cells) {
 		super(parameters,cells);
-		//probDead = Double.parseDouble(parameters.get("probDead"));
+		numDead = 0;
 	}
 	
 	@Override
@@ -26,7 +28,7 @@ public class GameOfLife extends Simulation{
 	}
 	
 	private void applyRulesToCell(int row, int col) {
-		GameOfLifeCell cell = (GameOfLifeCell) getMyGrid().tryGetCell(row, col);
+		Cell cell = getMyGrid().tryGetCell(row, col);
 		List<Cell> neighbors = getMyGrid().getEightNeighbors(row, col);
 		int numAliveNeighbors=0;
 		for (Cell gameCell : neighbors) {
@@ -37,11 +39,13 @@ public class GameOfLife extends Simulation{
 		if (cell.getState().equals(ALIVE)) {
 			if (numAliveNeighbors<2||numAliveNeighbors>3) {
 				cell.updateState(DEAD);
+				numDead++;
 				return;
 			}
 		} else if (cell.getState().equals(DEAD)) {
 			if (numAliveNeighbors==3) {
 				cell.updateState(ALIVE);
+				numDead--;
 				return;
 			}
 		}
@@ -51,32 +55,19 @@ public class GameOfLife extends Simulation{
 	public void initiateSimulation() {
 		for (int[] coordinates : getMyCells().keySet()) {
 			String cellType = getMyCells().get(coordinates);
-			GameOfLifeCell cell = null;
-			if (cellType.equals(DEAD)) {
-				cell = new GameOfLifeCell(DEAD);
-			} else if (cellType.equals(ALIVE)) {
-				cell = new GameOfLifeCell(ALIVE);
-			}
+			if (cellType.equals(DEAD)) numDead++;
+			GameOfLifeCell cell = new GameOfLifeCell(cellType);
 			getMyGrid().setCell(coordinates[0],coordinates[1],cell);
 		}
-		
-//		for (int i=0; i<getGridSize();i++) {
-//			for (int j = 0; j<getGridSize();j++) {
-//				double rand = Math.random();
-//				if (rand<probDead) {
-//					getMyGrid().setCell(i, j, new GameOfLifeCell(DEAD));
-//				} else {
-//					getMyGrid().setCell(i, j, new GameOfLifeCell(ALIVE));
-//				}
-//	}
-//		}
 	}
 
-
-	@Override
-	public void calculateStatus() {
-		// TODO Auto-generated method stub
-		
+	public int getNumDead() {
+		return numDead;
 	}
+	
+	public int getNumAlive() {
+		return getGridSize()*getGridSize()-numDead;
+	}
+
 
 }
