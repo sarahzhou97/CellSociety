@@ -46,9 +46,7 @@ public class MainScreen {
 			// currentButton.setOnAction(e ->
 			// currentSimulation.initiateSimulation());
 			Button currentButton = new Button(currentSimulation);
-			currentButton.setOnAction(e -> {
-				System.out.println("Button works");
-			});
+			currentButton.setOnAction(e -> openUserSim(currentSimulation));
 			myButtons.add(currentButton);
 		}
 		Button fileButton = new Button("Read from File");
@@ -58,6 +56,12 @@ public class MainScreen {
 
 	private void openFileSim() {
 		UserInterface myUI = new GUIFromFile(myStage, RESOURCE_TAG + usedResource, myScene);
+		myUI.setUIScreen(myWidth, myHeight);
+	}
+	
+	private void openUserSim(String simType) {
+		String mySim = simType.toLowerCase().replaceAll("\\s+","");
+		UserInterface myUI = new GUIFromUser(myStage, RESOURCE_TAG + usedResource, myScene, mySim);
 		myUI.setUIScreen(myWidth, myHeight);
 	}
 }

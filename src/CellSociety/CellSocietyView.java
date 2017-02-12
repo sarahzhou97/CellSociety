@@ -1,7 +1,7 @@
 package CellSociety;
 
-import Simulations.Simulation; 
-import UI.FrontEndGrid;
+import Simulations.Simulation;
+import UI_FrontEndGrid.BaseFrontEndGrid;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.util.Duration;
@@ -11,10 +11,10 @@ public class CellSocietyView {
 	public static final double DEFAULT_SPEED = 150;
 
 	private Simulation mySimulation;
-	private FrontEndGrid myDisplay;
+	private BaseFrontEndGrid myDisplay;
 	private Timeline cellAnimation;
 
-	public CellSocietyView(Simulation newSimulation, FrontEndGrid mainDisplay) {
+	public CellSocietyView(Simulation newSimulation, BaseFrontEndGrid mainDisplay) {
 		mySimulation = newSimulation;
 		myDisplay = mainDisplay;
 		initializeAnimation();

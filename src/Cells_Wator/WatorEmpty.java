@@ -11,6 +11,7 @@ public class WatorEmpty extends Cell{
 	
 	public WatorEmpty(){
 		setColor(WATOREMPTY_COLOR);
+		setState("WatorEmpty");
 	}
 	
 	@Override
