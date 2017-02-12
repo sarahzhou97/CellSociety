@@ -20,12 +20,13 @@ public class BaseFrontEndGrid {
 	private Canvas gridPicture;
 	private BackEndGrid myGrid;
 	private Color defaultColor;
-	private String latticeType="square";
+	private String latticeType="triangle";
 	private HashMap<String,Color> cellColors;//Colors a cell based on its getState
 	private final String SQUARE_LATTICE="square";
 	private final String HEXAGON_LATTICE="hexagon";
 	private final String TRIANGLE_LATTICE="triangle";
 	private boolean drawCellBorders;
+	private double cellMaxDimension=60;
 	private double cellEdgeLength=60.0;
 
 	public BaseFrontEndGrid(BackEndGrid myGrid, double canvasWidth, double canvasHeight, 
@@ -36,6 +37,17 @@ public class BaseFrontEndGrid {
 		this.canvasWidth=canvasWidth;
 		System.out.print(canvasWidth);
 		gridPicture=new Canvas(canvasWidth,canvasHeight);
+	}
+	public void setEdgeLengthToFitDimension(){
+		if(latticeType==SQUARE_LATTICE){
+			cellEdgeLength=cellMaxDimension;
+		}else if(latticeType==TRIANGLE_LATTICE){
+			cellEdgeLength=cellMaxDimension;
+		}else if(latticeType==HEXAGON_LATTICE){
+			cellEdgeLength=cellMaxDimension/2;
+		}else{
+			//throw exception
+		}
 	}
 	
 	public void drawCell(double x, double y, Cell cell, boolean edgeUpwards, GraphicsContext gc){
@@ -121,6 +133,7 @@ public class BaseFrontEndGrid {
 	}
 
 	public void updateGrid(){
+		setEdgeLengthToFitDimension();
 		if(latticeType==SQUARE_LATTICE)updateSquareGrid();
 		if(latticeType==TRIANGLE_LATTICE)updateTriangleGrid();
 		if(latticeType==HEXAGON_LATTICE)updateHexagonGrid();
