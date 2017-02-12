@@ -69,5 +69,10 @@ public class GameOfLife extends Simulation{
 		return getGridSize()*getGridSize()-numDead;
 	}
 
+	@Override
+	public void updateParametersInSimulation() {
+		
+	}
+
 
 }

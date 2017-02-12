@@ -128,6 +128,12 @@ public class Fire extends Simulation {
 		return numTrees;
 	}
 
+	@Override
+	public void updateParametersInSimulation() {
+		setProbCatch(Double.parseDouble(getMyParameters().get("probCatch")));
+	}
+	
+
 
 	
 

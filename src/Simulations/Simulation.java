@@ -105,6 +105,17 @@ public abstract class Simulation {
 		coordinates[1] = cell.getCol();
 		myCells.put(coordinates, cell.getState());
 	}
+	
+	public void updateParametersInMap(Map<String,String> modifiedParameters) {
+		for (String key : getMyParameters().keySet()) {
+			if (modifiedParameters.keySet().contains(key)) {
+				getMyParameters().put(key, modifiedParameters.get(key));
+			} 
+		}
+		updateParametersInSimulation();
+	}
+	
+	public abstract void updateParametersInSimulation();
 
 	
 }

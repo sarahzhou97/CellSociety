@@ -12,10 +12,11 @@ public class Segregation extends Simulation {
 	private final String EMPTY = "empty"; // duplicated code
 	private final String TYPE1 = "type1";
 	private final String TYPE2 = "type2";
-	private double satisfactionRequirement=0.5;
+	private double satisfactionRequirement;
 
 	public Segregation(Map<String,String> parameters,Map<int[],String> cells) {
 		super(parameters,cells);
+		this.satisfactionRequirement = 0.5;
 	}
 
 	@Override
@@ -68,6 +69,15 @@ public class Segregation extends Simulation {
 			cell.setRow(coordinates[0]);
 			cell.setCol(coordinates[1]);
 		}
+	}
+	
+	public void setSatisfactionRequirement(double satisfactionRequirement) {
+		this.satisfactionRequirement = satisfactionRequirement;
+	}
+
+	@Override
+	public void updateParametersInSimulation() {
+		setSatisfactionRequirement(Integer.parseInt(getMyParameters().get("satisfactionRequirement")));
 	}
 
 }
