@@ -1,6 +1,6 @@
-# cellsociety
-
-CompSci 308 Cell Society Project
+# Cell Society
 
 To run the program, run Main.java in CellSociety.
+
+Team members: Moses Wayne, David Li, Sarah Zhou
 
